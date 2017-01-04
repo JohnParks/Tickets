@@ -37,8 +37,15 @@ get_header(); ?>
 
 				$exists = Show::exists( $id );
 
-				if ( !$exists )
+				if ( $exists ) {
+					echo "show $name exists, skipping this one";
 					continue;
+				} else {
+					echo "show $name does not exist.  continuing with import.";
+				}
+
+				echo "<br />Commencing import<br />";
+					
 
 				$show = new Show( (object) [
 						'id' => $id,
