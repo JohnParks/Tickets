@@ -684,6 +684,128 @@ function display_shows ( $postID, $numPosts = 4, $topSeller = false ) {
 
 }
 
+// function to spit out the start and end date of a given week (used for building out the event calendars)
+function getStartEndDate( $week, $year ) {
+  $dto = new DateTime();
+  $dto->setISODate( $year, $week, 0 );
+  $dates['start'] = $dto->format( "Y-m-d" );
+  $dto->modify( "+6 days" ); // move forward one week
+  $dates['end'] = $dto->format( "Y-m-d" );
+  return $dates;
+}
+
+// function to fetch the "sunday date" of the calendar as it stands now
+function getDates( $week = '', $month = '' ) {
+
+  $year;
+  $dates;
+  // First up, let's check whether the above variables are set (which would indicate the user has interacted with the calendar)
+  if ( $month == '' ) {
+    if ( $week == '' ) {
+      // ok!  Neither are set, so we're displaying the current week
+      $date = new DateTime();
+      $week = $date->format('W');
+      $year = $date->format('Y');
+      //$dateArr = getStartEndDate( $date->format('W'), $date->format('Y') );
+    } else {
+      // we're on a particular week!
+      // note: add logic to handle swinging around to a new year
+      $year = date('Y');
+      //$dateArr = getStartEndDate( $week, date('Y') );
+    }
+  } else {
+    // user has selected a month!
+    $month += 1;
+    $monthDateString = date('Y') . "-";
+    $monthDateString .= $month . "-01";
+    $date = new DateTime( $monthDateString ); // this should correspond to the first of the selected month
+    $week = $date->format('W');
+    $year = $date->format('Y');
+    //$dateArr = getStartEndDate( $date->format("W"), $date->format("Y") );
+  }
+  $startDate = new DateTime();
+  $startDate->setISODate( $year, $week, 0 );
+
+  $endDate = new DateTime();
+  $endDate->setISODate( $year, $week, 0 );
+  $endDate->modify( "+6 days" );
+
+  $dates["start"] = $startDate;
+  $dates["end"] = $endDate;
+
+  return $dates;
+}
+
+// function to grab events based on a date range, venue, and performer
+// accepts a show WP ID, venue WP ID, week (optional) or month (optional)
+// defaults to spitting out the current week's events
+function getShowEvents( $showID, $venueWPID='', $start, $end ) {
+  // grab this Show's performer ID
+  $perfID = get_post_meta( $showID, "performerID", true );
+
+  $venueID;
+
+  global $wpdb;
+  // Put together the piece of the query that filters over performer ID
+  $query = "SELECT * FROM " . $wpdb->prefix . "events WHERE performer = " . $perfID;
+
+  // confirm whether venueID is set, if so, grab its API ID and add an additional filter to the query
+  if ( $venueWPID != '' ) {
+    $venueID = get_post_meta( $venueWPID, "venueID", true );
+
+    $query .= " AND venue = " . $venueID;
+  }
+
+  $query .= " AND ( time >= '" . $start . " 00:00:00' AND time <= '" . $end . " 23:59:59' )";
+  
+  //echo "<br />The query is " . $query;
+  // $events contains all the event objects
+  $events = $wpdb->get_results( $query );
+
+  return $events;
+}
+
+// function to handle events calendar ajax call
+function handleCalendar( $showID, $dates=null, $venueWPID="" ) {
+  
+  /*if ( $dates == null ) {
+    echo $_POST;
+    $dates = getDates();
+  }*/
+
+  /*echo "<pre>";
+  print_r($dates);
+  echo "</pre>";*/
+
+  $events = getShowEvents( $showID, $venueWPID, $dates['start']->format( "Y-m-d" ), $dates['end']->format( "Y-m-d" ) );
+
+  // set previous and next week variables
+  $prevWeek = new DateTime( $dates["start"]->format("Y-m-d") );
+  $prevWeek->modify( "-1 week" );
+  $nextWeek = new DateTime( $dates["start"]->format("Y-m-d") );
+  $nextWeek->modify( "+1 week" );
+  
+  //start building out the HTML that will display the calendar
+  $html = "<span><input type='hidden' id='prev-week' value='" . $prevWeek->format('W') . "' />Previous Week</span>";
+  $html .= "<span id='date-range'>" . $dates['start']->format('M j') . " - " . $dates['end']->format( 'M j' ) . "</span>";
+  $html .= "<span><input type='hidden' id='next-week' value='" . $nextWeek->format('W') . "' />Next Week</span>";
+  $html .= "<table id='events-calendar'><tr>";
+  $html .= "</table>";
+
+  echo $html;
+
+  if( $_POST )
+    wp_die();
+}
+add_action( "wp_ajax_add_calendar", "handleCalendar" );
+
+function tickets_enqueue_scripts(){
+  wp_enqueue_script( 'ticket-script', get_template_directory_uri() . '/library/js/tb-scripts.js' );
+  wp_localize_script( 'ticket-script', 'ticket_ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+}
+
+
+
 // function to register some new URL parameters as query vars
 function tb_register_query_vars( $vars ) {
   $vars[] = "tosearch";

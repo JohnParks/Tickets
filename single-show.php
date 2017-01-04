@@ -62,33 +62,9 @@
 
 
 								<?php
-								// Before heading into the section (which displays events), let's grab a list of tickets for the current week's worth of events (up to Saturday)
 
-								// grab this Show's performer ID
-								$perfID = get_post_meta( $post->ID, "performerID", true );
-								global $wpdb;
-								$query = "SELECT * FROM " . $wpdb->prefix . "events WHERE performer = " . $perfID;
+								$dates = getDates();
 
-								// get current date
-								$curDate = date( "Y-m-d H:i:s" );
-								echo "Current date is $curDate <br />";
-
-								// get date a week from now
-								$oneWeek = date("Y-m-d H:i:s", mktime( 0, 0, 0, date('m'), date('d')+7, date('Y') ) );
-								echo "One week from now is $oneWeek <br />";
-
-								//$query .= " AND ( $curDate <= DATE(time) AND $oneWeek >= DATE(time) )";
-								$query .= " AND ( time <= '$oneWeek' AND time >= '$curDate' )";
-								echo $query;
-								$events = $wpdb->get_results( $query );
-
-								echo "<pre>";
-								print_r($events);
-								echo "</pre>";
-
-								/*foreach ( $events as $event ) {
-									echo "Event's city is $event->city <br />";
-								}*/
 								?>
 
 								<!-- Section to display listing of events -->
@@ -98,8 +74,9 @@
 										<span class="previous-arrow"> <- </span>
 										<span class="dates"></span>
 										<span class="next-arrow"> -> </span>
+										<input id="next-week" type="button" value="NEXT" />
 									</div>
-									<select class="month-selector" name="mStr">
+									<select class="month-selector" id="month-selector" name="mStr">
 										<option value="0">January</option>
 										<option value="1">February</option>
 										<option value="2">March</option>
@@ -116,17 +93,22 @@
 									<script type="text/javascript">
 										$('.month-selector').val(new Date().getMonth());
 									</script>
-									<table>
-										<tr class="days-row">
-											<td>Sun</td>
-											<td>Mon</td>
-											<td>Tue</td>
-											<td>Wed</td>
-											<td>Thu</td>
-											<td>Fri</td>
-											<td>Sat</td>
-										</tr>
-									</table>
+									<select class="venue-selector" id="venue-selector">
+										<option value="">All Venues</option>
+										<?php
+										// grab the array of venues from the show object
+										$venues = get_post_meta( $post->ID, "venues", true );
+
+										// iterate over the resulting array, adding a select option for each venue
+										foreach ( $venues as $daVenue ) {
+											$venue = get_post( $daVenue );
+											echo "<option value='" . $venue->ID . "'>$venue->post_title</option>";
+										}
+										?>
+									</select>
+									<div id="events-table">
+										<?php handleCalendar( $post->ID, $dates ); ?>
+									</div>
 								</section>
 
 							</div>

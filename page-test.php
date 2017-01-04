@@ -35,6 +35,18 @@ get_header(); ?>
 			// we've got an array of unique Shows, cycle through and commence import
 			foreach( $perfArray as $id=>$name ) {
 
+				$exists = Show::exists( $id );
+
+				if ( $exists ) {
+					echo "show $name exists, skipping this one";
+					continue;
+				} else {
+					echo "show $name does not exist.  continuing with import.";
+				}
+
+				echo "<br />Commencing import<br />";
+					
+
 				$show = new Show( (object) [
 						'id' => $id,
 						'name' => $name
