@@ -62,33 +62,17 @@
 
 
 								<?php
-								// Before heading into the section (which displays events), let's grab a list of tickets for the current week's worth of events (up to Saturday)
+								// Let's initialize the variables we'll need to make available to JS to get this rolling
+								$week = ''; // the week of the year we're displaying, defaults to today's week
+								$month = ''; // used for when a different month is changed
+								$venueID = '';
 
-								// grab this Show's performer ID
-								$perfID = get_post_meta( $post->ID, "performerID", true );
-								global $wpdb;
-								$query = "SELECT * FROM " . $wpdb->prefix . "events WHERE performer = " . $perfID;
-
-								// get current date
-								$curDate = date( "Y-m-d H:i:s" );
-								echo "Current date is $curDate <br />";
-
-								// get date a week from now
-								$oneWeek = date("Y-m-d H:i:s", mktime( 0, 0, 0, date('m'), date('d')+7, date('Y') ) );
-								echo "One week from now is $oneWeek <br />";
-
-								//$query .= " AND ( $curDate <= DATE(time) AND $oneWeek >= DATE(time) )";
-								$query .= " AND ( time <= '$oneWeek' AND time >= '$curDate' )";
-								echo $query;
-								$events = $wpdb->get_results( $query );
+								$events = getShowEvents( $post->ID, $venueID, $month, $week );
 
 								echo "<pre>";
 								print_r($events);
 								echo "</pre>";
 
-								/*foreach ( $events as $event ) {
-									echo "Event's city is $event->city <br />";
-								}*/
 								?>
 
 								<!-- Section to display listing of events -->

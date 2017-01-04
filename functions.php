@@ -680,6 +680,70 @@ function display_shows ( $postID, $numPosts = 4, $topSeller = false ) {
 
 }
 
+// function to spit out the start and end date of a given week (used for building out the event calendars)
+function getStartEndDate( $week, $year ) {
+  $dto = new DateTime();
+  $dto->setISODate( $year, $week, 0 );
+  $dates['start'] = $dto->format( "Y-m-d" );
+  $dto->modify( "+6 days" ); // move forward one week
+  $dates['end'] = $dto->format( "Y-m-d" );
+  return $dates;
+}
+
+// function to grab events based on a date range, venue, and performer
+// accepts a show WP ID, venue WP ID, week (optional) or month (optional)
+// defaults to spitting out the current week's events
+function getShowEvents( $showID, $venueWPID='', $month='', $week='' ) {
+  // grab this Show's performer ID
+  $perfID = get_post_meta( $showID, "performerID", true );
+
+  $venueID;
+
+  global $wpdb;
+  // Put together the piece of the query that filters over performer ID
+  $query = "SELECT * FROM " . $wpdb->prefix . "events WHERE performer = " . $perfID;
+
+  // confirm whether venueID is set, if so, grab its API ID and add an additional filter to the query
+  if ( $venueWPID != '' ) {
+    $venueID = get_post_meta( $venueWPID, "venueID", true );
+
+    $query .= " AND venue = " . $venueID;
+  }
+
+  // Array to hold our week's starting and ending dates
+  $dateArr;
+
+  // First up, let's check whether the above variables are set (which would indicate the user has interacted with the calendar)
+  if ( $month == '' ) {
+    if ( $week == '' ) {
+      // ok!  Neither are set, so we're displaying the current week
+      $date = new DateTime();
+      $dateArr = getStartEndDate( $date->format('W'), $date->format('Y') );
+    } else {
+      // we're on a particular week!
+      // note: add logic to handle swinging around to a new year
+      $dateArr = getStartEndDate( $week, date('Y') );
+    }
+  } else {
+    // user has selected a month!
+    $month += 1;
+    $monthDateString = date('Y') . "-";
+    $monthDateString .= $month . "-01";
+    $date = new DateTime( $monthDateString ); // this should correspond to the first of the selected month
+    
+    $dateArr = getStartEndDate( $date->format("W"), $date->format("Y") );
+  }
+
+  // $dateArr has now been populated, use that to append the date filters to our query
+  $query .= " AND ( time >= '" . $dateArr["start"] . " 00:00:00' AND time <= '" . $dateArr["end"] . " 23:59:59' )";
+  
+  echo "<br />The query is " . $query;
+  // $events contains all the event objects
+  $events = $wpdb->get_results( $query );
+
+  return $events;
+}
+
 // function to register some new URL parameters as query vars
 function tb_register_query_vars( $vars ) {
   $vars[] = "tosearch";
