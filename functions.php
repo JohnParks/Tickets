@@ -14,6 +14,9 @@ require_once( 'library/bones.php' );
 // Load in API related libraries
 include_once( 'library/api-lib/api-includes.php' );
 
+include_once('library/mobile/functions.php');
+
+include_once('functions/showutils.php');
 // CUSTOMIZE THE WORDPRESS ADMIN (off by default)
 // require_once( 'library/admin.php' );
 
@@ -50,7 +53,7 @@ function bones_ahoy() {
   add_action( 'wp_enqueue_scripts', 'bones_scripts_and_styles', 999 );
 
   // enqueue Tickets Broadway specific scripts
-  add_action( 'wp_enqueue_scripts', get_template_directory_uri() . '/library/js/tb-scripts.js' );
+  add_action( 'wp_enqueue_scripts', 'broadway_scripts');
 
   // ie conditional wrapper
 
@@ -292,7 +295,8 @@ function create_tb_post_types() {
     'query_var'     => true,
     'publicly_queryable' => true,
     'delete_with_user'  => false,
-    'show_in_rest'    => true
+    'show_in_rest'    => true,
+    'show_in_nav_menus' => true
   );
 
   $result = register_post_type( 'show', $showArgs );
@@ -689,4 +693,8 @@ function tb_register_query_vars( $vars ) {
 }
 add_filter( "query_vars", "tb_register_query_vars" );
 
+
+function broadway_scripts(){
+     wp_enqueue_script('tb-js-script', get_template_directory_uri() . '/library/js/tb-scripts.js'); 
+}
 /* DON'T DELETE THIS CLOSING TAG */ ?>
