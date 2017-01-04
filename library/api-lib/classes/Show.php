@@ -195,6 +195,21 @@ class Show {
 	public function killCity( $cityName ) {
 
 	}
+
+	// static function to determine whether show exists in WP...if so, return true
+	static function exists( $anID ) {
+
+		global $wpdb;
+
+		$results = $wpdb->get_results( "select post_id, meta_key from $wpdb->postmeta where meta_key = 'performerID' AND meta_value = $anID", ARRAY_A );
+
+		if ( $results ) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
 }
 
 ?>

@@ -737,7 +737,7 @@ function getShowEvents( $showID, $venueWPID='', $month='', $week='' ) {
   // $dateArr has now been populated, use that to append the date filters to our query
   $query .= " AND ( time >= '" . $dateArr["start"] . " 00:00:00' AND time <= '" . $dateArr["end"] . " 23:59:59' )";
   
-  echo "<br />The query is " . $query;
+  //echo "<br />The query is " . $query;
   // $events contains all the event objects
   $events = $wpdb->get_results( $query );
 

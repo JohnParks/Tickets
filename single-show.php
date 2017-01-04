@@ -65,13 +65,13 @@
 								// Let's initialize the variables we'll need to make available to JS to get this rolling
 								$week = ''; // the week of the year we're displaying, defaults to today's week
 								$month = ''; // used for when a different month is changed
-								$venueID = '';
+								$venueWPID = '';
 
-								$events = getShowEvents( $post->ID, $venueID, $month, $week );
+								$events = getShowEvents( $post->ID, $venueWPID, $month, $week );
 
-								echo "<pre>";
+								/*echo "<pre>";
 								print_r($events);
-								echo "</pre>";
+								echo "</pre>";*/
 
 								?>
 
@@ -100,6 +100,19 @@
 									<script type="text/javascript">
 										$('.month-selector').val(new Date().getMonth());
 									</script>
+									<select class="venue-selector">
+										<option value="">All Venues</option>
+										<?php
+										// grab the array of venues from the show object
+										$venues = get_post_meta( $post->ID, "venues", true );
+
+										// iterate over the resulting array, adding a select option for each venue
+										foreach ( $venues as $daVenue ) {
+											$venue = get_post( $daVenue );
+											echo "<option value='" . $venue->ID . "'>$venue->post_title</option>";
+										}
+										?>
+									</select>
 									<table>
 										<tr class="days-row">
 											<td>Sun</td>

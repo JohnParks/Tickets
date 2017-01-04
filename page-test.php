@@ -35,6 +35,11 @@ get_header(); ?>
 			// we've got an array of unique Shows, cycle through and commence import
 			foreach( $perfArray as $id=>$name ) {
 
+				$exists = Show::exists( $id );
+
+				if ( !$exists )
+					continue;
+
 				$show = new Show( (object) [
 						'id' => $id,
 						'name' => $name
