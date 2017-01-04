@@ -62,16 +62,8 @@
 
 
 								<?php
-								// Let's initialize the variables we'll need to make available to JS to get this rolling
-								$week = ''; // the week of the year we're displaying, defaults to today's week
-								$month = ''; // used for when a different month is changed
-								$venueWPID = '';
 
-								$events = getShowEvents( $post->ID, $venueWPID, $month, $week );
-
-								/*echo "<pre>";
-								print_r($events);
-								echo "</pre>";*/
+								$dates = getDates();
 
 								?>
 
@@ -82,8 +74,9 @@
 										<span class="previous-arrow"> <- </span>
 										<span class="dates"></span>
 										<span class="next-arrow"> -> </span>
+										<input id="next-week" type="button" value="NEXT" />
 									</div>
-									<select class="month-selector" name="mStr">
+									<select class="month-selector" id="month-selector" name="mStr">
 										<option value="0">January</option>
 										<option value="1">February</option>
 										<option value="2">March</option>
@@ -100,7 +93,7 @@
 									<script type="text/javascript">
 										$('.month-selector').val(new Date().getMonth());
 									</script>
-									<select class="venue-selector">
+									<select class="venue-selector" id="venue-selector">
 										<option value="">All Venues</option>
 										<?php
 										// grab the array of venues from the show object
@@ -113,17 +106,9 @@
 										}
 										?>
 									</select>
-									<table>
-										<tr class="days-row">
-											<td>Sun</td>
-											<td>Mon</td>
-											<td>Tue</td>
-											<td>Wed</td>
-											<td>Thu</td>
-											<td>Fri</td>
-											<td>Sat</td>
-										</tr>
-									</table>
+									<div id="events-table">
+										<?php handleCalendar( $post->ID, $dates ); ?>
+									</div>
 								</section>
 
 							</div>
