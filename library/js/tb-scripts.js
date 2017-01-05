@@ -16,13 +16,15 @@ jQuery(document).ready(function(){
 function sendCalData() {
 	var selectedData = {
 		"monthVal" : $("#month-selector").val(),
-		"venueVal" : $("#venue-selector").val()
+		"venueVal" : $("#venue-selector").val(),
+		"showID"   : $("#showID").val()
 	};
 	var toPass = {
 		action: "add_calendar",
 		data: selectedData
 	};
 	$.post( ticket_ajax.ajaxurl, toPass ).done( function(res){
+		$("#events-table").html( res );
 		console.log(res)
 	} );
 };

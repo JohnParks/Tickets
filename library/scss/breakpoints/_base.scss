@@ -409,6 +409,40 @@ section {
 	clear: both;
 }
 
+#month-selector {
+	width: 100px;
+}
+
+#venue-selector {
+	width: auto;
+	padding-right: 25px;
+}
+
+table#events-calendar {
+	width: 100%;
+	text-align: center;
+
+	.days-heading {
+		background-color: black;
+		color: #b3b3b3;
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+
+	tr {
+		background-color: #eee;
+		vertical-align: top;
+	}
+
+	td {
+		border-left: white 1px solid;
+	}
+
+	td:first-child {
+		border-left: none;
+	}
+}
+
 		.hentry {
 			background-color: $white;
 			border-radius: 3px;

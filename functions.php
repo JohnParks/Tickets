@@ -55,6 +55,8 @@ function bones_ahoy() {
   // enqueue Tickets Broadway specific scripts
   add_action( 'wp_enqueue_scripts', 'broadway_scripts');
 
+  add_action( 'wp_enqueue_scripts', 'tickets_enqueue_scripts');
+
   // ie conditional wrapper
 
   // launching this stuff after theme setup
@@ -719,6 +721,8 @@ function getDates( $week = '', $month = '' ) {
     $monthDateString = date('Y') . "-";
     $monthDateString .= $month . "-01";
     $date = new DateTime( $monthDateString ); // this should correspond to the first of the selected month
+    /* TO DO: account edge cases where year rolls over
+    --------------------------------------------------------------------------------------------------------------------*/
     $week = $date->format('W');
     $year = $date->format('Y');
     //$dateArr = getStartEndDate( $date->format("W"), $date->format("Y") );
@@ -757,8 +761,9 @@ function getShowEvents( $showID, $venueWPID='', $start, $end ) {
   }
 
   $query .= " AND ( time >= '" . $start . " 00:00:00' AND time <= '" . $end . " 23:59:59' )";
-  
-  //echo "<br />The query is " . $query;
+
+  // Sort results by aescending event date
+  $query .= " ORDER BY time ASC";
   // $events contains all the event objects
   $events = $wpdb->get_results( $query );
 
@@ -767,35 +772,96 @@ function getShowEvents( $showID, $venueWPID='', $start, $end ) {
 
 // function to handle events calendar ajax call
 function handleCalendar( $showID, $dates=null, $venueWPID="" ) {
-  
-  /*if ( $dates == null ) {
-    echo $_POST;
-    $dates = getDates();
-  }*/
+  $monthVal;
+  if ( $dates == null ) {
+    $showID = $_POST['data']['showID'];
+    //echo "No worries!";
+    $monthVal = $_POST['data']['monthVal'];
+
+    $venueWPID = $_POST['data']['venueVal'];
+    //echo "Month value is $monthVal";
+    $dates = getDates( '', $monthVal );
+    //var_dump($dates);
+    //wp_die();
+  }
 
   /*echo "<pre>";
   print_r($dates);
   echo "</pre>";*/
 
-  $events = getShowEvents( $showID, $venueWPID, $dates['start']->format( "Y-m-d" ), $dates['end']->format( "Y-m-d" ) );
+  $fullEvents = getShowEvents( $showID, $venueWPID, $dates['start']->format( "Y-m-d" ), $dates['end']->format( "Y-m-d" ) );
+  /*echo "<pre>";
+  print_r($fullEvents);
+  echo "</pre>";*/
+
+  // for each event, create a new array containing their ID, day of the week and time; push that into events array
+  $events;
+  foreach( $fullEvents as $event ) {
+    $daDate = new DateTime( $event->time );
+    $toInsert = array (
+      "id"    => $event->id,
+      "time"  => $daDate->format( 'G:i' ),
+      "day"   => $daDate->format( 'w' )
+    );
+    $events[] = $toInsert;
+  }
 
   // set previous and next week variables
   $prevWeek = new DateTime( $dates["start"]->format("Y-m-d") );
   $prevWeek->modify( "-1 week" );
   $nextWeek = new DateTime( $dates["start"]->format("Y-m-d") );
   $nextWeek->modify( "+1 week" );
+
+  // new DateTime to hold current start date...will be used to iterate over and populate the day headers without messing with the dates array
+  $currWeek = new DateTime( $dates['start']->format("Y-m-d") );
   
   //start building out the HTML that will display the calendar
   $html = "<span><input type='hidden' id='prev-week' value='" . $prevWeek->format('W') . "' />Previous Week</span>";
   $html .= "<span id='date-range'>" . $dates['start']->format('M j') . " - " . $dates['end']->format( 'M j' ) . "</span>";
   $html .= "<span><input type='hidden' id='next-week' value='" . $nextWeek->format('W') . "' />Next Week</span>";
-  $html .= "<table id='events-calendar'><tr>";
+  $html .= "<table id='events-calendar'><tr class='days-heading'>";
+
+  // while loop to create the day of the week headers (complete month/day indications)
+  $cntr = 0;
+  while( $cntr < 7 ) {
+    $html .= "<td>" . $currWeek->format( 'D n/j' ) . "</td>";
+    $currWeek->modify( '+1 day' );
+    $cntr++;
+  }
+  $html .= "</tr>"; // finish off the day headings row
+
+  // another loop, this one to populate in events on each day
+  $cntr = 0;
+  $html .= "<tr>";
+  if ( isset( $events ) ) {
+    while( $cntr < 7 ) {
+      $html .= "<td>";
+
+      // cycle through events array, grabbing any for current day (based on "day" value)
+      foreach( $events as $event ) {
+        if( $event['day'] == $cntr ) {
+          if ( $event['time'] > 12 )
+            $time = $event['time']-12 . " PM";
+          else
+            $time = $event['time'];
+          $html .= "<div class='show-time'><a href=''>" . $time . "</a></div>";
+        }
+      }
+      $html .= "</td>";
+      $cntr++;
+    }
+  } else {
+    $html .= "<td colspan='7'>No events for this week</td>";
+  }
+
   $html .= "</table>";
+
 
   echo $html;
 
-  if( $_POST )
+  if( $_POST ) {
     wp_die();
+  }
 }
 add_action( "wp_ajax_add_calendar", "handleCalendar" );
 

@@ -70,12 +70,19 @@
 								<!-- Section to display listing of events -->
 								<section class="event-list">
 									<h3>Show Tickets</h3>
-									<div class="date-range">
-										<span class="previous-arrow"> <- </span>
-										<span class="dates"></span>
-										<span class="next-arrow"> -> </span>
-										<input id="next-week" type="button" value="NEXT" />
-									</div>
+									<select class="venue-selector" id="venue-selector">
+										<option value="">All Venues</option>
+										<?php
+										// grab the array of venues from the show object
+										$venues = get_post_meta( $post->ID, "venues", true );
+
+										// iterate over the resulting array, adding a select option for each venue
+										foreach ( $venues as $daVenue ) {
+											$venue = get_post( $daVenue );
+											echo "<option value='" . $venue->ID . "'>$venue->post_title</option>";
+										}
+										?>
+									</select>
 									<select class="month-selector" id="month-selector" name="mStr">
 										<option value="0">January</option>
 										<option value="1">February</option>
@@ -93,19 +100,7 @@
 									<script type="text/javascript">
 										$('.month-selector').val(new Date().getMonth());
 									</script>
-									<select class="venue-selector" id="venue-selector">
-										<option value="">All Venues</option>
-										<?php
-										// grab the array of venues from the show object
-										$venues = get_post_meta( $post->ID, "venues", true );
-
-										// iterate over the resulting array, adding a select option for each venue
-										foreach ( $venues as $daVenue ) {
-											$venue = get_post( $daVenue );
-											echo "<option value='" . $venue->ID . "'>$venue->post_title</option>";
-										}
-										?>
-									</select>
+									<input type="hidden" id="showID" value="<?php echo $post->ID; ?>" />
 									<div id="events-table">
 										<?php handleCalendar( $post->ID, $dates ); ?>
 									</div>
