@@ -646,6 +646,15 @@ function display_shows ( $postID, $numPosts = 4, $topSeller = false, $offset = 0
   // grab array of show IDs
   $showIDs = get_post_meta( $postID, 'shows', true );
 
+  if ( $_POST ) {
+
+    $numPosts = 4;
+    $topSeller = false;
+
+    $postID = $_POST['showData']['postID'];
+    $offset = $_POST['showData']['offset'];
+  }
+
 
   // establish total possible size of result set, use this to modulate offset
   $possibleShows = count( $showIDs );
@@ -685,7 +694,8 @@ function display_shows ( $postID, $numPosts = 4, $topSeller = false, $offset = 0
   // start building out $html
   $cntr = 1;
   $html = "<div class='show-list'>";
-  $html .= "<img src='" . get_template_directory_uri() . "/library/assets/icons/dotted-arrow.png' />";
+  // add previous shows nav
+  $html .= "<a id='prev-shows-btn' ><input id='prev-shows-offset' value='" . $prevOffset . "' type='hidden' /><img src='" . get_template_directory_uri() . "/library/assets/icons/dotted-arrow.png' class='show-list-nav' /></a>";
   foreach ( $shows as $show ) {
     if ( $cntr > $numPosts )
       break;
@@ -703,12 +713,9 @@ function display_shows ( $postID, $numPosts = 4, $topSeller = false, $offset = 0
     $html .= "</div>";
     $cntr++;
   }
-  $html .= "<img src='" . get_template_directory_uri() . "/library/assets/icons/dotted-arrow.png' class='next-shows-btn' />";
+  // add next shows nav
+  $html .= "<a id='next-shows-btn' ><input id='next-shows-offset' value='" . $nextOffset . "' type='hidden' /><img src='" . get_template_directory_uri() . "/library/assets/icons/dotted-arrow.png' class='show-list-nav' /></a>";
   $html .= "</div>";
-
-  // echo out the (hidden) inputs containing the respective offsets
-  $html .= "<input id='prev-shows-offset' value='" . $prevOffset . "' type='hidden' />";
-  $html .= "<input id='next-shows-offset' value='" . $nextOffset . "' type='hidden' />";
 
   // finally, let's echo out $html
   echo $html;
@@ -717,6 +724,7 @@ function display_shows ( $postID, $numPosts = 4, $topSeller = false, $offset = 0
     wp_die();
   }
 }
+add_action( "wp_ajax_nopriv_display_shows", "display_shows" );
 
 // function to spit out the start and end date of a given week (used for building out the event calendars)
 function getStartEndDate( $week, $year ) {
@@ -910,7 +918,7 @@ function handleCalendar( $showID, $dates=null, $venueWPID="" ) {
     wp_die();
   }
 }
-add_action( "wp_ajax_add_calendar", "handleCalendar" );
+add_action( "wp_ajax_nopriv_add_calendar", "handleCalendar" );
 
 function tickets_enqueue_scripts(){
   wp_enqueue_script( 'ticket-script', get_template_directory_uri() . '/library/js/tb-scripts.js' );

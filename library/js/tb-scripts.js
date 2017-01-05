@@ -1,8 +1,9 @@
 jQuery(document).ready(function(){
 	$("#month-selector").change( sendCalData );
 	$("#venue-selector").change( sendCalData );
-	$("#events-table").on( "click", "#prev-week-btn", sendPrevWeek );
-	$("#events-table").on( "click", "#next-week-btn", sendNextWeek );
+	$("#events-table").on( "click", "#prev-week-btn", sendCalData );
+	$("#events-table").on( "click", "#next-week-btn", sendCalData );
+	$("#shows-listing-container").on( "click" , "#next-shows-btn", loadNextShows );
 	$("#next-week").click( function(){
 		console.log("a click!");
 		var whatever = {
@@ -15,46 +16,32 @@ jQuery(document).ready(function(){
 	} );
 });
 
-function sendCalData( weekData ) {
-	var selectedData = {
-		"monthVal"	: $("#month-selector").val(),
-		"venueVal"	: $("#venue-selector").val(),
-		"showID"	: $("#showID").val(),
-		"week"		: ""
+function loadNextShows() {
+	console.log( "load them next shows!" );
+	var showData = {
+		"offset"	: $("#next-shows-offset").val(),
+		"postID"	: $("#post-id").val()
 	};
 	var toPass = {
-		action: "add_calendar",
-		data: selectedData
+		action: "display_shows",
+		data: showData 
 	};
 	$.post( ticket_ajax.ajaxurl, toPass ).done( function(res){
-		$("#events-table").html( res );
+		$("#shows-listing-container").html( res );
 		console.log(res)
 	} );
-};
+}
 
-function sendPrevWeek() {
+function sendCalData() {
+	var week = "";
+	if ( $(this).is("a") ) {
+		week = $(this).find("input").val();
+	}
 	var selectedData = {
 		"monthVal"	: $("#month-selector").val(),
 		"venueVal"	: $("#venue-selector").val(),
 		"showID"	: $("#showID").val(),
-		"week"		: $("#prev-week").val()
-	};
-	var toPass = {
-		action: "add_calendar",
-		data: selectedData
-	};
-	$.post( ticket_ajax.ajaxurl, toPass ).done( function(res){
-		$("#events-table").html( res );
-		console.log(res)
-	} );
-};
-
-function sendNextWeek() {
-	var selectedData = {
-		"monthVal"	: $("#month-selector").val(),
-		"venueVal"	: $("#venue-selector").val(),
-		"showID"	: $("#showID").val(),
-		"week"		: $("#next-week").val()
+		"week"		: week
 	};
 	var toPass = {
 		action: "add_calendar",

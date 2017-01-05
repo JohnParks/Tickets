@@ -424,7 +424,7 @@ section {
 	width: 180px;
 
 	a {
-		
+
 	}
 	
 	img {
@@ -432,6 +432,19 @@ section {
 	}
 
 	#next-week-btn img {
+		transform:          rotate(180deg);
+		-ms-transform:      rotate(180deg);
+		-moz-transform:     rotate(180deg);
+		-webkit-transform:  rotate(180deg);
+		-o-transform:       rotate(180deg);
+	}
+}
+
+
+
+.show-list {
+	
+	#next-shows-btn img {
 		transform:          rotate(180deg);
 		-ms-transform:      rotate(180deg);
 		-moz-transform:     rotate(180deg);
@@ -1054,6 +1067,10 @@ SIDEBARS & ASIDES
 		.show-list-item {
 			margin-left: auto;
 			margin-right: auto;
+		}
+
+		.show-list-nav {
+			display: none;
 		}
 	}
 }
