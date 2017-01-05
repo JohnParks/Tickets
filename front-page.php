@@ -41,9 +41,17 @@
 							<div id='gallery-block'>
 
 							<?php
+								$cntr = 0;
 								foreach ( $slides as $slide ) {
+									if( $cntr == 1 ) {
+										$toAdd = "display:none;";
+										$cntr++;
+									} else {
+										$toAdd = "";
+										$cntr++;
+									}
 							?>
-								<div class="slide" style="background-image: url('<?php echo $slide["background"]; ?>');" >
+								<div class="slide <?php echo $slide['link']; ?>" style="background-image: url('<?php echo $slide["background"]; ?>'); <?php echo $toAdd; ?>" >
 									<div class='poster'><?php echo $slide['poster']; ?></div>
 									<div class='show-info'>
 										<h3><?php echo $slide['title']; ?></h3>
@@ -58,13 +66,22 @@
 							<div id="slider-listing">
 								<?php
 								// let's build out the listing on the right side of the slider
+								$cntr = 0;
 								foreach ( $slides as $slide ) {
+									if ( $cntr == 1 ) {
+										$classToAdd = "show-listing active";
+										$cntr++;
+									} else {
+										$cntr++;
+										$classToAdd = "show-listing";
+									}
 									?>
-									<div class="show-listing">
+									<div class="<?php echo $classToAdd; ?>">
+										<!--<img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/dotted-arrow.png" class='dotted-arrow' />-->
 										<div class='poster'><?php echo $slide['poster']; ?></div>
 										<div class='show-info'>
 											<div class="show-title"><?php echo $slide['title']; ?></div>
-											<a href="<?php echo $slide['link']; ?>" class="empty-buy" ><div>Buy Tickets</div></a>
+											<a href="<?php echo $slide['link']; ?>" class="buy-tickets" ><div>Buy Tickets</div></a>
 										</div>
 									</div>
 									<?php
@@ -79,9 +96,12 @@
 							var someTime;
 
 							function toggleThings( cntr ) {
+								console.log( cntr, $("#gallery-block > div")[cntr] )
 								$($("#gallery-block > div")[cntr]).toggle();
+								$($("#slider-listing > div")[cntr]).toggleClass( "active" );
 								cntr = cntr == 3 ? 0 : cntr+1;
 								$($("#gallery-block > div")[cntr]).toggle();
+								$($("#slider-listing > div")[cntr]).toggleClass( "active" );
 
 								someTime = setTimeout( toggleThings, 4000, cntr );
 							}

@@ -498,6 +498,7 @@ table#events-calendar {
 		height: 500px;
 		width: 75%;
 		overflow: hidden;
+		display: inline-block;
 
 		.slide {
 			height: inherit;
@@ -555,15 +556,48 @@ table#events-calendar {
 
 	#slider-listing {
 		float: right;
+		display: inline-block;
 		width: 25%;
+		padding: 25px 0px 0px 30px;
+		height: 500px;
 
 		.show-listing {
+			clear: both;
+			display: inline-block;
+			margin-bottom: 8px;
+
+			.active::before {
+				content: url(../assets/icons/dotted-arrow.png);
+			}
+
+			.show-info {
+				float: right;
+				width: 64%;
+
+				.buy-tickets {
+
+					div {
+						display: inline-block;
+						font-size: 15px;
+						text-transform: uppercase;
+						font-weight: 600;
+					}
+				}
+
+				.show-title {
+					color: white;
+					font-weight: bold;
+					font-size: 18px;
+				}
+			}
 
 			.poster {
-				width: 25%;
+				width: 30%;
+				float: left;
 
 				img {
 					width: 100%;
+					height: auto;
 				}
 			}
 		}
