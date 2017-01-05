@@ -489,6 +489,88 @@ table#events-calendar {
 	}
 }
 
+#home-page-slider {
+	width: 100%;
+	background-color: black;
+
+	#gallery-block {
+		position: relative;
+		height: 500px;
+		width: 75%;
+		overflow: hidden;
+
+		.slide {
+			height: inherit;
+			padding: 39px;
+			background-size: contain;
+
+			.show-info {
+				margin-left: 15px;
+				color: white;
+				float: left;
+
+				h3 {
+					font-weight: bold;
+					font-size: 30px;
+					margin-top: 0px;
+				}
+
+				a.filled-buy {
+					text-decoration: none;
+				}
+
+				.filled-buy div {
+					background-color: #ffa700;
+					text-transform: uppercase;
+					font-weight: 600;
+					border-radius: 20px;
+					color: black;
+					padding: 5px;
+					text-align: center;
+				}
+
+				.more-info {
+					position: relative;
+					top: 40px;
+
+					a {
+						color: white;
+					}
+				}
+			}
+
+			.poster {
+				float: left;
+				border-right: #b3b3b3 solid 1px;
+				padding-right: 15px;
+				height: 70%;
+
+				img {
+					width: 170px;
+					height: auto;
+				}
+			}
+		}
+	} /* Close #gallery-block */
+
+	#slider-listing {
+		float: right;
+		width: 25%;
+
+		.show-listing {
+
+			.poster {
+				width: 25%;
+
+				img {
+					width: 100%;
+				}
+			}
+		}
+	}
+
+}
+
 		.hentry {
 			background-color: $white;
 			border-radius: 3px;
