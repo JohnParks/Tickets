@@ -811,7 +811,7 @@ function getShowEvents( $showID, $venueWPID='', $start, $end ) {
 }
 
 // function to handle events calendar ajax call
-function handleCalendar( $showID, $dates=null, $venueWPID="" ) {
+function handleCalendar( $showID, $dates=null, $venueWPID="", $mobile = false ) {
   $monthVal;
   if ( $dates == null ) {
 
@@ -820,6 +820,8 @@ function handleCalendar( $showID, $dates=null, $venueWPID="" ) {
     $monthVal = $_POST['data']['monthVal'];
 
     $venueWPID = $_POST['data']['venueVal'];
+      
+      $mobile = isset($_POST['data']['mobile'])? true : false;
     
     // grab "week" variable from $_POST, if set, use that to build start and end dates, else call "getDates"
     $week = $_POST['data']['week'];
@@ -841,6 +843,9 @@ function handleCalendar( $showID, $dates=null, $venueWPID="" ) {
   echo "</pre>";*/
 
   $fullEvents = getShowEvents( $showID, $venueWPID, $dates['start']->format( "Y-m-d" ), $dates['end']->format( "Y-m-d" ) );
+    if($mobile){
+        return $fullEvents;
+    }
   /*echo "<pre>";
   print_r($fullEvents);
   echo "</pre>";*/
