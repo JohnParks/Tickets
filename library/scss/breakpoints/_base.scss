@@ -418,6 +418,28 @@ section {
 	padding-right: 25px;
 }
 
+.cal-nav {
+
+	display: flex;
+	width: 180px;
+
+	a {
+		
+	}
+	
+	img {
+		height: 30px;
+	}
+
+	#next-week-btn img {
+		transform:          rotate(180deg);
+		-ms-transform:      rotate(180deg);
+		-moz-transform:     rotate(180deg);
+		-webkit-transform:  rotate(180deg);
+		-o-transform:       rotate(180deg);
+	}
+}
+
 table#events-calendar {
 	width: 100%;
 	text-align: center;
@@ -440,6 +462,17 @@ table#events-calendar {
 
 	td:first-child {
 		border-left: none;
+	}
+
+	.show-time {
+		width: 85%;
+		border: $yellow solid;
+		border-radius: 20px;
+		display: block;
+		margin: 15px auto;
+		font-weight: bold;
+		color: black;
+		text-decoration: none;
 	}
 }
 

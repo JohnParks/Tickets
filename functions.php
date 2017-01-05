@@ -640,17 +640,37 @@ add_action( "admin_enqueue_scripts", "tb_options_enqueue_scripts" );
 /* Commence Template related functions!
 ------------------------------------------*/
 // function to build out a list of of shows using the standard "show preview" format
-function display_shows ( $postID, $numPosts = 4, $topSeller = false ) {
+function display_shows ( $postID, $numPosts = 4, $topSeller = false, $offset = 0 ) {
   // what parameters might we need?
 
   // grab array of show IDs
   $showIDs = get_post_meta( $postID, 'shows', true );
 
+
+  // establish total possible size of result set, use this to modulate offset
+  $possibleShows = count( $showIDs );
+  //echo "Possible shows is " . $possibleShows;
+  if ( $offset > ( $possibleShows - $numPosts ) ) {
+    //we've reached the end, do not iterate offset any further
+    $nextOffset = $offset;
+    $prevOffset = $offset - $numPosts;
+  } else if ( $offset < 0 ) {
+    // we're at the beginning of the list, decrease no further
+    $prevOffset = 0;
+    $nextOffset = $numPosts;
+  } else {
+    // all is hunky dory
+    $nextOffset = $offset + 1;
+    $prevOffset = $offset - 1;
+  }
+
   // grab Show objects
   $args = array (
     "include" => $showIDs,
     "post_type" => "show",
-    "posts_per_page" => $numPosts
+    "posts_per_page" => $numPosts,
+    "offset"  => $offset,
+    "no_found_rows" => true
   );
   if ( $topSeller ) {
     $args[ 'meta_key' ] = 'top_seller';
@@ -662,28 +682,40 @@ function display_shows ( $postID, $numPosts = 4, $topSeller = false ) {
   print_r( $shows );
   echo "</pre>";*/
 
-  // spit 'em out!
+  // start building out $html
   $cntr = 1;
-  echo "<div class='show-list'>";
+  $html = "<div class='show-list'>";
+  $html .= "<img src='" . get_template_directory_uri() . "/library/assets/icons/dotted-arrow.png' />";
   foreach ( $shows as $show ) {
     if ( $cntr > $numPosts )
       break;
-    echo "<div class='show-list-item'>";
-    echo "<a href='" . get_permalink( $show ) . "'>";
-    echo "<div class='show-poster'>";
+    $html .= "<div class='show-list-item'>";
+    $html .= "<a href='" . get_permalink( $show ) . "'>";
+    $html .= "<div class='show-poster'>";
     if ( has_post_thumbnail( $show ) ) {
-      echo get_the_post_thumbnail( $show, 'thumbnail' );
+      $html .= get_the_post_thumbnail( $show, 'thumbnail' );
     } else {
-      echo "<img src='" . get_template_directory_uri() . "/library/assets/placeholder.jpg' class='placeholder' />";
+      $html .= "<img src='" . get_template_directory_uri() . "/library/assets/placeholder.jpg' class='placeholder' />";
     }
-    echo "</div></a>";
-    echo "<div class='show-title'><a href='" . get_permalink( $show ) . "'>" . $show->post_title . "</a></div>";
-    echo "<a href='" . get_permalink( $show ) . "' ><div class='buy-tickets'>Buy Tickets</div></a>";
-    echo "</div>";
+    $html .= "</div></a>";
+    $html .= "<div class='show-title'><a href='" . get_permalink( $show ) . "'>" . $show->post_title . "</a></div>";
+    $html .= "<a href='" . get_permalink( $show ) . "' ><div class='buy-tickets'>Buy Tickets</div></a>";
+    $html .= "</div>";
     $cntr++;
   }
-  echo "</div>";
+  $html .= "<img src='" . get_template_directory_uri() . "/library/assets/icons/dotted-arrow.png' class='next-shows-btn' />";
+  $html .= "</div>";
 
+  // echo out the (hidden) inputs containing the respective offsets
+  $html .= "<input id='prev-shows-offset' value='" . $prevOffset . "' type='hidden' />";
+  $html .= "<input id='next-shows-offset' value='" . $nextOffset . "' type='hidden' />";
+
+  // finally, let's echo out $html
+  echo $html;
+
+  if( $_POST ) {
+    wp_die();
+  }
 }
 
 // function to spit out the start and end date of a given week (used for building out the event calendars)
@@ -721,7 +753,7 @@ function getDates( $week = '', $month = '' ) {
     $monthDateString = date('Y') . "-";
     $monthDateString .= $month . "-01";
     $date = new DateTime( $monthDateString ); // this should correspond to the first of the selected month
-    /* TO DO: account edge cases where year rolls over
+    /* TO DO: account for edge cases where year rolls over
     --------------------------------------------------------------------------------------------------------------------*/
     $week = $date->format('W');
     $year = $date->format('Y');
@@ -774,13 +806,24 @@ function getShowEvents( $showID, $venueWPID='', $start, $end ) {
 function handleCalendar( $showID, $dates=null, $venueWPID="" ) {
   $monthVal;
   if ( $dates == null ) {
+
     $showID = $_POST['data']['showID'];
-    //echo "No worries!";
+    
     $monthVal = $_POST['data']['monthVal'];
 
     $venueWPID = $_POST['data']['venueVal'];
-    //echo "Month value is $monthVal";
-    $dates = getDates( '', $monthVal );
+    
+    // grab "week" variable from $_POST, if set, use that to build start and end dates, else call "getDates"
+    $week = $_POST['data']['week'];
+    //echo "Week is $week";
+    if ( $week != '' ) {
+      $trashDate = new DateTime( $week );
+      $dates['start'] = new DateTime( $trashDate->format( 'Y-m-d' ) );
+      $trashDate->modify( "+6 days" );
+      $dates['end'] = new DateTime( $trashDate->format( 'Y-m-d' ) );
+    } else {
+      $dates = getDates( '', $monthVal );
+    }
     //var_dump($dates);
     //wp_die();
   }
@@ -800,7 +843,8 @@ function handleCalendar( $showID, $dates=null, $venueWPID="" ) {
     $daDate = new DateTime( $event->time );
     $toInsert = array (
       "id"    => $event->id,
-      "time"  => $daDate->format( 'G:i' ),
+      "hour"  => $daDate->format( 'G' ),
+      "minute"=> $daDate->format( 'i' ),
       "day"   => $daDate->format( 'w' )
     );
     $events[] = $toInsert;
@@ -816,9 +860,9 @@ function handleCalendar( $showID, $dates=null, $venueWPID="" ) {
   $currWeek = new DateTime( $dates['start']->format("Y-m-d") );
   
   //start building out the HTML that will display the calendar
-  $html = "<span><input type='hidden' id='prev-week' value='" . $prevWeek->format('W') . "' />Previous Week</span>";
+  $html = "<div class='cal-nav'><a id='prev-week-btn'><input type='hidden' id='prev-week' value='" . $prevWeek->format('Y-m-d') . "' /><img src='" . get_template_directory_uri() . "/library/assets/icons/dotted-arrow.png' /></a>";
   $html .= "<span id='date-range'>" . $dates['start']->format('M j') . " - " . $dates['end']->format( 'M j' ) . "</span>";
-  $html .= "<span><input type='hidden' id='next-week' value='" . $nextWeek->format('W') . "' />Next Week</span>";
+  $html .= "<a id='next-week-btn'><input type='hidden' id='next-week' value='" . $nextWeek->format('Y-m-d') . "' /><img src='" . get_template_directory_uri() . "/library/assets/icons/dotted-arrow.png' /></a></div>";
   $html .= "<table id='events-calendar'><tr class='days-heading'>";
 
   // while loop to create the day of the week headers (complete month/day indications)
@@ -840,11 +884,14 @@ function handleCalendar( $showID, $dates=null, $venueWPID="" ) {
       // cycle through events array, grabbing any for current day (based on "day" value)
       foreach( $events as $event ) {
         if( $event['day'] == $cntr ) {
-          if ( $event['time'] > 12 )
-            $time = $event['time']-12 . " PM";
-          else
-            $time = $event['time'];
-          $html .= "<div class='show-time'><a href=''>" . $time . "</a></div>";
+          // build time variable, including converting from 24 hour to 12 hour time
+          if ( $event['hour'] > 12 ) {
+            $time = $event['hour']-12 . ":" . $event['minute'] . " PM";
+          } else {
+            $time = $event['hour'] . ":" . $event['minute'] . " AM";
+          }
+            
+          $html .= "<a href='' class='show-time' id='" . $event['id'] . "' >" . $time . "</a>";
         }
       }
       $html .= "</td>";
