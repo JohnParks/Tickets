@@ -126,7 +126,7 @@ H1, H2, H3, H4, H5 STYLES
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
 	text-rendering: optimizelegibility;
-	font-weight: 500;
+	font-weight: 600;
 	/*
 	if you're going to use webfonts, be sure to check your weights
 	http://css-tricks.com/watch-your-font-weight/
@@ -689,8 +689,58 @@ table#events-calendar {
 }
 
 .search-results {
+
 	article {
-		display: block;
+		height: auto;
+		padding: 40px;
+		clear: both;
+		border: none;
+
+		section {
+			padding: 1.5em;
+		}
+	}
+
+	header.entry-header {
+		padding: 0px;
+	}
+
+	.result-body {
+		float: left;
+		margin-left: 20px;
+
+		.entry-meta{
+
+			p {
+				margin-bottom: 5px;
+				margin-top: 5px;
+			}
+		}
+	}
+	
+	main {
+		width: 100%;
+	}
+
+	h3 {
+		font-size: 20px;
+		font-weight: bold;
+		max-width: 490px;
+		
+		a {
+			text-decoration: none;
+			color: black;
+		}
+	}
+
+	.thumbnail {
+		width: 200px;
+		float: left;
+
+		img {
+			width: inherit;
+			height: auto;
+		}
 	}
 }
 
@@ -936,6 +986,7 @@ PAGE NAVI STYLES
 }
 	.pagination{
     text-align: center;
+    clear: both;
 
     ul {
       display: inline-block;

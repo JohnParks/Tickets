@@ -69,6 +69,9 @@ get_header(); ?>
 				// cycle through the new Events
 				foreach( $APIEvents as $obj ) {
 
+					if ( $exists )
+						continue;
+
 					$event = new Event( $obj );
 					$event->setPerformerID( $show->performerID );
 
@@ -93,6 +96,10 @@ get_header(); ?>
 
 				// cycle through array of venue IDs, either grabbing existing or creating/saving new ones, then register relationship between show and venue
 				foreach( $venueIDs as $vID ) {
+
+					if ( $exists )
+						continue;
+
 					// fetch venue from API, use to instantiate a new Venue object
 					$vAPI = $conn->getVenue( $vID );
 					$venue = new Venue( $vAPI );
@@ -136,9 +143,9 @@ get_header(); ?>
 
 				$cntr++;
 
-				/*if ( $cntr > 5 ) {
-					break;
-				}*/
+				if ( $cntr > 5 ) {
+					//break;
+				}
 			}
 
 			?>

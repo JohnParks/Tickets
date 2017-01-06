@@ -60,7 +60,10 @@
 
 								<section class="entry-content cf">
 									<?php
+									if( $post->post_content != '' )
 										the_content();
+									else
+										echo "<p>There is no content for this page as of yet.</p>"
 									?>
 								</section> <!-- end article section -->
 

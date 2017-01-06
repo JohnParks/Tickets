@@ -429,6 +429,7 @@ function create_tb_post_types() {
       'all_items'       => __( 'All Reviews' )
     ),
     'public'      =>  true,
+    'exclude_from_search' => true,
     'description'   =>  'Show reviews.',
     'menu_position'   =>  5,
     'capability_type' =>  'post',
@@ -830,7 +831,7 @@ function handleCalendar( $showID, $dates=null, $venueWPID="", $mobile = false ) 
 
     $venueWPID = $_POST['data']['venueVal'];
       
-    //$mobile = isset($_POST['data']['mobile'])? true : false;
+    $mobile = isset($_POST['data']['mobile'])? true : false;
     
     // grab "week" variable from $_POST, if set, use that to build start and end dates, else call "getDates"
     $week = $_POST['data']['week'];
@@ -852,9 +853,9 @@ function handleCalendar( $showID, $dates=null, $venueWPID="", $mobile = false ) 
   echo "</pre>";*/
 
   $fullEvents = getShowEvents( $showID, $venueWPID, $dates['start']->format( "Y-m-d" ), $dates['end']->format( "Y-m-d" ) );
-    /*if($mobile){
+    if($mobile){
         return $fullEvents;
-    }*/
+    }
   /*echo "<pre>";
   print_r($fullEvents);
   echo "</pre>";*/
@@ -905,6 +906,8 @@ function handleCalendar( $showID, $dates=null, $venueWPID="", $mobile = false ) 
 
       // cycle through events array, grabbing any for current day (based on "day" value)
       foreach( $events as $event ) {
+
+        $url = home_url( '/' ) . "tickets/?eventID=" . $event['id'];
         if( $event['day'] == $cntr ) {
           // build time variable, including converting from 24 hour to 12 hour time
           if ( $event['hour'] > 12 ) {
@@ -913,7 +916,7 @@ function handleCalendar( $showID, $dates=null, $venueWPID="", $mobile = false ) 
             $time = $event['hour'] . ":" . $event['minute'] . " AM";
           }
             
-          $html .= "<a href='' class='show-time' id='" . $event['id'] . "' >" . $time . "</a>";
+          $html .= "<a href='" . $url . "' class='show-time' id='" . $event['id'] . "' >" . $time . "</a>";
         }
       }
       $html .= "</td>";

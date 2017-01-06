@@ -25,31 +25,27 @@ if ( ( $post_type[0] != "" ) && locate_template( 'search-shows.php' ) ) {
 
 				<div id="inner-content" class="wrap cf">
 
-					<main id="main" class="m-all t-2of3  cf" role="main">
+					<div class="sidebar d-2of7">
+					</div>
+
+					<div id="post-<?php the_ID(); ?>" class="body-content d-5of7" <?php post_class('cf'); ?> role="article">
 						<h1 class="archive-title"><span><?php _e( 'Search Results for:', 'bonestheme' ); ?></span> <?php echo esc_attr(get_search_query()); ?></h1>
 
 						<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
+						<?php
+						// get post-type to display here
+						$theType = get_post_type();
+						
+						?>
+
 							<article id="post-<?php the_ID(); ?>" <?php post_class('cf'); ?> role="article">
 
-								<header class="entry-header article-header">
+								<?php
+									echo get_template_part( "search", $theType );
+								?>
 
-									<h3 class="search-title entry-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
-
-								</header>
-
-								<section class="entry-content">
-										<?php the_excerpt( '<span class="read-more">' . __( 'Read more &raquo;', 'bonestheme' ) . '</span>' ); ?>
-
-								</section>
-
-								<footer class="article-footer">
-
-									<?php if(get_the_category_list(', ') != ''): ?>
-                  					<?php printf( __( 'Filed under: %1$s', 'bonestheme' ), get_the_category_list(', ') ); ?>
-                  					<?php endif; ?>
-
-								</footer> <!-- end article footer -->
+								<?php //the_excerpt( '<span class="read-more">' . __( 'Read more &raquo;', 'bonestheme' ) . '</span>' ); ?>
 
 							</article>
 
@@ -73,7 +69,7 @@ if ( ( $post_type[0] != "" ) && locate_template( 'search-shows.php' ) ) {
 
 							<?php endif; ?>
 
-						</main>
+						</div>
 
 					</div>
 
