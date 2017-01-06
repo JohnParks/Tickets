@@ -712,6 +712,30 @@ table#events-calendar {
 		clear: both;
 		margin-left: 40px;
 	}
+
+	.sidebar {
+		background-color: white;
+		border-right: darkgray 1px solid;
+
+		h4 {
+			font-weight: bold;
+			color: black;
+		}
+
+		.genre-filter {
+
+			li.active {
+				background-color: $yellow;
+			}
+
+			a {
+				text-decoration: none;
+				font-weight: 600;
+				font-size: 18px;
+				color: #444444;
+			}
+		}
+	}
 }
 
 .search-results {

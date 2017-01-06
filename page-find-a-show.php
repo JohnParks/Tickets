@@ -37,16 +37,25 @@
 					//echo $daURL;
 				?>
 
-				<div id="inner-content" class="wrap cf search-results">
+				<div id="inner-content" class="wrap cf search-results find-a-show">
 
 						<!--<main id="main" class="m-all t-2of3 d-5of7 cf" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">-->
 
 							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 							<div class='sidebar d-2of7'>
+								<div class="genre-filter">
+									<h4>Filter by Genre</h4>
+									<ul>
+										<li class="<?php if($theGenre=='musicals-and-plays') {echo 'active';}?>"><a href="<?php echo $daURL;?>&genre=musicals-and-plays">Musicals and Plays</a></li>
+										<li class="<?php if($theGenre=='las-vegas') {echo 'active';}?>"><a href="<?php echo $daURL;?>&genre=las-vegas">Las Vegas</a></li>
+										<li class="<?php if($theGenre=='broadway') {echo 'active';}?>"><a href="<?php echo $daURL;?>&genre=broadway">Broadway</a></li>
+										<li class="<?php if($theGenre=='theater') {echo 'active';}?>"><a href="<?php echo $daURL;?>&genre=theater">Theater</a></li>
+									</ul>
+								</div>
 							</div>
 
-							<div id="post-<?php the_ID(); ?>" class="d-5of7 find-a-show" <?php post_class( 'cf' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
+							<div id="post-<?php the_ID(); ?>" class="d-5of7" <?php post_class( 'cf' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
 
 								<header class="article-header">
 
