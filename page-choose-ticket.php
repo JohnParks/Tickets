@@ -15,6 +15,21 @@
 
 <?php get_header(); ?>
 
+<style>
+#inner-content {
+	margin-top: 135px;
+}
+.footer-columns li {
+	text-align: left;
+}
+#tn-maps {
+	width: 100%;
+}
+footer.footer{
+	background-color: transparent;
+}
+</style>
+
 			<div id="content">
 
 				<div id="inner-content" class="wrap cf">
@@ -37,14 +52,14 @@
 
 					</script>
 						<script type="text/javascript">
-					var Seatics = Seatics || {};
-					Seatics.config = Seatics.config || {};
-					if(document.location.origin == 'https://ticketsbroadway.com'){
-						Seatics.config.checkoutUrl = "https://secure.ticketsbroadway.com/checkout/mobile2/Checkout.aspx?brokerid="+brokerID+"&sitenumber="+siteNumber+userinformation;
-					}else if(document.location.origin == 'https://ticketsbroadway.net'){
-						siteNumber = '7';
-						Seatics.config.checkoutUrl = "https://secure.ticketsbroadway.net/checkout/mobile2/Checkout.aspx?brokerid="+brokerID+"&sitenumber="+siteNumber+userinformation;
-					}
+						var Seatics = Seatics || {};
+						Seatics.config = Seatics.config || {};
+						if(document.location.origin == 'https://ticketsbroadway.com'){
+							Seatics.config.checkoutUrl = "https://secure.ticketsbroadway.com/checkout/mobile2/Checkout.aspx?brokerid="+brokerID+"&sitenumber="+siteNumber+userinformation;
+						}else if(document.location.origin == 'https://ticketsbroadway.net'){
+							siteNumber = '7';
+							Seatics.config.checkoutUrl = "https://secure.ticketsbroadway.net/checkout/mobile2/Checkout.aspx?brokerid="+brokerID+"&sitenumber="+siteNumber+userinformation;
+						}
 
 
 					</script>

@@ -22,7 +22,7 @@ global $post; ?>
 
 		if ( $role == "Cast" ) {
 			$job = " and has played the role of ";
-			$job .= get_post_meta( $post->ID, "character_name", true ) ".";
+			$job .= get_post_meta( $post->ID, "character_name", true ) . ".";
 		} else {
 			$job = " and has served as a ";
 			$job .= get_post_meta( $post->ID, "crew_role", true ) . ".";

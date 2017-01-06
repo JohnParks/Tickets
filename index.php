@@ -2,9 +2,41 @@
 
 			<div id="content">
 
+				<?php 
+				// the query
+				if ( get_query_var( 'paged' ) ) { 
+					$paged = get_query_var( 'paged' );
+				} elseif ( get_query_var( 'page' ) ) {
+					$paged = get_query_var( 'page' );
+				} else { $paged = 1; }
+				$the_query = new WP_Query( array( 'posts_per_page' => 4, 'paged' => $paged ) ); ?>
+
+				<?php 
+
+				if ( $the_query->have_posts() ) : 
+
+					$cntr = 0; //keeps track of articles, adds horizontal rule after first two
+
+					while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+
+						<?php $categories = get_the_category(); //array of categories attached to current post
+
+						if ( $cntr > 1 || is_paged() ) {
+							$xtra_class = 'half-width';
+						} else if ( $cntr == 1 ) {
+							$xtra_class = 'second-article';
+						} else {
+							$xtra_class = 'first-article';
+						} ?>
+
+						<?php
+						if( is_paged() ) {
+							$xtra_class = "half-width";
+						} ?>
+
 				<div id="inner-content" class="wrap cf">
 
-						<main id="main" class="m-all t-2of3 d-5of7 cf" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
+						<div id="main" class="m-all t-2of3 d-5of7 cf" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
 
 							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
@@ -64,7 +96,7 @@
 							<?php endif; ?>
 
 
-						</main>
+						</div>
 
 					<?php get_sidebar(); ?>
 

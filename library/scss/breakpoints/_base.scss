@@ -114,10 +114,7 @@ a, a:visited {
   margin: 5px auto;
   color: $yellow;
   font-weight: bold;
-
-  a {
-    
-  }
+  display: inline-block;
 }
 
 /******************************************************************
@@ -371,7 +368,7 @@ section {
 
 .show-nav {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	background-color: black;
 
 	li {
@@ -399,6 +396,7 @@ section {
 
 	.person a {
 		text-decoration: none;
+		color: darkgray;
 	}
 
 	h3 {
@@ -427,6 +425,16 @@ section {
 
 .theater-display {
 	clear: both;
+
+	h4 {
+		font-weight: 600;
+		color: black;
+
+		a {
+			color: black;
+			text-decoration: underline;
+		}
+	}
 }
 
 .event-list {
@@ -599,6 +607,7 @@ table#events-calendar {
 					color: black;
 					padding: 5px;
 					text-align: center;
+					width: 150px;
 				}
 
 				.more-info {
@@ -688,6 +697,23 @@ table#events-calendar {
 
 }
 
+.show-search-form {
+	position: relative;
+	top: 23px;
+}
+
+.find-a-show {
+	
+	.article-header, .show-search-form {
+		margin-left: 40px;
+	}
+
+	h2 {
+		clear: both;
+		margin-left: 40px;
+	}
+}
+
 .search-results {
 
 	article {
@@ -715,6 +741,29 @@ table#events-calendar {
 				margin-bottom: 5px;
 				margin-top: 5px;
 			}
+		}
+	}
+
+	.show-info {
+		h4 {
+			margin: 5px 0px;
+		}
+
+		ul li {
+			max-width: 490px;
+
+			a {
+				color: #666666;
+				font-size: 20px;
+			}
+		}
+	}
+
+	.buy-tickets {
+		text-decoration: none;
+
+		div {
+			text-transform: none;
 		}
 	}
 	
@@ -987,6 +1036,7 @@ PAGE NAVI STYLES
 	.pagination{
     text-align: center;
     clear: both;
+    height: auto;
 
     ul {
       display: inline-block;
@@ -995,6 +1045,8 @@ PAGE NAVI STYLES
       padding: 0;
       clear: both;
       border-radius: 3px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     li {

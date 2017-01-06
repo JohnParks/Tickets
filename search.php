@@ -1,24 +1,3 @@
-<?php
-$post_type = array();
-if ( isset($_GET['post_type']) ) {
-	$post_type[0] = $_GET['post_type'];	
-} else {
-	$post_type[0] = "";
-}
-
-// check to see if there was a post type in the
-// URL string and if a results template for that
-// post type actually exists
-if ( ( $post_type[0] != "" ) && locate_template( 'search-shows.php' ) ) {
-  // if so, load that template
-  get_template_part( 'search', 'shows' );
-  
-  // and then exit out
-  exit;
-}
-
-?>
-
 <?php get_header(); ?>
 
 			<div id="content">

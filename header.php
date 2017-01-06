@@ -58,8 +58,44 @@
 
 					</div>
 
+					<?php
+						// build arrays to hold shows for each genre
+						$theaterGenre = array (
+							'taxonomy'	=>	'genre',
+							'field'		=>	'slug',
+							'terms'		=>	'theater'
+						);
+						$theaterArgs =  array (
+							'post_type'		=> 'show',
+							'tax_query'		=> $theaterGenre,
+							'posts_per_page'=> '6'
+						);
+						$theaterShows = get_posts( $theaterArgs );
+
+						// build arrays to hold shows for each genre
+						$playGenre = array (
+							'taxonomy'	=>	'genre',
+							'field'		=>	'slug',
+							'terms'		=>	'musicals-and-plays'
+						);
+						$playArgs =  array (
+							'post_type'		=> 'show',
+							'tax_query'		=> $playGenre,
+							'posts_per_page'=> '6'
+						);
+						$playShows = get_posts( $playArgs );
+					?>
 
 					<nav role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement">
+						<ul class="nav top-nav" id="shows-nav">
+							<li class="menu-item menu-item-has-children">
+								<a href="<?php echo home_url(); ?>/find-a-show">Shows</a>
+								<ul class="sub-menu">
+									<li class="menu-item menu-item-has-children">
+										<a href="<?php echo home_url();?>/genre/theater">Theater</a>
+								</ul>
+							</li>
+						</ul>
 						<?php wp_nav_menu(array(
     					         'container' => false,                           // remove nav container
     					         'container_class' => 'menu cf',                 // class of container (should you choose to use it)

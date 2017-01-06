@@ -949,6 +949,7 @@ function tickets_enqueue_scripts(){
 function tb_register_query_vars( $vars ) {
   $vars[] = "tosearch";
   $vars[] = "tab";
+  $vars[] = "genre";
 
   return $vars;
 }
