@@ -76,7 +76,7 @@
 									echo "<ul>";
 									if ( $notes !== '' ) {
 										foreach( $notes as $note ) {
-											echo "<li>$note</li>";
+											echo "<li><h4>$note<h4></li>";
 											if( $cntr++ > $notesLength/2 )
 												echo "</ul><ul>";
 										}

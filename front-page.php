@@ -43,16 +43,18 @@
 							<?php
 								$cntr = 0;
 								foreach ( $slides as $slide ) {
-									if( $cntr == 1 ) {
+									if( $cntr == 0 ) {
 										$toAdd = "display:none;";
+										$slideClass = "active-slide";
 										$cntr++;
 									} else {
 										$toAdd = "";
+										$slideClass = "";
 										$cntr++;
 									}
 							?>
-								<div class="slide <?php echo $slide['link']; ?>" style="background-image: url('<?php echo $slide["background"]; ?>'); <?php echo $toAdd; ?>" >
-									<div class='poster'><?php echo $slide['poster']; ?></div>
+								<div class="slide <?php echo $slideClass; ?>" style="background-image: url('<?php echo $slide["background"]; ?>');" >
+									<div class='poster <?php echo $slide['link']; ?>'><?php echo $slide['poster']; ?></div>
 									<div class='show-info'>
 										<h3><?php echo $slide['title']; ?></h3>
 										<a href="<?php echo $slide['link']; ?>" class="filled-buy" ><div>Buy Tickets</div></a>
@@ -68,17 +70,17 @@
 								// let's build out the listing on the right side of the slider
 								$cntr = 0;
 								foreach ( $slides as $slide ) {
-									if ( $cntr == 1 ) {
-										$classToAdd = "show-listing active";
+									if ( $cntr == 0 ) {
+										$arrowClass = "active-arrow";
 										$cntr++;
 									} else {
 										$cntr++;
-										$classToAdd = "show-listing";
+										$arrowClass = "";
 									}
 									?>
-									<div class="<?php echo $classToAdd; ?>">
-										<!--<img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/dotted-arrow.png" class='dotted-arrow' />-->
-										<div class='poster'><?php echo $slide['poster']; ?></div>
+									<div class="show-listing">
+										<img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/dotted-arrow.png" class='dotted-arrow <?php echo $arrowClass; ?>'/>
+										<div class='poster <?php echo $slide['link']; ?>'><?php echo $slide['poster']; ?></div>
 										<div class='show-info'>
 											<div class="show-title"><?php echo $slide['title']; ?></div>
 											<a href="<?php echo $slide['link']; ?>" class="buy-tickets" ><div>Buy Tickets</div></a>
@@ -98,10 +100,11 @@
 							function toggleThings( cntr ) {
 								console.log( cntr, $("#gallery-block > div")[cntr] )
 								$($("#gallery-block > div")[cntr]).toggle();
-								$($("#slider-listing > div")[cntr]).toggleClass( "active" );
+								$($("#slider-listing > div > img.dotted-arrow")[cntr]).toggle();
+
 								cntr = cntr == 3 ? 0 : cntr+1;
 								$($("#gallery-block > div")[cntr]).toggle();
-								$($("#slider-listing > div")[cntr]).toggleClass( "active" );
+								$($("#slider-listing > div > img.dotted-arrow")[cntr]).toggle();
 
 								someTime = setTimeout( toggleThings, 4000, cntr );
 							}

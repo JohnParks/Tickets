@@ -47,6 +47,7 @@ function sendCalData() {
 		action: "add_calendar",
 		data: selectedData
 	};
+	console.log(toPass);
 	$.post( ticket_ajax.ajaxurl, toPass ).done( function(res){
 		$("#events-table").html( res );
 		console.log(res)

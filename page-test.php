@@ -30,21 +30,28 @@ get_header(); ?>
 
 			$cntr = 0;
 
-			$perfArray = $conn->GetUniquePerformers();
-			
+			// grab collection of performers from performers table
+			global $wpdb;
+			$query = "SELECT * FROM " . $wpdb->prefix . "performers";
+			$perfArray = $wpdb->get_results( $query, ARRAY_A );
+
+			//print_r( $perfArray );
 			// we've got an array of unique Shows, cycle through and commence import
-			foreach( $perfArray as $id=>$name ) {
+			foreach( $perfArray as $performer ) {
+
+				$id = $performer['id'];
+				$name = $performer['name'];
 
 				$exists = Show::exists( $id );
 
-				if ( $exists ) {
+				/*if ( $exists ) {
 					echo "show $name exists, skipping this one";
 					continue;
 				} else {
 					echo "show $name does not exist.  continuing with import.";
-				}
+				}*/
 
-				echo "<br />Commencing import<br />";
+				//echo "<br />Commencing import<br />";
 					
 
 				$show = new Show( (object) [
@@ -118,6 +125,14 @@ get_header(); ?>
 				print_r( $cats );
 				//print_r( $APIEvents );
 				echo "</pre>";*/
+
+				$result = $wpdb->delete( $wpdb->prefix . 'performers', array( "id" => $id ) );
+
+				if ( $result === false ) {
+					//echo "deletion of " . $name . " failed.<br />";
+				} else {
+					//echo "<br />$result rows deleted (presumably with name $name)";
+				}
 
 				$cntr++;
 

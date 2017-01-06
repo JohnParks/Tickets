@@ -84,13 +84,13 @@
 										$cntr = 0;
 										while ( $cntr < count( $venues ) ) {
 											echo "<div class='theater-display'>";
-											echo "<span class='theater-thumb'>";
+											echo "<span class='theater-thumb'><a href='" . get_permalink( $venues[$cntr]->ID ) . "' >";
 											if ( has_post_thumbnail( $venues[$cntr] ) ) {
-												echo get_the_post_thumbnail( $venues[$cntr], 'thumbnail' );
+												echo get_the_post_thumbnail( $venues[$cntr], 'small' );
 											} else {
 												echo "<img src='" . get_template_directory_uri() . "/library/assets/placeholder.jpg' class='placeholder'/>";
 											}
-											echo "</span><span class='theater-data'>";
+											echo "</span></a><span class='theater-data'>";
 											echo "<h4><a href='" . get_permalink( $venues[$cntr]->ID ) . "'>" . $venues[$cntr]->post_title . "</a></h4>";
 											echo "<p>" . $venues[$cntr]->post_excerpt . "</p>";
 											echo "</div>";

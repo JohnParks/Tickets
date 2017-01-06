@@ -37,9 +37,9 @@
 
 								?>
 
-								<div class="buy-tickets">
+								<!--<div class="buy-tickets">
 									<h3>Buy Tickets</h3>
-								</div>
+								</div>-->
 							</div>
 
 							<div id="post-<?php the_ID(); ?>" class="body-content d-5of7 show-content" <?php post_class('cf'); ?> role="article">

@@ -506,6 +506,14 @@ function build_event_tbl() {
   
   require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
   dbDelta( $sql );
+
+  $performer_name = $wpdb->prefix . "performers";
+  $newSql = "CREATE TABLE $performer_name (
+    id mediumint(9) NOT NULL,
+    name text,
+    PRIMARY KEY  (id)
+  ) $charset_collate;";
+  dbDelta( $newSql );
 }
 
 // Let's create our Tickets Broadway specific theme options
@@ -703,7 +711,7 @@ function display_shows ( $postID, $numPosts = 4, $topSeller = false, $offset = 0
     $html .= "<a href='" . get_permalink( $show ) . "'>";
     $html .= "<div class='show-poster'>";
     if ( has_post_thumbnail( $show ) ) {
-      $html .= get_the_post_thumbnail( $show, 'thumbnail' );
+      $html .= get_the_post_thumbnail( $show, 'small' );
     } else {
       $html .= "<img src='" . get_template_directory_uri() . "/library/assets/placeholder.jpg' class='placeholder' />";
     }
@@ -725,6 +733,7 @@ function display_shows ( $postID, $numPosts = 4, $topSeller = false, $offset = 0
   }
 }
 add_action( "wp_ajax_nopriv_display_shows", "display_shows" );
+add_action( "wp_ajax_display_shows", "display_shows" );
 
 // function to spit out the start and end date of a given week (used for building out the event calendars)
 function getStartEndDate( $week, $year ) {
@@ -821,7 +830,7 @@ function handleCalendar( $showID, $dates=null, $venueWPID="", $mobile = false ) 
 
     $venueWPID = $_POST['data']['venueVal'];
       
-      $mobile = isset($_POST['data']['mobile'])? true : false;
+    //$mobile = isset($_POST['data']['mobile'])? true : false;
     
     // grab "week" variable from $_POST, if set, use that to build start and end dates, else call "getDates"
     $week = $_POST['data']['week'];
@@ -843,9 +852,9 @@ function handleCalendar( $showID, $dates=null, $venueWPID="", $mobile = false ) 
   echo "</pre>";*/
 
   $fullEvents = getShowEvents( $showID, $venueWPID, $dates['start']->format( "Y-m-d" ), $dates['end']->format( "Y-m-d" ) );
-    if($mobile){
+    /*if($mobile){
         return $fullEvents;
-    }
+    }*/
   /*echo "<pre>";
   print_r($fullEvents);
   echo "</pre>";*/
@@ -924,6 +933,7 @@ function handleCalendar( $showID, $dates=null, $venueWPID="", $mobile = false ) 
   }
 }
 add_action( "wp_ajax_nopriv_add_calendar", "handleCalendar" );
+add_action( "wp_ajax_add_calendar", "handleCalendar" );
 
 function tickets_enqueue_scripts(){
   wp_enqueue_script( 'ticket-script', get_template_directory_uri() . '/library/js/tb-scripts.js' );

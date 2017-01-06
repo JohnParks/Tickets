@@ -504,6 +504,11 @@ HOMEPAGE STYLES
   display: block;
 }
 
+/* line 331, ../scss/breakpoints/_768up.scss */
+.body-content {
+  padding: 40px 0px 40px 40px;
+}
+
 /******************************************************************
 Site Name:
 Author:

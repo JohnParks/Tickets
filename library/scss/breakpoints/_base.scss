@@ -332,6 +332,26 @@ section {
 	}
 }
 
+.venue-notes {
+
+	h3 {
+		font-weight: bold;
+		font-size: 25px;
+		margin-bottom: 10px;
+	}
+	
+	ul {
+		width: 50%;
+		float: left;
+
+		h4 {
+			font-weight: 600;
+			font-size: 18px;
+			margin: 0px;
+		}
+	}
+}
+
 .theater-thumb {
 	float: left;
 	margin-right: 20px;
@@ -409,6 +429,13 @@ section {
 	clear: both;
 }
 
+.event-list {
+	
+	select {
+		float: right;
+	}
+}
+
 #month-selector {
 	width: 100px;
 }
@@ -416,12 +443,17 @@ section {
 #venue-selector {
 	width: auto;
 	padding-right: 25px;
+	margin-left: 20px;
 }
 
 .cal-nav {
 
 	display: flex;
 	width: 180px;
+
+	#date-range {
+		margin: auto 10px;
+	}
 
 	a {
 
@@ -440,9 +472,43 @@ section {
 	}
 }
 
+.single-city .body-content {
+	
+	h3 {
+		font-size: 22px;
+		font-weight: bold;
+		margin-top: 0px;
+	}
 
+	.theater-thumb a {
+		width: 150px;
+
+		img {
+			width: inherit;
+			height: auto;
+		}
+	}
+
+	.theater-display {
+		.theater-data {
+			h4 {
+				text-decoration: none;
+				font-size: 26px;
+
+				a {
+					color: black;
+				}
+			}
+		}
+	}
+}
 
 .show-list {
+
+	#next-shows-btn, #prev-shows-btn {
+		position: relative;
+		top: 27px;
+	}
 	
 	#next-shows-btn img {
 		transform:          rotate(180deg);
@@ -500,10 +566,15 @@ table#events-calendar {
 		overflow: hidden;
 		display: inline-block;
 
-		.slide {
+		div.slide {
 			height: inherit;
 			padding: 39px;
 			background-size: contain;
+			display: none;
+
+			&.active-slide {
+				display: block;
+			}
 
 			.show-info {
 				margin-left: 15px;
@@ -565,7 +636,19 @@ table#events-calendar {
 			clear: both;
 			display: inline-block;
 			margin-bottom: 8px;
+			position: relative;
 
+			img.dotted-arrow {
+				display: none;
+				position: absolute;
+				left: -50px;
+				top: 20px;
+				height: 60px;
+
+				&.active-arrow{
+					display:block;
+				}
+			}
 			.active::before {
 				content: url(../assets/icons/dotted-arrow.png);
 			}
@@ -603,6 +686,12 @@ table#events-calendar {
 		}
 	}
 
+}
+
+.search-results {
+	article {
+		display: block;
+	}
 }
 
 		.hentry {
@@ -1271,7 +1360,31 @@ SIDEBARS & ASIDES
 	.show-list-item {
 		width: 150px;
 		text-align: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
+		.show-poster {
+			width: 150px;
+
+			img {
+				width: 100%;
+				height: auto;
+			}		
+		}
+
+		.show-title {
+			font-weight: 600;
+			text-decoration: none;
+			font-size: 18px;
+
+			a {
+				color: black;
+			}
+		}
 	}
+
+
 }
 /*********************
 FOOTER STYLES
