@@ -852,9 +852,18 @@ function handleCalendar( $showID, $dates=null, $venueWPID="", $mobile = false ) 
   print_r($dates);
   echo "</pre>";*/
 
+      // set previous and next week variables
+  $prevWeek = new DateTime( $dates["start"]->format("Y-m-d") );
+  $prevWeek->modify( "-1 week" );
+  $nextWeek = new DateTime( $dates["start"]->format("Y-m-d") );
+  $nextWeek->modify( "+1 week" );
+    
   $fullEvents = getShowEvents( $showID, $venueWPID, $dates['start']->format( "Y-m-d" ), $dates['end']->format( "Y-m-d" ) );
     if($mobile){
-        return $fullEvents;
+        return array(
+            'events' => $fullEvents,
+            'week'  => $nextWeek
+            );
     }
   /*echo "<pre>";
   print_r($fullEvents);
@@ -873,11 +882,6 @@ function handleCalendar( $showID, $dates=null, $venueWPID="", $mobile = false ) 
     $events[] = $toInsert;
   }
 
-  // set previous and next week variables
-  $prevWeek = new DateTime( $dates["start"]->format("Y-m-d") );
-  $prevWeek->modify( "-1 week" );
-  $nextWeek = new DateTime( $dates["start"]->format("Y-m-d") );
-  $nextWeek->modify( "+1 week" );
 
   // new DateTime to hold current start date...will be used to iterate over and populate the day headers without messing with the dates array
   $currWeek = new DateTime( $dates['start']->format("Y-m-d") );
