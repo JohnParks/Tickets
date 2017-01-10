@@ -17,26 +17,6 @@
 
 			<div id="content">
 
-				<?php
-					$toSearch = get_query_var( "tosearch", "none" );
-					$theGenre = get_query_var( "genre", "" );
-					//echo $toSearch;
-
-					// Create URL, to be loaded with additional parameters when clicking on sidebar filters
-					$daURL = site_url('/') . 'find-a-show/?tosearch=' . $toSearch;
-
-					if( $theGenre != "" ) {
-						//build out taxonomy array for addition to search query
-						$genreArr = array (
-							'taxonomy'	=>	'genre',
-							'field'		=>	'slug',
-							'terms'		=>	$theGenre
-						);
-					}
-
-					//echo $daURL;
-				?>
-
 				<div id="inner-content" class="wrap cf search-results find-a-show">
 
 						<!--<main id="main" class="m-all t-2of3 d-5of7 cf" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">-->
@@ -44,11 +24,11 @@
 							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 							<div class='sidebar d-2of7'>
-								<form role="search" action="<?php echo site_url('/') . 'find-a-show'; ?>" method="get" id="searchform">
-									<input type="hidden" name="post_type" value="shows" /> <!-- // hidden 'products' value -->
-									<input type="hidden" name="tosearch" value="" />
+								<form role="search" action="<?php echo site_url('/') . 'find-a-show'; ?>" method="post" id="searchform">
+									<input type="hidden" name="search_post_type" value="shows" /> <!-- // hidden 'products' value -->
+									<input type="hidden" name="search_tosearch" value="" />
 									<div class="genre-filter">
-										<input type="hidden" name="genre" value="" />
+										<input type="hidden" name="search_genre" value="" />
 										<h4>Filter by Genre</h4>
 										<?php
 										// Alright, let's try fetching a list of genres that have "include_filter" set to true (or 1)
@@ -71,15 +51,9 @@
 											<option value="<?php echo $term->slug; ?>" ><?php echo $term->name; ?></option>
 											<?php } ?>
 										</select>
-										<!--<ul>
-											<li class="<?php if($theGenre=='musicals-and-plays') {echo 'active';}?>"><a href="<?php echo $daURL;?>&genre=musicals-and-plays">Musicals and Plays</a></li>
-											<li class="<?php if($theGenre=='las-vegas') {echo 'active';}?>"><a href="<?php echo $daURL;?>&genre=las-vegas">Las Vegas</a></li>
-											<li class="<?php if($theGenre=='broadway') {echo 'active';}?>"><a href="<?php echo $daURL;?>&genre=broadway">Broadway</a></li>
-											<li class="<?php if($theGenre=='theater') {echo 'active';}?>"><a href="<?php echo $daURL;?>&genre=theater">Theater</a></li>
-										</ul>-->
 									</div>
 									<div class="city-filter">
-										<input type="hidden" name="city" value="" />
+										<input type="hidden" name="search_city" value="" />
 										<h4>Filter by City</h4>
 										<?php
 										// let get a list of all cities in the DB, build a selector for each one
@@ -93,7 +67,7 @@
 										</select>
 									</div>
 									<div class="month-filter">
-										<input type="hidden" name="month" value="" />
+										<input type="hidden" name="search_month" value="" />
 										<h4>Filter by Month<h4>
 										<select class="month-filter" id="month-filter" name="mStr" multiple>
 											<option value="0">January</option>
@@ -135,29 +109,18 @@
 								<div>
 									<h2>Search Results</h2>
 									<?php
-									// Build out the query to grab first 12 top sellers (based on the meta field in show object)
-									$args = array (
-										'post_type'		=> 'show',
-										'posts_per_page'=> '12'
-									);
+									// Call "getShowResults()", which is a function that takes all the various filters and search params, and returns a WP_Query object
+									$shows_query = getShowResults();
 
-									if ( isset( $toSearch ) ) {
-										$args['s'] = $toSearch;
-									}
-
-									if ( isset( $genreArr ) ) {
-										$args['tax_query'] = array( $genreArr );
-									}
-
-									$shows_query = new WP_Query( $args );
-
-									/*echo "<pre>";
-									print_r( $seller_query );
+									/*echo "The Result Query is:<br />";
+									echo "<pre>";
+									print_r( $shows_query ) ;
 									echo "</pre>";*/
 
 									echo "<div class='shows-results-list'>";
 
 									// Commence the Loop!
+									//if( $shows_query->have_posts() ) : while( $shows_query->have_posts() ) : $shows_query->the_post();
 									if( $shows_query->have_posts() ) : while( $shows_query->have_posts() ) : $shows_query->the_post();
 
 									?>	<article id="post-<?php the_ID(); ?>" <?php post_class('cf'); ?> role="article">
