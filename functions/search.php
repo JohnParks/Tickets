@@ -30,7 +30,7 @@ function get_filter_form($options){
             <select id="genre-filter" <?php echo (isset($options['genre']['multi'])) ? "multiple" : ""; ?>>
                 <option value="">All Genres</option>
                 <?php foreach( $terms as $term ) { ?>
-                <option value="<?php echo $term->slug; ?>" ><?php echo $term->name; ?></option>
+                <option value="<?php echo $term->slug; ?>"><?php echo $term->name; ?></option>
                 <?php } ?>
             </select>
         </div>
