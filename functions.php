@@ -17,6 +17,8 @@ include_once( 'library/api-lib/api-includes.php' );
 include_once('library/mobile/functions.php');
 
 include_once('functions/showutils.php');
+
+include_once('functions/search.php');
 // CUSTOMIZE THE WORDPRESS ADMIN (off by default)
 // require_once( 'library/admin.php' );
 
