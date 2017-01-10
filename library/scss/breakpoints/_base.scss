@@ -471,6 +471,7 @@ section {
 	
 	img {
 		height: 30px;
+		width: auto;
 	}
 
 	#next-week-btn img {
@@ -655,6 +656,7 @@ table#events-calendar {
 				left: -50px;
 				top: 20px;
 				height: 60px;
+				width: auto;
 
 				&.active-arrow{
 					display:block;

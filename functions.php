@@ -973,4 +973,24 @@ add_filter( "query_vars", "tb_register_query_vars" );
 function broadway_scripts(){
      wp_enqueue_script('tb-js-script', get_template_directory_uri() . '/library/js/tb-scripts.js'); 
 }
+
+
+// we need to hook into a couple filters to make sure ACF taxonomy fields get saved into the Term Meta table
+function acf_update_term_meta($value, $post_id, $field) {
+  $term_id = intval(filter_var($post_id, FILTER_SANITIZE_NUMBER_INT));
+  if($term_id > 0)
+    update_term_meta($term_id, $field['name'], $value);
+  return $value;
+}
+add_filter('acf/update_value/name=dropdown_display', 'acf_update_term_meta', 10, 3);
+add_filter('acf/update_value/name=include_filter', 'acf_update_term_meta', 10, 3);
+
+function acf_load_term_meta($value, $post_id, $field) {
+  $term_id = intval(filter_var($post_id, FILTER_SANITIZE_NUMBER_INT));
+  if($term_id > 0)
+    $value = get_term_meta($term_id, $field['name'], true);
+  return $value;
+}
+add_filter('acf/load_value/name=dropdown_display', 'acf_load_term_meta', 10, 3);
+add_filter('acf/load_value/name=include_filter', 'acf_load_term_meta', 10, 3);
 /* DON'T DELETE THIS CLOSING TAG */ ?>

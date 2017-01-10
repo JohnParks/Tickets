@@ -44,15 +44,76 @@
 							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 							<div class='sidebar d-2of7'>
-								<div class="genre-filter">
-									<h4>Filter by Genre</h4>
-									<ul>
-										<li class="<?php if($theGenre=='musicals-and-plays') {echo 'active';}?>"><a href="<?php echo $daURL;?>&genre=musicals-and-plays">Musicals and Plays</a></li>
-										<li class="<?php if($theGenre=='las-vegas') {echo 'active';}?>"><a href="<?php echo $daURL;?>&genre=las-vegas">Las Vegas</a></li>
-										<li class="<?php if($theGenre=='broadway') {echo 'active';}?>"><a href="<?php echo $daURL;?>&genre=broadway">Broadway</a></li>
-										<li class="<?php if($theGenre=='theater') {echo 'active';}?>"><a href="<?php echo $daURL;?>&genre=theater">Theater</a></li>
-									</ul>
-								</div>
+								<form role="search" action="<?php echo site_url('/') . 'find-a-show'; ?>" method="get" id="searchform">
+									<input type="hidden" name="post_type" value="shows" /> <!-- // hidden 'products' value -->
+									<input type="hidden" name="tosearch" value="" />
+									<div class="genre-filter">
+										<input type="hidden" name="genre" value="" />
+										<h4>Filter by Genre</h4>
+										<?php
+										// Alright, let's try fetching a list of genres that have "include_filter" set to true (or 1)
+										$genreArgs = array(
+											"taxonomy"		=>	"genre",
+											"fields"		=>	"all",
+											"meta_query"	=>	array(
+												array(
+													"key"		=> "include_filter",
+													"value"		=>	true,
+													"compare"	=>	"="
+												)
+											)
+										);
+										$terms = get_terms( $genreArgs );
+										?>
+										<select id="genre-filter">
+											<option value="">All Genres</option>
+											<?php foreach( $terms as $term ) { ?>
+											<option value="<?php echo $term->slug; ?>" ><?php echo $term->name; ?></option>
+											<?php } ?>
+										</select>
+										<!--<ul>
+											<li class="<?php if($theGenre=='musicals-and-plays') {echo 'active';}?>"><a href="<?php echo $daURL;?>&genre=musicals-and-plays">Musicals and Plays</a></li>
+											<li class="<?php if($theGenre=='las-vegas') {echo 'active';}?>"><a href="<?php echo $daURL;?>&genre=las-vegas">Las Vegas</a></li>
+											<li class="<?php if($theGenre=='broadway') {echo 'active';}?>"><a href="<?php echo $daURL;?>&genre=broadway">Broadway</a></li>
+											<li class="<?php if($theGenre=='theater') {echo 'active';}?>"><a href="<?php echo $daURL;?>&genre=theater">Theater</a></li>
+										</ul>-->
+									</div>
+									<div class="city-filter">
+										<input type="hidden" name="city" value="" />
+										<h4>Filter by City</h4>
+										<?php
+										// let get a list of all cities in the DB, build a selector for each one
+										$cities = get_posts( array( "post_type" => "city" ) );
+										?>
+										<select id="city-filter">
+											<option value="">All Cities</option>
+											<?php foreach( $cities as $city ) { ?>
+											<option value="<?php echo $city->ID; ?>" ><?php echo $city->post_title; ?></option>
+											<?php } ?>
+										</select>
+									</div>
+									<div class="month-filter">
+										<input type="hidden" name="month" value="" />
+										<h4>Filter by Month<h4>
+										<select class="month-filter" id="month-filter" name="mStr" multiple>
+											<option value="0">January</option>
+											<option value="1">February</option>
+											<option value="2">March</option>
+											<option value="3">April</option>
+											<option value="4">May</option>
+											<option value="5">June</option>
+											<option value="6">July</option>
+											<option value="7">August</option>
+											<option value="8">September</option>
+											<option value="9">October</option>
+											<option value="10">November</option>
+											<option value="11">December</option>
+										</select>
+										<script type="text/javascript">
+											$('.month-selector').val(new Date().getMonth());
+										</script>
+									</div>
+								</form>
 							</div>
 
 							<div id="post-<?php the_ID(); ?>" class="d-5of7" <?php post_class( 'cf' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
@@ -77,9 +138,12 @@
 									// Build out the query to grab first 12 top sellers (based on the meta field in show object)
 									$args = array (
 										'post_type'		=> 'show',
-										's'				=> $toSearch,
 										'posts_per_page'=> '12'
 									);
+
+									if ( isset( $toSearch ) ) {
+										$args['s'] = $toSearch;
+									}
 
 									if ( isset( $genreArr ) ) {
 										$args['tax_query'] = array( $genreArr );
