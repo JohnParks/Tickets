@@ -977,12 +977,12 @@ function getShowResults() {
   );
 
   // set Search parameter, if there's a search string yet
-  if ( isset( $toSearch ) ) {
+  if ( isset( $toSearch ) && $toSearch != "" ) {
     $args['s'] = $toSearch;
   }
 
   // build out array for passing into tax_query param, then add to $args
-  if ( isset( $genre ) ) {
+  if ( isset( $genre ) && $genre != "" ) {
     $genreArr = array(
       'taxonomy'  =>  'genre',
       'field'     =>  'slug',
@@ -995,7 +995,7 @@ function getShowResults() {
   //$cityShowIDs = array();
 
   // next, we need to get a list of Show IDs (derived from any city and month values), and create an array of unique IDs
-  if ( isset( $city ) ) {
+  if ( isset( $city ) && $city != "" ) {
     // grab "shows" post meta field and stuff into $showIDs
     $cityShowIDs = get_post_meta( $city, "shows", true );
   }

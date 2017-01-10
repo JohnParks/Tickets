@@ -4,7 +4,7 @@
 function get_filter_form($options){ 
     
     ?>
-    <form role="search" action="" method="get" id="searchform-find-a-show">
+    <form role="search" action="" method="post" id="searchform-find-a-show">
         <input type="hidden" name="search_post_type" value="shows" /> <!-- // hidden 'products' value -->
         <input type="hidden" name="search_tosearch" value="" />
         <div class="genre-filter">
