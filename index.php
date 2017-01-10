@@ -1,5 +1,4 @@
 <?php get_header(); ?>
-
 			<div id="content">
 
 				<?php 
@@ -103,6 +102,3 @@
 				</div>
 
 			</div>
-
-
-<?php get_footer(); ?>
