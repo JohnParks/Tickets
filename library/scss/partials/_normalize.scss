@@ -9,6 +9,12 @@
  * Correct `block` display not defined in IE 8/9.
  */
 
+/* Add image reset, make my life easier */
+img {
+  width: 100%;
+  height: auto;
+}
+
 article,
 aside,
 details,

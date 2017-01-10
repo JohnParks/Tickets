@@ -209,9 +209,11 @@ nav {
 
 		a {
 			display: inline;
+			height: 48px;
 
 			img {
-				height: 48px;
+				height: inherit;
+				width: auto;
 			}
 		}
 
@@ -817,20 +819,107 @@ table#events-calendar {
 	}
 }
 
+
+/**********
+BLOG STYLES
+**********/
+
+.single-post #main, .blog #main, .archive #main {
+	margin-left: 40px;
+}
+
+.single-post a, .blog a, .archive a {
+	color: #666666;
+}
+
+.archive article {
+	border-bottom: 1px solid gray;
+}
+
+article.second-article {
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.blog article.half-width {
+    width: 50%;
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 20px;
+}
+
+.blog .article-header {
+    padding-bottom: 10px;
+    position: relative;
+    top: -5px;
+}
+
+.blog hr {
+	clear: both;
+}
+
+/* Blog article social icons */
+article .social-icons img {
+    position: relative;
+    top: 7px;
+    height: 32px;
+    width: auto;
+}
+
+article h2 a, article h1 a {
+	font-size: 22px;
+}
+
+article h1 {
+	margin-bottom: 0px;
+}
+
+/* Blog Read More button styling */
+.blog .read-more {
+    margin-top: 10px;
+}
+.blog .read-more a, .blog-sidebar h3, .nav-single a {
+    background-color: #fab512;
+    padding: 5px;
+}
+
+/* Blog Sidebar */
+.blog-sidebar img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.blog-sidebar h3 {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 20px 0px;
+    text-align: center;
+    color: black;
+}
+
+.blog-sidebar .widget_categories li {
+    margin: 10px 0px;
+    font-size: 17px;
+}
+
+.blog-sidebar label {
+	display: none;
+}
+
+
 		.hentry {
 			background-color: $white;
-			border-radius: 3px;
-			margin-bottom: 1.5em;
-			border: 1px solid $border-color;
 
 			header {
 				border-bottom: 1px solid $light-gray;
-				padding: 1.5em;
+				padding-bottom: 1.5em;
 			}
 
 			footer {
 				padding: 1.5em;
-				border-top: 1px solid $light-gray;
 
 				p {
 					margin: 0;
@@ -1556,16 +1645,11 @@ FOOTER STYLES
 }
 
 .footer-social {
-	position: relative;
-	top: -6px;
+	display: flex;
+	align-items: center;
 
-	a img {
-		height: 48px;
-	}
-
-	.youtube-icon img {
-		width: 35px;
-		height: 35px;
+	a {
+		margin-left: 26px;
 	}
 }
 
@@ -1581,6 +1665,8 @@ FOOTER STYLES
 
 	.footer-cards {
 		float: right;
+		height: inherit;
+		width: auto;
 	}
 }
 

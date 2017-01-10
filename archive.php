@@ -4,7 +4,11 @@
 
 				<div id="inner-content" class="wrap cf">
 
-						<main id="main" class="m-all t-2of3 d-5of7 cf" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
+					<div class="d-2of7">
+						<?php get_sidebar( "blog" ); ?>
+					</div>
+
+						<div id="main" class="m-all t-2of3 d-5of7 cf" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
 
 							<?php
 							the_archive_title( '<h1 class="page-title">', '</h1>' );
@@ -17,7 +21,7 @@
 
 								<header class="entry-header article-header">
 
-									<h3 class="h2 entry-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
+									<h2 class="h2 entry-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
 									<p class="byline entry-meta vcard">
 										<?php printf( __( 'Posted', 'bonestheme' ).' %1$s %2$s',
                   							     /* the time the post was published */
@@ -31,7 +35,7 @@
 
 								<section class="entry-content cf">
 
-									<?php the_post_thumbnail( 'bones-thumb-300' ); ?>
+									<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_post_thumbnail( 'bones-thumb-300' ); ?></a>
 
 									<?php the_excerpt(); ?>
 
@@ -63,9 +67,7 @@
 
 							<?php endif; ?>
 
-						</main>
-
-					<?php get_sidebar(); ?>
+						</div>
 
 				</div>
 
