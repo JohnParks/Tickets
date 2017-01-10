@@ -24,70 +24,20 @@
 							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 							<div class='sidebar d-2of7'>
-								<form role="search" action="<?php echo site_url('/') . 'find-a-show'; ?>" method="post" id="searchform">
-									<input type="hidden" name="search_post_type" value="shows" /> <!-- // hidden 'products' value -->
-									<input type="hidden" name="search_tosearch" value="" />
-									<div class="genre-filter">
-										<input type="hidden" name="search_genre" value="" />
-										<h4>Filter by Genre</h4>
-										<?php
-										// Alright, let's try fetching a list of genres that have "include_filter" set to true (or 1)
-										$genreArgs = array(
-											"taxonomy"		=>	"genre",
-											"fields"		=>	"all",
-											"meta_query"	=>	array(
-												array(
-													"key"		=> "include_filter",
-													"value"		=>	true,
-													"compare"	=>	"="
-												)
-											)
-										);
-										$terms = get_terms( $genreArgs );
-										?>
-										<select id="genre-filter">
-											<option value="">All Genres</option>
-											<?php foreach( $terms as $term ) { ?>
-											<option value="<?php echo $term->slug; ?>" ><?php echo $term->name; ?></option>
-											<?php } ?>
-										</select>
-									</div>
-									<div class="city-filter">
-										<input type="hidden" name="search_city" value="" />
-										<h4>Filter by City</h4>
-										<?php
-										// let get a list of all cities in the DB, build a selector for each one
-										$cities = get_posts( array( "post_type" => "city" ) );
-										?>
-										<select id="city-filter">
-											<option value="">All Cities</option>
-											<?php foreach( $cities as $city ) { ?>
-											<option value="<?php echo $city->ID; ?>" ><?php echo $city->post_title; ?></option>
-											<?php } ?>
-										</select>
-									</div>
-									<div class="month-filter">
-										<input type="hidden" name="search_month" value="" />
-										<h4>Filter by Month<h4>
-										<select class="month-filter" id="month-filter" name="mStr" multiple>
-											<option value="0">January</option>
-											<option value="1">February</option>
-											<option value="2">March</option>
-											<option value="3">April</option>
-											<option value="4">May</option>
-											<option value="5">June</option>
-											<option value="6">July</option>
-											<option value="7">August</option>
-											<option value="8">September</option>
-											<option value="9">October</option>
-											<option value="10">November</option>
-											<option value="11">December</option>
-										</select>
-										<script type="text/javascript">
-											$('.month-selector').val(new Date().getMonth());
-										</script>
-									</div>
-								</form>
+                                                                    <?php 
+                                    $args = array(
+                                        'genre' => array(
+                                            'label' => "",
+                                        ),
+                                        'city' => array(
+                                            'label' => "",
+                                        ),
+                                        'month' => array(
+                                            'label' => "",
+                                            'multi' => true
+                                        )
+                                    );
+                                    get_filter_form($args); ?>
 							</div>
 
 							<div id="post-<?php the_ID(); ?>" class="d-5of7" <?php post_class( 'cf' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
@@ -99,11 +49,19 @@
 								</header>
 
 								<div class="show-search-form">
-									<form role="search" action="<?php echo site_url('/') . 'find-a-show'; ?>" method="get" id="searchform">
-									    <input type="text" name="tosearch" placeholder="Search Shows"/>
-									    <input type="hidden" name="post_type" value="shows" /> <!-- // hidden 'products' value -->
-									    <button type="submit" value="Search" id="searchSubmit"><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/search.png" /></button>
-									</form>
+									
+									    <input type="text" name="tosearch-find-a-show" placeholder="Search Shows"/>
+									     <!-- // hidden 'products' value -->
+									    <button value="Search" id="searchSubmit-find-a-show"><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/search.png" /></button>
+									   <script>
+                                          $('input[name="tosearch-find-a-show"]').keyup(function(){
+                                              console.log("hello");
+                                              $('#searchform-find-a-show input[name="search_tosearch"]').val($('input[name="tosearch-find-a-show"]').val());
+                                          })
+                                        $('#searchSubmit-find-a-show').click(function(){
+                                            $('#searchform-find-a-show').submit();
+                                        })
+                                    </script>
 								</div>
 
 								<div>
