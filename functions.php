@@ -954,6 +954,122 @@ function handleCalendar( $showID, $dates=null, $venueWPID="", $mobile = false ) 
 add_action( "wp_ajax_nopriv_add_calendar", "handleCalendar" );
 add_action( "wp_ajax_add_calendar", "handleCalendar" );
 
+// Pulls filter and search parameters from $_POST, then builds and spits out a WP_Query object
+function getShowResults() {
+  // first off, let's grab and initialize $_POST variables
+  if( isset( $_POST['search_tosearch'] ) ) {
+    $toSearch = $_POST['search_tosearch'];
+  }
+  if ( isset($_POST['search_genre'] ) ) {
+    $genre = $_POST['search_genre'];
+  }
+  if( isset( $_POST['search_city'] ) ) {
+    $city = $_POST['search_city'];
+  }
+  if( isset( $_POST['search_month'] ) ) {
+    $months = explode( ',', $_POST['search_month'] );
+  }
+
+  // Let's start populating the $args array for the query
+  $args = array(
+    'post_type' =>  'show',
+    'posts_per_page'  =>  '12'
+  );
+
+  // set Search parameter, if there's a search string yet
+  if ( isset( $toSearch ) ) {
+    $args['s'] = $toSearch;
+  }
+
+  // build out array for passing into tax_query param, then add to $args
+  if ( isset( $genre ) ) {
+    $genreArr = array(
+      'taxonomy'  =>  'genre',
+      'field'     =>  'slug',
+      'terms'     =>  $genre
+    );
+    $args['tax_query'] = array( $genreArr );
+  }
+
+  // array holding any Show IDs coming from city filtering
+  //$cityShowIDs = array();
+
+  // next, we need to get a list of Show IDs (derived from any city and month values), and create an array of unique IDs
+  if ( isset( $city ) ) {
+    // grab "shows" post meta field and stuff into $showIDs
+    $cityShowIDs = get_post_meta( $city, "shows", true );
+  }
+
+  // holds any Show IDs that come from month filtering
+  //$wpShowIDs = array();
+
+  // take array of months (as values), grab any Performer IDs with events happening during those months
+  if ( isset( $months ) ) {
+    global $wpdb;
+
+    //start building a query to select Performer IDs
+    $monthQuery = "SELECT DISTINCT performer FROM " . $wpdb->prefix . "events WHERE Month(time) IN (";
+
+    // build out "OR" block of months
+    $cntr = 0;
+    foreach( $months as $month ) {
+      $cntr++;
+      $monthQuery .= $month+1;
+      if ( $cntr != count($months) ) {
+        $monthQuery .= ",";
+      }
+    }
+    $monthQuery .= ")";
+
+    $performers = $wpdb->get_results( $monthQuery );
+
+    // Now that we have an array of unique performers, grab the corresponding WP IDs
+    $performersQuery = "SELECT post_id FROM " . $wpdb->prefix . "postmeta WHERE meta_key = 'performerID' AND meta_value IN (";
+    // build "OR" block of Performer IDs
+    $cntr = 0;
+    foreach( $performers as $performer ) {
+      $cntr++;
+      $performersQuery .= $performer->performer;
+      if ( $cntr != count($performers) ) {
+        $performersQuery .= ",";
+      }
+    }
+    $performersQuery .= ")";
+    $wpShowResults = $wpdb->get_results( $performersQuery );
+    // pull IDs out of results array and push into $wpShowIDs
+    foreach ( $wpShowResults as $show ) {
+      $wpShowIDs[] = $show->post_id;
+    }
+  }
+
+  // final array of show IDs to be included in search results
+  //$showIDs = array();
+
+  if ( isset( $cityShowIDs ) ) {
+    if ( isset( $wpShowIDs ) ) {
+      // both filters have been applied, take the intersect
+      $showIDs = array_intersect( $cityShowIDs, $wpShowIDs );
+    } else {
+      // only city filter is applied, just use that
+      $showIDs = $cityShowIDs;
+    }
+  } elseif ( isset( $wpShowIDs ) ) {
+    // only month filter is applied, use that
+    $showIDs = $wpShowIDs;
+  }
+
+  // finally, if there are any IDs in $showIDs, add those to the $args param
+  if ( isset( $showIDs ) ) {
+    $args['post__in'] = $showIDs;
+  }
+
+  // instantiate our new Query, and return that bad boy
+  $the_query = new WP_Query( $args );
+
+  return $the_query;
+
+}
+
 function tickets_enqueue_scripts(){
   wp_enqueue_script( 'ticket-script', get_template_directory_uri() . '/library/js/tb-scripts.js' );
   wp_localize_script( 'ticket-script', 'ticket_ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );

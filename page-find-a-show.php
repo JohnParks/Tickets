@@ -17,26 +17,6 @@
 
 			<div id="content">
 
-				<?php
-					$toSearch = get_query_var( "tosearch", "none" );
-					$theGenre = get_query_var( "genre", "" );
-					//echo $toSearch;
-
-					// Create URL, to be loaded with additional parameters when clicking on sidebar filters
-					$daURL = site_url('/') . 'find-a-show/?tosearch=' . $toSearch;
-
-					if( $theGenre != "" ) {
-						//build out taxonomy array for addition to search query
-						$genreArr = array (
-							'taxonomy'	=>	'genre',
-							'field'		=>	'slug',
-							'terms'		=>	$theGenre
-						);
-					}
-
-					//echo $daURL;
-				?>
-
 				<div id="inner-content" class="wrap cf search-results find-a-show">
 
 						<!--<main id="main" class="m-all t-2of3 d-5of7 cf" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">-->
@@ -87,29 +67,18 @@
 								<div>
 									<h2>Search Results</h2>
 									<?php
-									// Build out the query to grab first 12 top sellers (based on the meta field in show object)
-									$args = array (
-										'post_type'		=> 'show',
-										'posts_per_page'=> '12'
-									);
+									// Call "getShowResults()", which is a function that takes all the various filters and search params, and returns a WP_Query object
+									$shows_query = getShowResults();
 
-									if ( isset( $toSearch ) ) {
-										$args['s'] = $toSearch;
-									}
-
-									if ( isset( $genreArr ) ) {
-										$args['tax_query'] = array( $genreArr );
-									}
-
-									$shows_query = new WP_Query( $args );
-
-									/*echo "<pre>";
-									print_r( $seller_query );
+									/*echo "The Result Query is:<br />";
+									echo "<pre>";
+									print_r( $shows_query ) ;
 									echo "</pre>";*/
 
 									echo "<div class='shows-results-list'>";
 
 									// Commence the Loop!
+									//if( $shows_query->have_posts() ) : while( $shows_query->have_posts() ) : $shows_query->the_post();
 									if( $shows_query->have_posts() ) : while( $shows_query->have_posts() ) : $shows_query->the_post();
 
 									?>	<article id="post-<?php the_ID(); ?>" <?php post_class('cf'); ?> role="article">
