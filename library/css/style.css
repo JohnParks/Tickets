@@ -3091,19 +3091,20 @@ view.
 .drop-down-shows .genre-show-list {
   display: none;
   float: right;
+  padding: 35px 0px;
 }
-/* line 32, ../scss/tb/_menu.scss */
+/* line 33, ../scss/tb/_menu.scss */
 .drop-down-shows .genre-show-list:first-child {
   display: block;
 }
-/* line 35, ../scss/tb/_menu.scss */
+/* line 36, ../scss/tb/_menu.scss */
 .drop-down-shows .genre-show-list:after {
   clear: both;
   display: block;
   content: "";
   height: 1px;
 }
-/* line 41, ../scss/tb/_menu.scss */
+/* line 42, ../scss/tb/_menu.scss */
 .drop-down-shows .genre-show-list .single-show {
   display: inline-block;
   width: 107px;
@@ -3111,7 +3112,7 @@ view.
   float: left;
   padding: 4px;
 }
-/* line 47, ../scss/tb/_menu.scss */
+/* line 48, ../scss/tb/_menu.scss */
 .drop-down-shows .genre-show-list .single-show:nth-child(5) {
   clear: both;
 }
