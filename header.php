@@ -87,15 +87,7 @@
 					?>
                     
 					<nav role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement" style="position:relative">
-						<!--<ul class="nav top-nav" id="shows-nav">
-							<li class="menu-item menu-item-has-children">
-								<a href="<?php echo home_url(); ?>/find-a-show">Shows</a>
-								<ul class="sub-menu">
-									<li class="menu-item menu-item-has-children">
-										<a href="<?php echo home_url();?>/genre/theater">Theater</a>
-								</ul>
-							</li>
-						</ul>-->
+
 						<?php wp_nav_menu(array(
     					         'container' => false,                           // remove nav container
     					         'container_class' => 'menu cf',                 // class of container (should you choose to use it)
@@ -109,69 +101,40 @@
         			               'depth' => 0,                                   // limit the depth of the nav
     					         'fallback_cb' => ''                             // fallback function (if there is one)
 						)); ?>
-                        <style>
-                            div.posters{
-                                display: none;
-                                background-color: black;
-                                
-                                position: relative;
-                                z-index: 999;
-                                left: 238px;
-                                width: 500px;
-                                height: 300px;
-                                /*display: flex;*/
-                                align-items: baseline;
-                                justify-content: space-between;
-                                flex-wrap: wrap;
-                                padding: 10px;
-                            }
-                            
-                             div#theater-posters a {
-                                    width: 18%;
-                                    height: auto;
-                                 display:block
-                                }
-                            div#theater-posters a img{
-                                width:100%;
-                                height:auto;
-                            }
                         
-                        </style>
-                        <div clas="show-dropdown" style="position:absolute;" >
-                            <ul class="nav top-nav" id="shows-nav">
-                                <li id="showslink" class="menu-item menu-item-has-children">
-                                    <a href="<?php echo home_url(); ?>/find-a-show">Shows</a>
-                                    <ul class="sub-menu plays" style="height:300px;border-right:none !important">
-                                        <li class="menu-item menu-item-has-children" id="theater-link">
-                                            <a href="<?php echo home_url();?>/genre/theater">Theater</a>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <div id="theater-posters" class="posters" style="display:none">
-                                <?php foreach($theaterShows as $show){?>
-                                <a href="<?php echo get_the_permalink($show->ID); ?>"><?php echo get_the_post_thumbnail($show->ID, 'full'); ?></a>
-                                    <?php }?>
+                        <div class="drop-down-shows" id="drop-down-shows">
+                            <div class="ul-genre-list">
+                                <ul>
+                                    <li class="genre" data-genre="10"><a href="">Genre 10</a></li>
+                                    <li class="genre" data-genre="11"><a href="">Genre 11</a></li>
+                                </ul>
+                            </div>
+                            <div class="genre-show-list" id="genre-show-list-10">
+                            <?php 
+                                $arrayOfShowsForGenre10 = array(1,2,3,4,5,6,7,8);
+                                foreach($arrayOfShowsForGenre10 as $Show){ ?>
+                                    <div class="single-show">
+                                        <a href="#">
+                                            <img src="<?php echo get_template_directory_uri(); ?>/library/assets/placeholder.jpg">
+                                        </a>
+                                    </div>
+                               <?php }
+                            ?>
+                            </div>
+                            <div class="genre-show-list" id="genre-show-list-11">
+                            <?php 
+                                $arrayOfShowsForGenre11 = array(1,2,3,4,5,6,7,8);
+                                foreach($arrayOfShowsForGenre11 as $Show){ ?>
+                                    <div class="single-show">
+                                        <a href="#">
+                                            <img src="<?php echo get_template_directory_uri(); ?>/library/assets/placeholder.jpg">
+                                        </a>
+                                    </div>
+                                <?php }
+                            ?>
                             </div>
                         </div>
-                        <script>
-                            $('#showslink').hover(function(){
-                                $('.sub-menu.plays').css('display', 'block');
-                            })
-                            $('#theater-link').hover(function(){
-                                console.log("hover");
-                                $('#theater-posters').css('display', 'flex');
-                                $('.sub-menu.plays').css('display', 'block');
-                            }, function(){
-                                $('.sub-menu.plays').css('visibility', 'visible');
-                                //$('#theater-posters').css('display', 'none');
-                                //$('.sub-menu.plays').css('display', 'none');
-                            })
-                            $('#theater-posters').hover(function(){
-                                $('.sub-menu.plays').css('display', 'block');
-                            },function(){
-                                $('#theater-posters').css('display', 'none');
-                            })
-                        </script>
+                        
 						<span class="top-social">
 							<a href="http://www.facebook.com/ticketsbroadway/" class="facebook-icon" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/color/facebook.png" /></a>
 							<a href="http://www.twitter.com/ticksbroadway/" class="twitter-icon" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/color/twitter.png" /></a>

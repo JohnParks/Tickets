@@ -1089,7 +1089,7 @@ add_filter( "query_vars", "tb_register_query_vars" );
 
 
 function broadway_scripts(){
-     wp_enqueue_script('tb-js-script', get_template_directory_uri() . '/library/js/tb-scripts.js'); 
+     //wp_enqueue_script('tb-js-script', get_template_directory_uri() . '/library/js/tb-scripts.js'); 
 }
 
 
