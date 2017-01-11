@@ -39,6 +39,17 @@ jQuery(document).ready(function(){
 
         });
     })
+    var d_el = $('#drop-down-shows');
+    $('body').click(function(e){
+            if(d_el.css('display') !== "none"){
+                d_el.click(function(e){
+                    console.log("clicked inside div");
+                    e.stopPropagation();
+                })
+                console.log("clicked outside div");
+                d_el.slideToggle();
+            }
+        });
 });
 
 function loadNextShows() {
@@ -87,18 +98,7 @@ function revealGenreShows(e){
 function revealShowMenu(){
     var el = $('#drop-down-shows');
     if(el.css('display') == "none"){
-        el.slideToggle();
-        $('body').click(function(e){
-            if(el.css('display') !== "none"){
-                el.click(function(e){
-                    console.log("clicked inside div");
-                    e.stopPropagation();
-                })
-                console.log("clicked outside div");
-                el.slideToggle();
-            }
-        });
-        
+        el.slideToggle();    
         
     }
 }
