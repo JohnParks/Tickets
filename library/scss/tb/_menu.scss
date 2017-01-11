@@ -1,0 +1,55 @@
+.drop-down-shows{
+    position: absolute;
+    background-color: #000000;
+    z-index: 10;
+    top: 49px;
+    display:none;
+    width:677px;
+    height:370px;
+    padding:5px 15px;
+    .ul-genre-list{
+        width:225px;
+        ul{
+            li{
+                a{
+                    color:#FFFFFF;
+                    text-decoration:none;
+                    &:hover{
+                        color:$yellow;
+                    }
+                    &.active{
+                        color:$yellow;
+                    }
+                }
+            }
+        }
+    }
+    .genre-show-list{
+        display:none;
+        float:right;
+        &:first-child{
+            display:block;
+        }
+        &:after{
+            clear:both;
+            display:block;
+            content:"";
+            height:1px;
+        }
+        .single-show{
+            display:inline-block;
+            width:107px;
+            height:137px;
+            float:left;
+            padding:4px;
+            &:nth-child(5){
+                clear:both;
+            }
+            a{
+                img{
+                    
+                }
+            }
+        }
+    }
+}

@@ -98,7 +98,7 @@
 							var someTime;
 
 							function toggleThings( cntr ) {
-								console.log( cntr, $("#gallery-block > div")[cntr] )
+								
 								$($("#gallery-block > div")[cntr]).toggle();
 								$($("#slider-listing > div > img.dotted-arrow")[cntr]).toggle();
 
