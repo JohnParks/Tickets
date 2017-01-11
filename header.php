@@ -57,34 +57,6 @@
 						<a href="" class="phone-btn"><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/phone-speech-bubble.png" /></a>
 
 					</div>
-
-					<?php
-						// build arrays to hold shows for each genre
-						$theaterGenre = array (
-							'taxonomy'	=>	'genre',
-							'field'		=>	'slug',
-							'terms'		=>	'theater'
-						);
-						$theaterArgs =  array (
-							'post_type'		=> 'show',
-							'tax_query'		=> $theaterGenre,
-							'posts_per_page'=> '8'
-						);
-						$theaterShows = get_posts( $theaterArgs );
-
-						// build arrays to hold shows for each genre
-						$playGenre = array (
-							'taxonomy'	=>	'genre',
-							'field'		=>	'slug',
-							'terms'		=>	'musicals-and-plays'
-						);
-						$playArgs =  array (
-							'post_type'		=> 'show',
-							'tax_query'		=> $playGenre,
-							'posts_per_page'=> '8'
-						);
-						$playShows = get_posts( $playArgs );
-					?>
                     
 					<nav role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement" style="position:relative">
 
@@ -101,38 +73,67 @@
         			               'depth' => 0,                                   // limit the depth of the nav
     					         'fallback_cb' => ''                             // fallback function (if there is one)
 						)); ?>
+
+						<?php
+			            // First, grab a list of Genres that have been cleared to appear in the dropdown menu
+			            $genreArgs = array(
+			                "taxonomy"		=>	"genre",
+			                "fields"		=>	"all",
+			                "meta_query"	=>	array(
+			                    array(
+			                        "key"		=> "dropdown_display",
+			                        "value"		=>	true,
+			                        "compare"	=>	"="
+			                    )
+			                )
+			            );
+			            $terms = get_terms( $genreArgs );
+			            ?>
                         
                         <div class="drop-down-shows" id="drop-down-shows">
                             <div class="ul-genre-list">
                                 <ul>
-                                    <li class="genre" data-genre="10"><a href="">Genre 10</a></li>
-                                    <li class="genre" data-genre="11"><a href="">Genre 11</a></li>
+                                	<?php
+                                	foreach( $terms as $term ) { ?>
+                                	<li class="genre" data-genre="<?php echo $term->term_id; ?>"><a href="<?php echo esc_url( home_url( '/' ) ) . 'genre/' . $term->slug; ?>"><?php echo $term->name; ?></a></li>
+                                	<?php } ?>
                                 </ul>
                             </div>
-                            <div class="genre-show-list" id="genre-show-list-10">
-                            <?php 
-                                $arrayOfShowsForGenre10 = array(1,2,3,4,5,6,7,8);
-                                foreach($arrayOfShowsForGenre10 as $Show){ ?>
-                                    <div class="single-show">
-                                        <a href="#">
-                                            <img src="<?php echo get_template_directory_uri(); ?>/library/assets/placeholder.jpg">
-                                        </a>
-                                    </div>
-                               <?php }
+                            <?php
+                            foreach( $terms as $term ) {
+                            	echo "<div class='genre-show-list' id='genre-show-list-$term->term_id'>";
+                            	// grab list of 8 shows of this genre
+                            	// start building $args array
+                            	$termArgs = array (
+                            		'taxonomy'	=>	'genre',
+                            		'field'		=>	'slug',
+                            		'terms'		=>	$term->slug
+                            	);
+                            	$args = array(
+                            		'post_type'		=>	'show',
+                            		'posts_per_page'=>	'8',
+                            		'no_found_rows'	=>	true,
+                            		'tax_query'		=> array( $termArgs )
+                            	);
+                            	$shows = get_posts( $args );
+
+                            	// iterate through show list, building out the poster image links
+                            	foreach ( $shows as $show ) { ?>
+                            		<div class="single-show">
+                            			<a href="<?php echo $show->guid; ?>">
+                            				<?php
+                            				if ( has_post_thumbnail( $show->ID ) ) {
+                            					echo get_the_post_thumbnail( $show->ID, 'small' );
+                            				} else {
+                            					echo "<img src='" . get_template_directory_uri() . "/library/assets/placeholder.jpg' />";
+                            				}
+                            				?>
+                            			</a>
+                            		</div>
+                            	<?php }
+                            	echo "</div>";
+                            }
                             ?>
-                            </div>
-                            <div class="genre-show-list" id="genre-show-list-11">
-                            <?php 
-                                $arrayOfShowsForGenre11 = array(1,2,3,4,5,6,7,8);
-                                foreach($arrayOfShowsForGenre11 as $Show){ ?>
-                                    <div class="single-show">
-                                        <a href="#">
-                                            <img src="<?php echo get_template_directory_uri(); ?>/library/assets/placeholder.jpg">
-                                        </a>
-                                    </div>
-                                <?php }
-                            ?>
-                            </div>
                         </div>
                         
 						<span class="top-social">
