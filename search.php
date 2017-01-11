@@ -4,10 +4,10 @@
 
 				<div id="inner-content" class="wrap cf">
 
-					<div class="sidebar d-2of7">
+					<div class="sidebar d-2of7 t-1of3">
 					</div>
 
-					<div id="post-<?php the_ID(); ?>" class="body-content d-5of7" <?php post_class('cf'); ?> role="article">
+					<div id="post-<?php the_ID(); ?>" class="body-content d-5of7 t-2of3" <?php post_class('cf'); ?> role="article">
 						<h1 class="archive-title"><span><?php _e( 'Search Results for:', 'bonestheme' ); ?></span> <?php echo esc_attr(get_search_query()); ?></h1>
 
 						<?php if (have_posts()) : while (have_posts()) : the_post(); ?>

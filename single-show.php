@@ -25,7 +25,7 @@
 							$daURL = get_permalink($post->ID) . "?tab=";
 							?>
 
-							<div class="sidebar d-2of7">
+							<div class="sidebar d-2of7 t-1of3">
 								<?php
 								echo "<div class='sidebar-img'>";
 								if ( has_post_thumbnail() ) {
@@ -42,7 +42,7 @@
 								</div>-->
 							</div>
 
-							<div id="post-<?php the_ID(); ?>" class="body-content d-5of7 show-content" <?php post_class('cf'); ?> role="article">
+							<div id="post-<?php the_ID(); ?>" class="body-content d-5of7 t-2of3 show-content" <?php post_class('cf'); ?> role="article">
 
 								<h2><?php echo $post->post_title; ?></h2>
 
