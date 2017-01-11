@@ -3,7 +3,7 @@
 
 				<div id="inner-content" class="wrap cf">
 
-					<div class="d-2of7">
+					<div class="t-1of3 d-2of7">
 						<?php get_sidebar( "blog" ); ?>
 					</div>
 

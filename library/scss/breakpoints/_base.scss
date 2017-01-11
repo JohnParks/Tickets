@@ -324,7 +324,6 @@ section {
 }
 
 .show-content {
-	padding: 0px 0px 0px 40px;
 
 	h2 {
 		margin-top: 0px;
@@ -564,141 +563,6 @@ table#events-calendar {
 		color: black;
 		text-decoration: none;
 	}
-}
-
-#home-page-slider {
-	width: 100%;
-	background-color: black;
-
-	#gallery-block {
-		position: relative;
-		height: 500px;
-		width: 75%;
-		overflow: hidden;
-		display: inline-block;
-
-		div.slide {
-			height: inherit;
-			padding: 39px;
-			background-size: contain;
-			display: none;
-
-			&.active-slide {
-				display: block;
-			}
-
-			.show-info {
-				margin-left: 15px;
-				color: white;
-				float: left;
-
-				h3 {
-					font-weight: bold;
-					font-size: 30px;
-					margin-top: 0px;
-				}
-
-				a.filled-buy {
-					text-decoration: none;
-				}
-
-				.filled-buy div {
-					background-color: #ffa700;
-					text-transform: uppercase;
-					font-weight: 600;
-					border-radius: 20px;
-					color: black;
-					padding: 5px;
-					text-align: center;
-					width: 150px;
-				}
-
-				.more-info {
-					position: relative;
-					top: 40px;
-
-					a {
-						color: white;
-					}
-				}
-			}
-
-			.poster {
-				float: left;
-				border-right: #b3b3b3 solid 1px;
-				padding-right: 15px;
-				height: 70%;
-
-				img {
-					width: 170px;
-					height: auto;
-				}
-			}
-		}
-	} /* Close #gallery-block */
-
-	#slider-listing {
-		float: right;
-		display: inline-block;
-		width: 25%;
-		padding: 25px 0px 0px 30px;
-		height: 500px;
-
-		.show-listing {
-			clear: both;
-			display: inline-block;
-			margin-bottom: 8px;
-			position: relative;
-
-			img.dotted-arrow {
-				display: none;
-				position: absolute;
-				left: -50px;
-				top: 20px;
-				height: 60px;
-				width: auto;
-
-				&.active-arrow{
-					display:block;
-				}
-			}
-			.active::before {
-				content: url(../assets/icons/dotted-arrow.png);
-			}
-
-			.show-info {
-				float: right;
-				width: 64%;
-
-				.buy-tickets {
-
-					div {
-						display: inline-block;
-						font-size: 15px;
-						text-transform: uppercase;
-						font-weight: 600;
-					}
-				}
-
-				.show-title {
-					color: white;
-					font-weight: bold;
-					font-size: 18px;
-				}
-			}
-
-			.poster {
-				width: 30%;
-				float: left;
-
-				img {
-					width: 100%;
-					height: auto;
-				}
-			}
-		}
-	}
-
 }
 
 .show-search-form {
@@ -1691,7 +1555,6 @@ FOOTER STYLES
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	font-size: 18px;
 
 	.footer-column-header {
 		font-weight: bold;

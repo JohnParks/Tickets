@@ -23,7 +23,7 @@
 
 							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-							<div class="sidebar d-2of7">
+							<div class="sidebar d-2of7 t-1of3">
 								<p class="contact-faq">
 									<a href="">Visit our FAQ Page.</a>
 								</p>
@@ -40,7 +40,7 @@
 								
 							</div>
 
-							<div id="post-<?php the_ID(); ?>" class="body-content d-5of7" <?php post_class( 'cf' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
+							<div id="post-<?php the_ID(); ?>" class="body-content d-5of7 t-2of3" <?php post_class( 'cf' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
 
 								<header class="article-header">
 

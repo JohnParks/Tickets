@@ -23,7 +23,7 @@
 
 							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-							<div class='sidebar d-2of7'>
+							<div class='sidebar d-2of7 t-1of3'>
                                                                     <?php 
                                     $args = array(
                                         'genre' => array(
@@ -40,7 +40,7 @@
                                     get_filter_form($args); ?>
 							</div>
 
-							<div id="post-<?php the_ID(); ?>" class="d-5of7" <?php post_class( 'cf' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
+							<div id="post-<?php the_ID(); ?>" class="d-5of7 t-2of3" <?php post_class( 'cf' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
 
 								<header class="article-header">
 

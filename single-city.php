@@ -14,7 +14,7 @@
 
 							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-							<div class="sidebar d-2of7">
+							<div class="sidebar d-2of7 t-1of3">
 								<?php
 								echo "<div class='sidebar-img'>";
 								if ( has_post_thumbnail() ) {
@@ -43,7 +43,7 @@
 								</div>
 							</div>
 
-							<div id="post-<?php the_ID(); ?>" class="body-content d-5of7" <?php post_class('cf'); ?> role="article">
+							<div id="post-<?php the_ID(); ?>" class="body-content d-5of7 t-2of3" <?php post_class('cf'); ?> role="article">
 
 								<!-- section to list out shows happening in this city -->
 								<section class="show-listing">

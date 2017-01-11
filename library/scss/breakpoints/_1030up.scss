@@ -12,3 +12,97 @@ be seen on the Desktop.
 .wrap {
   width: 1040px;
 }
+
+.above-nav {
+	height: 110px;
+}
+
+#search-form {
+	
+	input {
+		width: 526px;
+	}
+
+	button {
+		width: 52px;
+	}
+}
+
+nav {
+	
+	li {
+		margin-right: 57px;
+	}
+}
+
+.top-sellers-list {
+
+	& .top-seller-poster:nth-child(6n+0) a {
+		margin-right: 0px;
+	}
+
+	.top-seller-poster a {
+		margin-right: 35px;
+	}
+}
+
+#home-page-slider {
+
+	#gallery-block {
+		height: 500px;
+
+		div.slide {
+			padding: 39px;
+
+			.show-info {
+
+				h3 {
+					font-size: 30px;
+				}
+
+				.filled-buy div {
+					border-radius: 20px;
+					padding: 5px;
+					width: 150px;
+				}
+			}
+		}
+	}
+
+	#slider-listing {
+		padding: 25px 0px 0px 30px;
+		height: 500px;
+
+		.show-listing {
+
+			img.dotted-arrow {
+				left: -50px;
+				top: 20px;
+				height: 60px;
+			}
+
+			.poster {
+				width: 30%;
+			}
+
+			.show-info {
+				width: 64%;
+
+				.buy-tickets {
+
+					div {
+						font-size: 15px;
+					}
+				}
+
+				.show-title {
+					font-size: 18px;
+				}
+			}
+		}
+	}
+}
+
+.footer-columns {
+	font-size: 18px;
+}
