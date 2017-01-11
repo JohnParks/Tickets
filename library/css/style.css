@@ -3067,38 +3067,43 @@ view.
 }
 /* line 10, ../scss/tb/_menu.scss */
 .drop-down-shows .ul-genre-list {
-  width: 225px;
+  width: 215px;
+  float: left;
 }
 /* line 14, ../scss/tb/_menu.scss */
+.drop-down-shows .ul-genre-list ul li {
+  margin-right: 0px;
+}
+/* line 16, ../scss/tb/_menu.scss */
 .drop-down-shows .ul-genre-list ul li a {
   color: #FFFFFF;
   text-decoration: none;
 }
-/* line 17, ../scss/tb/_menu.scss */
+/* line 19, ../scss/tb/_menu.scss */
 .drop-down-shows .ul-genre-list ul li a:hover {
   color: #faa61a;
 }
-/* line 20, ../scss/tb/_menu.scss */
+/* line 22, ../scss/tb/_menu.scss */
 .drop-down-shows .ul-genre-list ul li a.active {
   color: #faa61a;
 }
-/* line 27, ../scss/tb/_menu.scss */
+/* line 29, ../scss/tb/_menu.scss */
 .drop-down-shows .genre-show-list {
   display: none;
   float: right;
 }
-/* line 30, ../scss/tb/_menu.scss */
+/* line 32, ../scss/tb/_menu.scss */
 .drop-down-shows .genre-show-list:first-child {
   display: block;
 }
-/* line 33, ../scss/tb/_menu.scss */
+/* line 35, ../scss/tb/_menu.scss */
 .drop-down-shows .genre-show-list:after {
   clear: both;
   display: block;
   content: "";
   height: 1px;
 }
-/* line 39, ../scss/tb/_menu.scss */
+/* line 41, ../scss/tb/_menu.scss */
 .drop-down-shows .genre-show-list .single-show {
   display: inline-block;
   width: 107px;
@@ -3106,7 +3111,7 @@ view.
   float: left;
   padding: 4px;
 }
-/* line 45, ../scss/tb/_menu.scss */
+/* line 47, ../scss/tb/_menu.scss */
 .drop-down-shows .genre-show-list .single-show:nth-child(5) {
   clear: both;
 }

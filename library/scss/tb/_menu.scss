@@ -8,9 +8,11 @@
     height:370px;
     padding:5px 15px;
     .ul-genre-list{
-        width:225px;
+        width:215px;
+        float:left;
         ul{
             li{
+                margin-right:0px;
                 a{
                     color:#FFFFFF;
                     text-decoration:none;
