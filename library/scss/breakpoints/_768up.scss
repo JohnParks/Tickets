@@ -345,6 +345,16 @@ mobile. Make sure to double check these!
 	font-size: 14px;
 }
 
+.footer-top {
+
+	.wpcf7-form {
+
+	    .wpcf7-email {
+	    	width: 140px;
+	    }
+	}
+}
+
 
 /*********************
 HOMEPAGE STYLES
@@ -532,4 +542,67 @@ GENERAL STYLES
 
 .show-content {
 	padding: 0px 0px 0px 40px;
+}
+
+.search-results {
+
+	h3 {
+		font-size: 18px;
+		max-width: 260px;
+	}
+
+	.shows-results-list {
+		margin-left: 25px;
+	}
+
+	.show-info {
+		h4 {
+			margin: 5px 0px;
+		}
+
+		ul li {
+			max-width: 260px;
+
+			a {
+				font-size: 18px;
+			}
+		}
+	}
+	
+	article {
+		padding: 0px;
+	}
+
+	.thumbnail {
+		width: 150px;
+	}
+
+	.result-body {
+		max-width: 260px;
+	}
+}
+
+.single-city {
+	.show-list-item {
+	
+	}
+}
+
+.show-list {
+
+	.show-list-item {
+		width: 130px;
+		margin: 0px 5px;
+
+		.show-poster {
+		}
+
+		.show-title {
+			font-size: 18px;
+
+			a {
+				color: black;
+			}
+		}
+	}
 }
