@@ -525,57 +525,62 @@ mobile. Make sure to double check these!
   font-size: 14px;
 }
 
+/* line 352, ../scss/breakpoints/_768up.scss */
+.footer-top .wpcf7-form .wpcf7-email {
+  width: 140px;
+}
+
 /*********************
 HOMEPAGE STYLES
 *********************/
-/* line 355, ../scss/breakpoints/_768up.scss */
+/* line 365, ../scss/breakpoints/_768up.scss */
 .home h1 {
   margin-bottom: 20px;
 }
 
-/* line 360, ../scss/breakpoints/_768up.scss */
+/* line 370, ../scss/breakpoints/_768up.scss */
 .top-sellers-list {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
 }
-/* line 365, ../scss/breakpoints/_768up.scss */
+/* line 375, ../scss/breakpoints/_768up.scss */
 .top-sellers-list .top-seller-poster a {
   width: 165px;
 }
-/* line 368, ../scss/breakpoints/_768up.scss */
+/* line 378, ../scss/breakpoints/_768up.scss */
 .top-sellers-list .top-seller-poster a img {
   width: inherit;
   height: auto;
 }
 
-/* line 375, ../scss/breakpoints/_768up.scss */
+/* line 385, ../scss/breakpoints/_768up.scss */
 #home-banner-image {
   margin: 40px 0px;
 }
 
-/* line 379, ../scss/breakpoints/_768up.scss */
+/* line 389, ../scss/breakpoints/_768up.scss */
 #home-bottom-banner {
   margin: 60px 0px 54px 0px;
 }
 
-/* line 383, ../scss/breakpoints/_768up.scss */
+/* line 393, ../scss/breakpoints/_768up.scss */
 .sidebar {
   display: block;
 }
 
-/* line 387, ../scss/breakpoints/_768up.scss */
+/* line 397, ../scss/breakpoints/_768up.scss */
 .body-content {
   padding: 40px 0px 40px 40px;
 }
 
-/* line 391, ../scss/breakpoints/_768up.scss */
+/* line 401, ../scss/breakpoints/_768up.scss */
 #home-page-slider {
   width: 100%;
   background-color: black;
   /* Close #gallery-block */
 }
-/* line 395, ../scss/breakpoints/_768up.scss */
+/* line 405, ../scss/breakpoints/_768up.scss */
 #home-page-slider #gallery-block {
   position: relative;
   height: 430px;
@@ -583,34 +588,34 @@ HOMEPAGE STYLES
   overflow: hidden;
   display: inline-block;
 }
-/* line 402, ../scss/breakpoints/_768up.scss */
+/* line 412, ../scss/breakpoints/_768up.scss */
 #home-page-slider #gallery-block div.slide {
   height: inherit;
   padding: 25px;
   background-size: contain;
   display: none;
 }
-/* line 408, ../scss/breakpoints/_768up.scss */
+/* line 418, ../scss/breakpoints/_768up.scss */
 #home-page-slider #gallery-block div.slide.active-slide {
   display: block;
 }
-/* line 412, ../scss/breakpoints/_768up.scss */
+/* line 422, ../scss/breakpoints/_768up.scss */
 #home-page-slider #gallery-block div.slide .show-info {
   margin-left: 15px;
   color: white;
   float: left;
 }
-/* line 417, ../scss/breakpoints/_768up.scss */
+/* line 427, ../scss/breakpoints/_768up.scss */
 #home-page-slider #gallery-block div.slide .show-info h3 {
   font-weight: bold;
   font-size: 23px;
   margin-top: 0px;
 }
-/* line 423, ../scss/breakpoints/_768up.scss */
+/* line 433, ../scss/breakpoints/_768up.scss */
 #home-page-slider #gallery-block div.slide .show-info a.filled-buy {
   text-decoration: none;
 }
-/* line 427, ../scss/breakpoints/_768up.scss */
+/* line 437, ../scss/breakpoints/_768up.scss */
 #home-page-slider #gallery-block div.slide .show-info .filled-buy div {
   background-color: #ffa700;
   text-transform: uppercase;
@@ -622,28 +627,28 @@ HOMEPAGE STYLES
   width: 150px;
   font-size: 13px;
 }
-/* line 439, ../scss/breakpoints/_768up.scss */
+/* line 449, ../scss/breakpoints/_768up.scss */
 #home-page-slider #gallery-block div.slide .show-info .more-info {
   position: relative;
   top: 40px;
 }
-/* line 443, ../scss/breakpoints/_768up.scss */
+/* line 453, ../scss/breakpoints/_768up.scss */
 #home-page-slider #gallery-block div.slide .show-info .more-info a {
   color: white;
 }
-/* line 449, ../scss/breakpoints/_768up.scss */
+/* line 459, ../scss/breakpoints/_768up.scss */
 #home-page-slider #gallery-block div.slide .poster {
   float: left;
   border-right: #b3b3b3 solid 1px;
   padding-right: 15px;
   height: 80%;
 }
-/* line 455, ../scss/breakpoints/_768up.scss */
+/* line 465, ../scss/breakpoints/_768up.scss */
 #home-page-slider #gallery-block div.slide .poster img {
   width: auto;
   height: inherit;
 }
-/* line 463, ../scss/breakpoints/_768up.scss */
+/* line 473, ../scss/breakpoints/_768up.scss */
 #home-page-slider #slider-listing {
   float: right;
   display: inline-block;
@@ -651,14 +656,14 @@ HOMEPAGE STYLES
   padding: 15px 0px 0px 15px;
   height: 100%;
 }
-/* line 470, ../scss/breakpoints/_768up.scss */
+/* line 480, ../scss/breakpoints/_768up.scss */
 #home-page-slider #slider-listing .show-listing {
   clear: both;
   display: inline-block;
   margin-bottom: 8px;
   position: relative;
 }
-/* line 476, ../scss/breakpoints/_768up.scss */
+/* line 486, ../scss/breakpoints/_768up.scss */
 #home-page-slider #slider-listing .show-listing img.dotted-arrow {
   display: none;
   position: absolute;
@@ -667,38 +672,38 @@ HOMEPAGE STYLES
   height: 50px;
   width: auto;
 }
-/* line 484, ../scss/breakpoints/_768up.scss */
+/* line 494, ../scss/breakpoints/_768up.scss */
 #home-page-slider #slider-listing .show-listing img.dotted-arrow.active-arrow {
   display: block;
 }
-/* line 488, ../scss/breakpoints/_768up.scss */
+/* line 498, ../scss/breakpoints/_768up.scss */
 #home-page-slider #slider-listing .show-listing .active::before {
   content: url(../assets/icons/dotted-arrow.png);
 }
-/* line 492, ../scss/breakpoints/_768up.scss */
+/* line 502, ../scss/breakpoints/_768up.scss */
 #home-page-slider #slider-listing .show-listing .show-info {
   float: right;
   width: 62%;
 }
-/* line 498, ../scss/breakpoints/_768up.scss */
+/* line 508, ../scss/breakpoints/_768up.scss */
 #home-page-slider #slider-listing .show-listing .show-info .buy-tickets div {
   display: inline-block;
   font-size: 12px;
   text-transform: uppercase;
   font-weight: 600;
 }
-/* line 506, ../scss/breakpoints/_768up.scss */
+/* line 516, ../scss/breakpoints/_768up.scss */
 #home-page-slider #slider-listing .show-listing .show-info .show-title {
   color: white;
   font-weight: bold;
   font-size: 15px;
 }
-/* line 513, ../scss/breakpoints/_768up.scss */
+/* line 523, ../scss/breakpoints/_768up.scss */
 #home-page-slider #slider-listing .show-listing .poster {
   width: 34%;
   float: left;
 }
-/* line 517, ../scss/breakpoints/_768up.scss */
+/* line 527, ../scss/breakpoints/_768up.scss */
 #home-page-slider #slider-listing .show-listing .poster img {
   width: 100%;
   height: auto;
@@ -707,9 +712,57 @@ HOMEPAGE STYLES
 /*********************
 GENERAL STYLES
 *********************/
-/* line 533, ../scss/breakpoints/_768up.scss */
+/* line 543, ../scss/breakpoints/_768up.scss */
 .show-content {
   padding: 0px 0px 0px 40px;
+}
+
+/* line 549, ../scss/breakpoints/_768up.scss */
+.search-results h3 {
+  font-size: 18px;
+  max-width: 260px;
+}
+/* line 554, ../scss/breakpoints/_768up.scss */
+.search-results .shows-results-list {
+  margin-left: 25px;
+}
+/* line 559, ../scss/breakpoints/_768up.scss */
+.search-results .show-info h4 {
+  margin: 5px 0px;
+}
+/* line 563, ../scss/breakpoints/_768up.scss */
+.search-results .show-info ul li {
+  max-width: 260px;
+}
+/* line 566, ../scss/breakpoints/_768up.scss */
+.search-results .show-info ul li a {
+  font-size: 18px;
+}
+/* line 572, ../scss/breakpoints/_768up.scss */
+.search-results article {
+  padding: 0px;
+}
+/* line 576, ../scss/breakpoints/_768up.scss */
+.search-results .thumbnail {
+  width: 150px;
+}
+/* line 580, ../scss/breakpoints/_768up.scss */
+.search-results .result-body {
+  max-width: 260px;
+}
+
+/* line 593, ../scss/breakpoints/_768up.scss */
+.show-list .show-list-item {
+  width: 130px;
+  margin: 0px 5px;
+}
+/* line 600, ../scss/breakpoints/_768up.scss */
+.show-list .show-list-item .show-title {
+  font-size: 18px;
+}
+/* line 603, ../scss/breakpoints/_768up.scss */
+.show-list .show-list-item .show-title a {
+  color: black;
 }
 
 /******************************************************************
@@ -801,9 +854,50 @@ nav li {
   font-size: 18px;
 }
 
-/* line 106, ../scss/breakpoints/_1030up.scss */
+/* line 108, ../scss/breakpoints/_1030up.scss */
+.search-results article {
+  padding: 40px;
+}
+/* line 112, ../scss/breakpoints/_1030up.scss */
+.search-results h3 {
+  font-size: 20px;
+  font-weight: bold;
+  max-width: 490px;
+}
+/* line 118, ../scss/breakpoints/_1030up.scss */
+.search-results .thumbnail {
+  width: 200px;
+}
+/* line 124, ../scss/breakpoints/_1030up.scss */
+.search-results .show-info ul li {
+  max-width: 490px;
+}
+/* line 129, ../scss/breakpoints/_1030up.scss */
+.search-results .result-body {
+  max-width: 490px;
+}
+
+/* line 136, ../scss/breakpoints/_1030up.scss */
+.show-list .show-list-item {
+  width: 150px;
+}
+/* line 145, ../scss/breakpoints/_1030up.scss */
+.show-list .show-list-item .show-title {
+  font-size: 18px;
+}
+/* line 148, ../scss/breakpoints/_1030up.scss */
+.show-list .show-list-item .show-title a {
+  color: black;
+}
+
+/* line 155, ../scss/breakpoints/_1030up.scss */
 .footer-columns {
   font-size: 18px;
+}
+
+/* line 163, ../scss/breakpoints/_1030up.scss */
+.footer-top .wpcf7-form .wpcf7-email {
+  width: 200px;
 }
 
 /*

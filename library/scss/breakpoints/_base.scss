@@ -488,6 +488,7 @@ section {
 		font-size: 22px;
 		font-weight: bold;
 		margin-top: 0px;
+		text-align: center;
 	}
 
 	.theater-thumb a {
@@ -621,6 +622,17 @@ table#events-calendar {
 	}
 }
 
+.single-venue {
+	
+	.venue-show-list {
+		clear: both;
+
+		h2 {
+			text-align: center;
+		}
+	}
+}
+
 .search-results {
 
 	article {
@@ -681,7 +693,6 @@ table#events-calendar {
 	h3 {
 		font-size: 20px;
 		font-weight: bold;
-		max-width: 490px;
 		
 		a {
 			text-decoration: none;
@@ -690,7 +701,6 @@ table#events-calendar {
 	}
 
 	.thumbnail {
-		width: 200px;
 		float: left;
 
 		img {
@@ -1455,14 +1465,12 @@ SIDEBARS & ASIDES
 	justify-content: space-around;
 
 	.show-list-item {
-		width: 150px;
 		text-align: center;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 
 		.show-poster {
-			width: 150px;
 
 			img {
 				width: 100%;
@@ -1480,9 +1488,8 @@ SIDEBARS & ASIDES
 			}
 		}
 	}
-
-
 }
+
 /*********************
 FOOTER STYLES
 *********************/

@@ -103,6 +103,65 @@ nav {
 	}
 }
 
+.search-results {
+	
+	article {
+		padding: 40px;
+	}
+
+	h3 {
+		font-size: 20px;
+		font-weight: bold;
+		max-width: 490px;
+	}
+
+	.thumbnail {
+		width: 200px;
+	}
+
+	.show-info {
+
+		ul li {
+			max-width: 490px;
+		}
+	}
+
+	.result-body {
+		max-width: 490px;
+	}
+}
+
+.show-list {
+
+	.show-list-item {
+		width: 150px;
+
+		.show-poster {
+
+			img {
+			}		
+		}
+
+		.show-title {
+			font-size: 18px;
+
+			a {
+				color: black;
+			}
+		}
+	}
+}
+
 .footer-columns {
 	font-size: 18px;
+}
+
+.footer-top {
+
+	.wpcf7-form {
+
+	    .wpcf7-email {
+	    	width: 200px;
+	    }
+	}
 }

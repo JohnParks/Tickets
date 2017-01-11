@@ -88,7 +88,7 @@
 									?>
 								</section>
 
-								<section>
+								<section class="venue-show-list">
 									<h2>Shows in This City</h2>
 
 									<?php
