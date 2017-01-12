@@ -54,11 +54,13 @@
 									}
 							?>
 								<div class="slide <?php echo $slideClass; ?>" style="background-image: url('<?php echo $slide["background"]; ?>');" >
-									<div class='poster <?php echo $slide['link']; ?>'><?php echo $slide['poster']; ?></div>
-									<div class='show-info'>
-										<h3><?php echo $slide['title']; ?></h3>
-										<a href="<?php echo $slide['link']; ?>" class="filled-buy" ><div>Buy Tickets</div></a>
-										<div class="more-info"><a href="<?php echo $slide['link']; ?>" >More Info</a> ></div>
+									<div class="slide-gradient">
+										<div class='poster <?php echo $slide['link']; ?>'><?php echo $slide['poster']; ?></div>
+										<div class='show-info'>
+											<h3><?php echo $slide['title']; ?></h3>
+											<a href="<?php echo $slide['link']; ?>" class="filled-buy" ><div>Buy Tickets</div></a>
+											<div class="more-info"><a href="<?php echo $slide['link']; ?>" >More Info</a> ></div>
+										</div>
 									</div>
 								</div>
 							<?php	} ?>
