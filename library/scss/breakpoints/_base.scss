@@ -1477,126 +1477,7 @@ SIDEBARS & ASIDES
 *********************/
 
 .sidebar {
-	padding: 40px;
-	float: left;
-	background-color: black;
-	color: white;
-
-	.show-list {
-		flex-direction: column;
-
-		.show-list-item {
-			margin-left: auto;
-			margin-right: auto;
-		}
-
-		.show-list-nav {
-			display: none;
-		}
-	}
-}
-
-.sidebar-img {
-	width: 100%;
-	margin-bottom: 28px;
-
-	img {
-		width: inherit;
-		height: auto;
-	}
-}
-
-.sidebar .shows-listing {
-
-	h3 {
-		text-align: center;
-	}
-	
-	.show-poster {
-		width: 167px;
-		margin-left: auto;
-		margin-right: auto;
-
-		img {
-			width: 100%;
-			height: auto;
-		}
-	}
-}
-
-.sidebar .contact-faq {
-	background-image: url("../assets/speech-bubble.png");
-    background-size: 100% auto;
-    height: 86px;
-    background-repeat: no-repeat;
-
-    a {
-    	color: black;
-    	position: relative;
-    	top: 22%;
-    	left: 20%;
-    }
-}
-	.widgettitle {}
-
-	.widget {
-
-		ul {
-
-			li {
-
-				&:first-child {}
-
-				&:last-child {}
-
-				a {}
-
-				/* deep nesting */
-				ul {}
-
-			}
-
-		}
-
-	}
-
-	.no-widgets {
-		background-color: $white;
-		padding: 1.5em;
-		text-align: center;
-		border: 1px solid $border-color;
-		border-radius: 2px;
-		margin-bottom: 1.5em;
-	}
-
-.show-list {
-	display: flex;
-	justify-content: space-around;
-
-	.show-list-item {
-		text-align: center;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-
-		.show-poster {
-
-			img {
-				width: 100%;
-				height: auto;
-			}		
-		}
-
-		.show-title {
-			font-weight: 600;
-			text-decoration: none;
-			font-size: 18px;
-
-			a {
-				color: black;
-			}
-		}
-	}
+	display: none;
 }
 
 /*********************
@@ -1661,9 +1542,9 @@ FOOTER STYLES
 	.footer-cards {
 		float: right;
 		height: inherit;
-		width: auto;
+		width: 25%;
 		position: relative;
-		top: 16px;
+		top: 11px;
 	}
 }
 
