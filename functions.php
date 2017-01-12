@@ -871,6 +871,7 @@ function handleCalendar( $showID, $dates=null, $venueWPID="", $mobile = false ) 
   $nextWeek->modify( "+1 week" );
     
   $fullEvents = getShowEvents( $showID, $venueWPID, $dates['start']->format( "Y-m-d" ), $dates['end']->format( "Y-m-d" ) );
+
     if($mobile){
         return array(
             'events' => $fullEvents,
@@ -966,7 +967,7 @@ function getShowResults() {
   if( isset( $_POST['search_city'] ) ) {
     $city = $_POST['search_city'];
   }
-  if( isset( $_POST['search_month'] ) ) {
+  if( isset( $_POST['search_month'] ) && $_POST['search_month'] != 'none' ) {
     $months = explode( ',', $_POST['search_month'] );
   }
 
@@ -1004,7 +1005,7 @@ function getShowResults() {
   //$wpShowIDs = array();
 
   // take array of months (as values), grab any Performer IDs with events happening during those months
-  if ( isset( $months ) ) {
+  if ( isset( $months ) && $months !== "" ) {
     global $wpdb;
 
     //start building a query to select Performer IDs
@@ -1045,7 +1046,7 @@ function getShowResults() {
   // final array of show IDs to be included in search results
   //$showIDs = array();
 
-  if ( isset( $cityShowIDs ) ) {
+  if ( isset( $cityShowIDs ) && $cityShowIDs != "" ) {
     if ( isset( $wpShowIDs ) ) {
       // both filters have been applied, take the intersect
       $showIDs = array_intersect( $cityShowIDs, $wpShowIDs );

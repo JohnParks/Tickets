@@ -41,6 +41,9 @@
 							</div>
 
 							<div id="post-<?php the_ID(); ?>" class="d-5of7 t-2of3" <?php post_class( 'cf' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
+								<!--<pre>
+								<?php print_r($_POST); ?>
+								</pre>-->
 
 								<header class="article-header">
 

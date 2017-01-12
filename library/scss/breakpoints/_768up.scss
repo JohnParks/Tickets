@@ -87,7 +87,7 @@ nav {
 	height: 49px;
 
 	li {
-		margin-right: 17px;
+		margin-right: 14px;
 	}
 }
 
@@ -412,7 +412,8 @@ HOMEPAGE STYLES
 		div.slide {
 			height: inherit;
 			padding: 25px;
-			background-size: contain;
+			background-size: cover;
+			background-position: center;
 			display: none;
 
 			&.active-slide {
@@ -538,10 +539,51 @@ HOMEPAGE STYLES
 /*********************
 GENERAL STYLES
 *********************/
-
+#beyond-buzz .headline-container {
+	height: 300px;
+}
 
 .show-content {
-	padding: 0px 0px 0px 40px;
+	padding: 0px 10px 0px 10px;
+}
+
+.cal-nav {
+	font-size: 14px;
+	position: relative;
+	top: 7px;
+
+	img {
+		width: 18px;
+	}
+
+	#date-range {
+		margin: auto 5px;
+		position: relative;
+		top: -3px;
+	}
+}
+
+#month-selector {
+	width: 90px;
+	font-size: 14px;
+}
+
+#venue-selector {
+	width: auto;
+	padding-right: 25px;
+	margin-left: 15px;
+	font-size: 14px;
+}
+
+table#events-calendar {
+
+	.days-heading {
+		font-size: 14px;
+	}
+
+	.show-time {
+		font-size: 14px;
+	}
 }
 
 .search-results {

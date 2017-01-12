@@ -179,6 +179,39 @@
 						<div id="beyond-buzz">
 							<h1>Broadway News and Entertainment</h1>
 
+							<div class="headline-container">
+								<?php
+	                            $args = array(
+	                                'posts_per_page' => 3,
+	                                'no_found_rows' => true,
+	                                'post_type' => 'post'
+	                            );
+	                            $recent = new WP_Query($args);
+	                            if($recent->have_posts()) : while ($recent->have_posts()) : $recent->the_post(); ?>
+
+	                            <?php
+	                            // set thumbnail (or placeholder) for current article
+	                            if ( has_post_thumbnail() ) {
+	                            	$imgURL = get_the_post_thumbnail_url( $post->ID, 'full' );
+	                            } else {
+	                            	$imgURL = get_template_directory_uri() . "/library/assets/placeholder.jpg";
+	                            }
+	                            ?>
+
+	                            <article class="home-recent" id="recent-<?php the_ID(); ?>" style="background-image: url('<?php echo $imgURL; ?>');">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/beyond-buzz-logo-large.png" class="beyond-buzz-star" />
+                                    <div class="content">
+
+                                        <span class="recent-title"><a href="<?php echo get_the_permalink(); ?>"><?php the_title(); ?></a></span>
+                                        <?php $cats = get_the_category( get_the_ID() ); ?>
+                                        <span class="recent-meta"><?php echo get_the_date(); ?> <?php echo isset($cats[0])? " <span class='separator'>|</span> ".$cats[0]->name : ""; ?></span>
+                                    </div>
+
+	                            </article>
+
+	                            <?php endwhile ; endif; ?>
+	                        </div>
+
 						</div>
 
 						<div id="home-bottom-banner">
