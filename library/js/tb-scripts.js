@@ -15,6 +15,7 @@ jQuery(document).ready(function(){
 		} );
 	} );
     $('#menu-main-nav li:first-of-type').hover(revealShowMenu);
+    $('#menu-main-nav li:first-of-type').click(revealShowMenu);
     $('#drop-down-shows').mouseleave(function(e){
         //$('#drop-down-shows').css('display', "none");
         $('#drop-down-shows').slideToggle();

@@ -26,3 +26,18 @@ function get_home_slider($count = 4, $offset = 0){
     $query = new WP_Query( $args );
     return $query;
 }
+
+function getVenueMap() {
+    $mapAPIKey = "AIzaSyBpCWx_Mw3ATBE3iFRtRnYs2gfmby7Eirw";
+
+    $address1 = urlencode( get_post_meta( get_the_ID(), "Street 1", true ) );
+    $address2 = urlencode( get_post_meta( get_the_ID(), "Street 2", true ) );
+    $zip = urlencode( get_post_meta( get_the_ID(), "zip", true ) );
+
+    $toEcho = '<iframe frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=';
+    $toEcho .= $mapAPIKey . "&q=";
+    $toEcho .= $address1 . "," . $address2 . "," . $zip . '">';
+    $toEcho .= "</iframe>";
+
+    echo $toEcho;
+}

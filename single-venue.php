@@ -39,6 +39,8 @@
 									$address1 = get_post_meta( get_the_ID(), 'Street 1', true );
 									$address2 = get_post_meta( get_the_ID(), 'Street 2', true );
 									$city = get_post_meta( get_the_ID(), 'city', true );
+									$state = get_post_meta( get_the_ID(), 'state', true );
+									$zip = get_post_meta( get_the_ID(), 'zip', true );
 
 									if( $address1 )
 										echo $address1 . "<br />";
@@ -46,6 +48,10 @@
 										echo $address2 . "<br />";
 									if( $city )
 										echo $city;
+									if ( $state )
+										echo ", " . $state;
+									if ( $zip )
+										echo " " . $zip;
 									?>
 								</div>
 							</div>
@@ -59,6 +65,9 @@
 								</header>
 
 								<section class="entry-content cf">
+									<div class="venue-map-holder">
+										<?php getVenueMap(); ?>
+									</div>
 									<?php
 									if( $post->post_content != '' )
 										the_content();

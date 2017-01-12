@@ -4,7 +4,10 @@
 
 				<div id="inner-content" class="wrap cf">
 
-						<main id="main" class="m-all t-2of3 d-5of7 cf" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
+					<div class='sidebar d-2of7 t-1of3'>
+					</div>
+
+						<div id="main" class="m-all t-2of3 d-5of7 cf body-content" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
 
 							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
@@ -56,9 +59,7 @@
 
 							<?php endwhile; endif; ?>
 
-						</main>
-
-						<?php get_sidebar(); ?>
+						</div>
 
 				</div>
 
