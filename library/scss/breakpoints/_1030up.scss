@@ -35,14 +35,19 @@ nav {
 	}
 }
 
+.nav {
+	margin-left: 6px;
+}
+
 .top-sellers-list {
 
-	& .top-seller-poster:nth-child(6n+0) a {
+	& .top-seller-poster:nth-child(6n+0) {
 		margin-right: 0px;
 	}
 
-	.top-seller-poster a {
+	.top-seller-poster {
 		margin-right: 35px;
+		margin-bottom: 35px;
 	}
 }
 
@@ -126,8 +131,12 @@ FRONT PAGE STYLES
 	#gallery-block {
 		height: 500px;
 
-		div.slide {
+		.slide-gradient {
 			padding: 39px;
+		}
+
+		div.slide {
+			/*padding: 39px;*/
 
 			.show-info {
 
@@ -138,7 +147,7 @@ FRONT PAGE STYLES
 				.filled-buy div {
 					border-radius: 20px;
 					padding: 5px;
-					width: 150px;
+					width: 130px;
 				}
 			}
 		}
@@ -175,6 +184,19 @@ FRONT PAGE STYLES
 				}
 			}
 		}
+	}
+}
+
+#searchform {
+	
+	input {
+		width: 526px;
+		height: 47px;
+		margin: 0px 11px 0px 0px;
+	}
+
+	button {
+		width: 52px;
 	}
 }
 
