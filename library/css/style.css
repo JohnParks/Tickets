@@ -2837,8 +2837,18 @@ FOOTER STYLES
 .footer-columns li::before {
   content: url(../assets/icons/small-arrow.png);
 }
+/* line 1516, ../scss/breakpoints/_base.scss */
+.footer-columns .footer-email::before {
+  content: url(../assets/icons/envelope.png);
+  margin-right: 5px;
+}
+/* line 1521, ../scss/breakpoints/_base.scss */
+.footer-columns .footer-phone::before {
+  content: url(../assets/icons/phone.png);
+  margin-right: 5px;
+}
 
-/* line 1517, ../scss/breakpoints/_base.scss */
+/* line 1527, ../scss/breakpoints/_base.scss */
 .lower-inner-footer {
   display: flex;
   justify-content: space-between;

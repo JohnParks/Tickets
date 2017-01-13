@@ -1512,6 +1512,16 @@ FOOTER STYLES
 	li::before {
 		content: url(../assets/icons/small-arrow.png);
 	}
+
+	.footer-email::before {
+		content: url(../assets/icons/envelope.png);
+		margin-right: 5px;
+	}
+
+	.footer-phone::before {
+		content: url(../assets/icons/phone.png);
+		margin-right: 5px;
+	}
 }
 
 .lower-inner-footer {
