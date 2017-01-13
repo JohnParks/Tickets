@@ -3122,18 +3122,23 @@ you can add resource intensive styles.
   NAVIGATION STYLES
   *********************/
   /* line 97, ../scss/breakpoints/_768up.scss */
+  nav ul {
+    text-transform: uppercase;
+  }
+
+  /* line 102, ../scss/breakpoints/_768up.scss */
   .nav {
     border: 0;
     /* end .menu ul li */
     /* highlight current page */
     /* end current highlighters */
   }
-  /* line 99, ../scss/breakpoints/_768up.scss */
+  /* line 104, ../scss/breakpoints/_768up.scss */
   .nav ul {
     background: #000;
     margin-top: 0;
   }
-  /* line 103, ../scss/breakpoints/_768up.scss */
+  /* line 108, ../scss/breakpoints/_768up.scss */
   .nav li {
     float: left;
     position: relative;
@@ -3142,20 +3147,21 @@ you can add resource intensive styles.
     */
     /* showing sub-menus */
   }
-  /* line 107, ../scss/breakpoints/_768up.scss */
+  /* line 112, ../scss/breakpoints/_768up.scss */
   .nav li a {
     border-bottom: 0;
+    letter-spacing: 1px;
     /*
     you can use hover styles here even though this size
     has the possibility of being a mobile device.
     */
   }
-  /* line 114, ../scss/breakpoints/_768up.scss */
+  /* line 120, ../scss/breakpoints/_768up.scss */
   .nav li a:hover, .nav li a:focus {
     color: #fff;
     text-decoration: underline;
   }
-  /* line 126, ../scss/breakpoints/_768up.scss */
+  /* line 132, ../scss/breakpoints/_768up.scss */
   .nav li ul.sub-menu,
   .nav li ul.children {
     margin-top: 0;
@@ -3166,7 +3172,7 @@ you can add resource intensive styles.
     z-index: 8999;
     /* highlight sub-menu current page */
   }
-  /* line 135, ../scss/breakpoints/_768up.scss */
+  /* line 141, ../scss/breakpoints/_768up.scss */
   .nav li ul.sub-menu li,
   .nav li ul.children li {
     /*
@@ -3175,7 +3181,7 @@ you can add resource intensive styles.
     for usability. k, bai.
     */
   }
-  /* line 137, ../scss/breakpoints/_768up.scss */
+  /* line 143, ../scss/breakpoints/_768up.scss */
   .nav li ul.sub-menu li a,
   .nav li ul.children li a {
     padding-left: 10px;
@@ -3184,18 +3190,18 @@ you can add resource intensive styles.
     width: 180px;
     border-bottom: 1px solid #ccc;
   }
-  /* line 154, ../scss/breakpoints/_768up.scss */
+  /* line 160, ../scss/breakpoints/_768up.scss */
   .nav li ul.sub-menu li:last-child a,
   .nav li ul.children li:last-child a {
     border-bottom: 0;
   }
-  /* line 164, ../scss/breakpoints/_768up.scss */
+  /* line 170, ../scss/breakpoints/_768up.scss */
   .nav li ul.sub-menu li ul,
   .nav li ul.children li ul {
     top: 0;
     left: 100%;
   }
-  /* line 179, ../scss/breakpoints/_768up.scss */
+  /* line 185, ../scss/breakpoints/_768up.scss */
   .nav li:hover > ul {
     top: auto;
     visibility: visible;
@@ -3205,62 +3211,62 @@ you can add resource intensive styles.
   /*********************
   SIDEBARS & ASIDES
   *********************/
-  /* line 199, ../scss/breakpoints/_768up.scss */
+  /* line 205, ../scss/breakpoints/_768up.scss */
   .sidebar {
     padding: 40px;
     float: left;
     background-color: black;
     color: white;
   }
-  /* line 205, ../scss/breakpoints/_768up.scss */
+  /* line 211, ../scss/breakpoints/_768up.scss */
   .sidebar .show-list {
     flex-direction: column;
   }
-  /* line 208, ../scss/breakpoints/_768up.scss */
+  /* line 214, ../scss/breakpoints/_768up.scss */
   .sidebar .show-list .show-list-item {
     margin-left: auto;
     margin-right: auto;
   }
-  /* line 213, ../scss/breakpoints/_768up.scss */
+  /* line 219, ../scss/breakpoints/_768up.scss */
   .sidebar .show-list .show-list-nav {
     display: none;
   }
 
-  /* line 219, ../scss/breakpoints/_768up.scss */
+  /* line 225, ../scss/breakpoints/_768up.scss */
   .sidebar-img {
     width: 100%;
     margin-bottom: 28px;
   }
-  /* line 223, ../scss/breakpoints/_768up.scss */
+  /* line 229, ../scss/breakpoints/_768up.scss */
   .sidebar-img img {
     width: inherit;
     height: auto;
   }
 
-  /* line 231, ../scss/breakpoints/_768up.scss */
+  /* line 237, ../scss/breakpoints/_768up.scss */
   .sidebar .shows-listing h3 {
     text-align: center;
   }
-  /* line 235, ../scss/breakpoints/_768up.scss */
+  /* line 241, ../scss/breakpoints/_768up.scss */
   .sidebar .shows-listing .show-poster {
     width: 167px;
     margin-left: auto;
     margin-right: auto;
   }
-  /* line 240, ../scss/breakpoints/_768up.scss */
+  /* line 246, ../scss/breakpoints/_768up.scss */
   .sidebar .shows-listing .show-poster img {
     width: 100%;
     height: auto;
   }
 
-  /* line 247, ../scss/breakpoints/_768up.scss */
+  /* line 253, ../scss/breakpoints/_768up.scss */
   .sidebar .contact-faq {
     background-image: url("../assets/speech-bubble.png");
     background-size: 100% auto;
     height: 86px;
     background-repeat: no-repeat;
   }
-  /* line 253, ../scss/breakpoints/_768up.scss */
+  /* line 259, ../scss/breakpoints/_768up.scss */
   .sidebar .contact-faq a {
     color: black;
     position: relative;
@@ -3268,12 +3274,12 @@ you can add resource intensive styles.
     left: 20%;
   }
 
-  /* line 266, ../scss/breakpoints/_768up.scss */
+  /* line 272, ../scss/breakpoints/_768up.scss */
   .widget ul li {
     /* deep nesting */
   }
 
-  /* line 283, ../scss/breakpoints/_768up.scss */
+  /* line 289, ../scss/breakpoints/_768up.scss */
   .no-widgets {
     background-color: #fff;
     padding: 1.5em;
@@ -3283,56 +3289,56 @@ you can add resource intensive styles.
     margin-bottom: 1.5em;
   }
 
-  /* line 292, ../scss/breakpoints/_768up.scss */
+  /* line 298, ../scss/breakpoints/_768up.scss */
   .show-list {
     display: flex;
     justify-content: space-around;
   }
-  /* line 296, ../scss/breakpoints/_768up.scss */
+  /* line 302, ../scss/breakpoints/_768up.scss */
   .show-list .show-list-item {
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
-  /* line 304, ../scss/breakpoints/_768up.scss */
+  /* line 310, ../scss/breakpoints/_768up.scss */
   .show-list .show-list-item .show-poster img {
     width: 100%;
     height: auto;
   }
-  /* line 310, ../scss/breakpoints/_768up.scss */
+  /* line 316, ../scss/breakpoints/_768up.scss */
   .show-list .show-list-item .show-title {
     font-weight: 600;
     text-decoration: none;
     font-size: 18px;
   }
-  /* line 315, ../scss/breakpoints/_768up.scss */
+  /* line 321, ../scss/breakpoints/_768up.scss */
   .show-list .show-list-item .show-title a {
     color: black;
   }
 
-  /* line 322, ../scss/breakpoints/_768up.scss */
+  /* line 328, ../scss/breakpoints/_768up.scss */
   .sidebar {
     /*margin-top: 2.2em;*/
   }
 
-  /* line 326, ../scss/breakpoints/_768up.scss */
+  /* line 332, ../scss/breakpoints/_768up.scss */
   .widgettitle {
     border-bottom: 2px solid #444;
     margin-bottom: 0.75em;
   }
 
-  /* line 331, ../scss/breakpoints/_768up.scss */
+  /* line 337, ../scss/breakpoints/_768up.scss */
   .widget {
     padding: 0 10px;
     margin: 2.2em 0;
   }
-  /* line 336, ../scss/breakpoints/_768up.scss */
+  /* line 342, ../scss/breakpoints/_768up.scss */
   .widget ul li {
     margin-bottom: 0.75em;
     /* deep nesting */
   }
-  /* line 344, ../scss/breakpoints/_768up.scss */
+  /* line 350, ../scss/breakpoints/_768up.scss */
   .widget ul li ul {
     margin-top: 0.75em;
     padding-left: 1em;
@@ -3357,7 +3363,7 @@ you can add resource intensive styles.
   of overriding here if you styled them for
   mobile. Make sure to double check these!
   */
-  /* line 452, ../scss/breakpoints/_768up.scss */
+  /* line 458, ../scss/breakpoints/_768up.scss */
   .footer-links ul li {
     /*
     be careful with the depth of your menus.
@@ -3367,82 +3373,100 @@ you can add resource intensive styles.
   }
 
   /* end .footer-links */
-  /* line 466, ../scss/breakpoints/_768up.scss */
+  /* line 472, ../scss/breakpoints/_768up.scss */
   .footer-columns {
     font-size: 14px;
   }
+  /* line 475, ../scss/breakpoints/_768up.scss */
+  .footer-columns .footer-column-header {
+    margin-bottom: 0px;
+  }
+  /* line 479, ../scss/breakpoints/_768up.scss */
+  .footer-columns ul {
+    margin: 0px;
+  }
+  /* line 483, ../scss/breakpoints/_768up.scss */
+  .footer-columns li {
+    padding-top: 4px;
+  }
 
-  /* line 474, ../scss/breakpoints/_768up.scss */
+  /* line 492, ../scss/breakpoints/_768up.scss */
   .footer-top .wpcf7-form .wpcf7-email {
     width: 140px;
+  }
+
+  /* line 498, ../scss/breakpoints/_768up.scss */
+  .copywrite {
+    font-size: 12px;
   }
 
   /*********************
   HOMEPAGE STYLES
   *********************/
-  /* line 486, ../scss/breakpoints/_768up.scss */
+  /* line 508, ../scss/breakpoints/_768up.scss */
   #top-sellers h1 {
     letter-spacing: 1px;
   }
 
-  /* line 493, ../scss/breakpoints/_768up.scss */
+  /* line 515, ../scss/breakpoints/_768up.scss */
   .home h1 {
     margin-bottom: 20px;
     margin-top: 40px;
   }
-  /* line 498, ../scss/breakpoints/_768up.scss */
+  /* line 520, ../scss/breakpoints/_768up.scss */
   .home .top-seller-poster {
-    -webkit-box-shadow: 6px 6px 5px 0px rgba(0, 0, 0, 0.55);
-    -moz-box-shadow: 6px 6px 5px 0px rgba(0, 0, 0, 0.55);
-    box-shadow: 6px 6px 5px 0px rgba(0, 0, 0, 0.55);
+    -webkit-box-shadow: 6px 6px 5px 0px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 6px 6px 5px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 6px 6px 5px 0px rgba(0, 0, 0, 0.3);
     font-size: 0px;
+    margin-bottom: 30px;
   }
 
-  /* line 506, ../scss/breakpoints/_768up.scss */
+  /* line 529, ../scss/breakpoints/_768up.scss */
   .top-sellers-list {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
   }
-  /* line 511, ../scss/breakpoints/_768up.scss */
+  /* line 534, ../scss/breakpoints/_768up.scss */
   .top-sellers-list .top-seller-poster a {
     width: 165px;
   }
-  /* line 514, ../scss/breakpoints/_768up.scss */
+  /* line 537, ../scss/breakpoints/_768up.scss */
   .top-sellers-list .top-seller-poster a img {
     width: inherit;
     height: auto;
   }
 
-  /* line 521, ../scss/breakpoints/_768up.scss */
+  /* line 544, ../scss/breakpoints/_768up.scss */
   #home-banner-image {
     margin: 40px 0px;
   }
 
-  /* line 525, ../scss/breakpoints/_768up.scss */
+  /* line 548, ../scss/breakpoints/_768up.scss */
   #home-bottom-banner {
     margin: 60px 0px 54px 0px;
   }
 
-  /* line 529, ../scss/breakpoints/_768up.scss */
+  /* line 552, ../scss/breakpoints/_768up.scss */
   .sidebar {
     display: block;
   }
 
-  /* line 533, ../scss/breakpoints/_768up.scss */
+  /* line 556, ../scss/breakpoints/_768up.scss */
   .body-content {
     padding: 40px 0px 40px 40px;
   }
 
-  /* line 537, ../scss/breakpoints/_768up.scss */
+  /* line 560, ../scss/breakpoints/_768up.scss */
   #home-page-slider {
     width: 100%;
-    height: 511px;
+    height: 441px;
     background-color: black;
     border-bottom: solid 11px #ffa700;
     /* Close #gallery-block */
   }
-  /* line 543, ../scss/breakpoints/_768up.scss */
+  /* line 566, ../scss/breakpoints/_768up.scss */
   #home-page-slider #gallery-block {
     position: relative;
     height: 430px;
@@ -3450,7 +3474,7 @@ you can add resource intensive styles.
     overflow: hidden;
     display: inline-block;
   }
-  /* line 550, ../scss/breakpoints/_768up.scss */
+  /* line 573, ../scss/breakpoints/_768up.scss */
   #home-page-slider #gallery-block .slide-gradient {
     width: 100%;
     height: 100%;
@@ -3460,7 +3484,7 @@ you can add resource intensive styles.
     backgrond: -moz-linear-gradient(black, transparent);
     padding: 25px;
   }
-  /* line 560, ../scss/breakpoints/_768up.scss */
+  /* line 583, ../scss/breakpoints/_768up.scss */
   #home-page-slider #gallery-block div.slide {
     height: inherit;
     /*padding: 25px;*/
@@ -3468,27 +3492,27 @@ you can add resource intensive styles.
     background-position: center;
     display: none;
   }
-  /* line 567, ../scss/breakpoints/_768up.scss */
+  /* line 590, ../scss/breakpoints/_768up.scss */
   #home-page-slider #gallery-block div.slide.active-slide {
     display: block;
   }
-  /* line 571, ../scss/breakpoints/_768up.scss */
+  /* line 594, ../scss/breakpoints/_768up.scss */
   #home-page-slider #gallery-block div.slide .show-info {
     margin-left: 15px;
     color: white;
     float: left;
   }
-  /* line 576, ../scss/breakpoints/_768up.scss */
+  /* line 599, ../scss/breakpoints/_768up.scss */
   #home-page-slider #gallery-block div.slide .show-info h3 {
     font-weight: bold;
     font-size: 23px;
     margin-top: 0px;
   }
-  /* line 582, ../scss/breakpoints/_768up.scss */
+  /* line 605, ../scss/breakpoints/_768up.scss */
   #home-page-slider #gallery-block div.slide .show-info a.filled-buy {
     text-decoration: none;
   }
-  /* line 586, ../scss/breakpoints/_768up.scss */
+  /* line 609, ../scss/breakpoints/_768up.scss */
   #home-page-slider #gallery-block div.slide .show-info .filled-buy div {
     background-color: #ffa700;
     text-transform: uppercase;
@@ -3497,38 +3521,41 @@ you can add resource intensive styles.
     color: black;
     padding: 5px;
     text-align: center;
-    width: 150px;
+    width: 120px;
     font-size: 13px;
   }
-  /* line 598, ../scss/breakpoints/_768up.scss */
+  /* line 621, ../scss/breakpoints/_768up.scss */
   #home-page-slider #gallery-block div.slide .show-info .more-info {
     margin-top: 15px;
+    margin-left: 8px;
   }
-  /* line 601, ../scss/breakpoints/_768up.scss */
+  /* line 625, ../scss/breakpoints/_768up.scss */
   #home-page-slider #gallery-block div.slide .show-info .more-info a {
     color: white;
   }
-  /* line 607, ../scss/breakpoints/_768up.scss */
+  /* line 631, ../scss/breakpoints/_768up.scss */
   #home-page-slider #gallery-block div.slide .poster {
     float: left;
     border-right: #b3b3b3 solid 1px;
     padding-right: 15px;
     height: 80%;
   }
-  /* line 613, ../scss/breakpoints/_768up.scss */
+  /* line 637, ../scss/breakpoints/_768up.scss */
   #home-page-slider #gallery-block div.slide .poster img {
     width: auto;
     height: inherit;
   }
-  /* line 621, ../scss/breakpoints/_768up.scss */
+  /* line 645, ../scss/breakpoints/_768up.scss */
   #home-page-slider #slider-listing {
     float: right;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 25%;
     padding: 15px 0px 0px 15px;
     height: 100%;
   }
-  /* line 628, ../scss/breakpoints/_768up.scss */
+  /* line 654, ../scss/breakpoints/_768up.scss */
   #home-page-slider #slider-listing .show-listing {
     clear: both;
     display: flex;
@@ -3536,7 +3563,7 @@ you can add resource intensive styles.
     position: relative;
     vertical-align: middle;
   }
-  /* line 635, ../scss/breakpoints/_768up.scss */
+  /* line 661, ../scss/breakpoints/_768up.scss */
   #home-page-slider #slider-listing .show-listing img.dotted-arrow {
     display: none;
     position: absolute;
@@ -3545,48 +3572,49 @@ you can add resource intensive styles.
     height: 50px;
     width: auto;
   }
-  /* line 643, ../scss/breakpoints/_768up.scss */
+  /* line 669, ../scss/breakpoints/_768up.scss */
   #home-page-slider #slider-listing .show-listing img.dotted-arrow.active-arrow {
     display: block;
   }
-  /* line 647, ../scss/breakpoints/_768up.scss */
+  /* line 673, ../scss/breakpoints/_768up.scss */
   #home-page-slider #slider-listing .show-listing .active::before {
     content: url(../assets/icons/dotted-arrow.png);
   }
-  /* line 651, ../scss/breakpoints/_768up.scss */
+  /* line 677, ../scss/breakpoints/_768up.scss */
   #home-page-slider #slider-listing .show-listing .show-info {
     float: right;
     width: 62%;
-    margin: auto 0px auto 5px;
+    margin: auto 0px auto 11px;
   }
-  /* line 658, ../scss/breakpoints/_768up.scss */
+  /* line 684, ../scss/breakpoints/_768up.scss */
   #home-page-slider #slider-listing .show-listing .show-info .buy-tickets div {
     display: inline-block;
-    font-size: 12px;
+    font-size: 9px;
     text-transform: uppercase;
     font-weight: 600;
   }
-  /* line 666, ../scss/breakpoints/_768up.scss */
+  /* line 692, ../scss/breakpoints/_768up.scss */
   #home-page-slider #slider-listing .show-listing .show-info .show-title {
     color: white;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 13px;
+    margin-left: 7px;
   }
-  /* line 673, ../scss/breakpoints/_768up.scss */
+  /* line 700, ../scss/breakpoints/_768up.scss */
   #home-page-slider #slider-listing .show-listing .poster {
     width: 34%;
     float: left;
   }
-  /* line 677, ../scss/breakpoints/_768up.scss */
+  /* line 704, ../scss/breakpoints/_768up.scss */
   #home-page-slider #slider-listing .show-listing .poster img {
     width: 100%;
     height: auto;
   }
-  /* line 684, ../scss/breakpoints/_768up.scss */
+  /* line 711, ../scss/breakpoints/_768up.scss */
   #home-page-slider #slider-listing .buy-tickets {
     padding: 0px 10px;
   }
-  /* line 687, ../scss/breakpoints/_768up.scss */
+  /* line 714, ../scss/breakpoints/_768up.scss */
   #home-page-slider #slider-listing .buy-tickets div {
     font-size: 13px;
   }
@@ -3594,17 +3622,17 @@ you can add resource intensive styles.
   /*********************
   GENERAL STYLES
   *********************/
-  /* line 699, ../scss/breakpoints/_768up.scss */
+  /* line 726, ../scss/breakpoints/_768up.scss */
   #beyond-buzz {
     width: 100%;
     color: white;
   }
-  /* line 703, ../scss/breakpoints/_768up.scss */
+  /* line 730, ../scss/breakpoints/_768up.scss */
   #beyond-buzz a {
     color: white;
     text-decoration: none;
   }
-  /* line 708, ../scss/breakpoints/_768up.scss */
+  /* line 735, ../scss/breakpoints/_768up.scss */
   #beyond-buzz article:first-of-type {
     float: left;
     width: 59%;
@@ -3612,28 +3640,29 @@ you can add resource intensive styles.
     margin-right: 1%;
     margin-bottom: 0px;
   }
-  /* line 715, ../scss/breakpoints/_768up.scss */
+  /* line 742, ../scss/breakpoints/_768up.scss */
   #beyond-buzz article:first-of-type .recent-title {
     font-weight: 600;
     font-size: 25px;
   }
-  /* line 720, ../scss/breakpoints/_768up.scss */
+  /* line 747, ../scss/breakpoints/_768up.scss */
   #beyond-buzz article:first-of-type .recent-meta {
     font-size: 18px;
   }
-  /* line 724, ../scss/breakpoints/_768up.scss */
+  /* line 751, ../scss/breakpoints/_768up.scss */
   #beyond-buzz article:first-of-type .content {
     width: 100%;
     padding-left: 10px;
+    line-height: 28px;
   }
-  /* line 729, ../scss/breakpoints/_768up.scss */
+  /* line 757, ../scss/breakpoints/_768up.scss */
   #beyond-buzz article:first-of-type .beyond-buzz-star {
     width: 30%;
     top: 10px;
     left: 10px;
     z-index: 10;
   }
-  /* line 737, ../scss/breakpoints/_768up.scss */
+  /* line 765, ../scss/breakpoints/_768up.scss */
   #beyond-buzz article {
     float: right;
     width: 40%;
@@ -3643,7 +3672,7 @@ you can add resource intensive styles.
     background-position: center;
     position: relative;
   }
-  /* line 746, ../scss/breakpoints/_768up.scss */
+  /* line 774, ../scss/breakpoints/_768up.scss */
   #beyond-buzz article .content {
     display: flex;
     flex-direction: column;
@@ -3652,62 +3681,63 @@ you can add resource intensive styles.
     height: 100%;
     float: right;
     background-color: rgba(0, 0, 0, 0.3);
-    padding: 0px 0px 10px 10px;
+    padding: 10px;
+    line-height: 22px;
   }
-  /* line 757, ../scss/breakpoints/_768up.scss */
+  /* line 786, ../scss/breakpoints/_768up.scss */
   #beyond-buzz article .recent-title {
     font-size: 14px;
   }
-  /* line 761, ../scss/breakpoints/_768up.scss */
+  /* line 790, ../scss/breakpoints/_768up.scss */
   #beyond-buzz article .recent-meta {
     font-size: 11px;
   }
-  /* line 765, ../scss/breakpoints/_768up.scss */
+  /* line 794, ../scss/breakpoints/_768up.scss */
   #beyond-buzz article .beyond-buzz-star {
     position: absolute;
     width: 19%;
     top: 10px;
     left: 10px;
   }
-  /* line 773, ../scss/breakpoints/_768up.scss */
+  /* line 802, ../scss/breakpoints/_768up.scss */
   #beyond-buzz article:last-of-type {
     margin-bottom: 0px;
   }
 
-  /* line 778, ../scss/breakpoints/_768up.scss */
+  /* line 807, ../scss/breakpoints/_768up.scss */
   #beyond-buzz .headline-container {
     height: 300px;
   }
 
-  /* line 782, ../scss/breakpoints/_768up.scss */
+  /* line 811, ../scss/breakpoints/_768up.scss */
   .show-content {
     padding: 0px 10px 0px 10px;
   }
 
-  /* line 786, ../scss/breakpoints/_768up.scss */
+  /* line 815, ../scss/breakpoints/_768up.scss */
   .cal-nav {
     font-size: 14px;
     position: relative;
     top: 7px;
   }
-  /* line 791, ../scss/breakpoints/_768up.scss */
+  /* line 820, ../scss/breakpoints/_768up.scss */
   .cal-nav img {
     width: 18px;
   }
-  /* line 795, ../scss/breakpoints/_768up.scss */
+  /* line 824, ../scss/breakpoints/_768up.scss */
   .cal-nav #date-range {
     margin: auto 5px;
     position: relative;
     top: -3px;
   }
 
-  /* line 802, ../scss/breakpoints/_768up.scss */
+  /* line 831, ../scss/breakpoints/_768up.scss */
   #month-selector {
     width: 90px;
     font-size: 14px;
   }
 
-  /* line 807, ../scss/breakpoints/_768up.scss */
+  /* line 836, ../scss/breakpoints/_768up.scss */
   #venue-selector {
     width: auto;
     padding-right: 25px;
@@ -3715,20 +3745,20 @@ you can add resource intensive styles.
     font-size: 14px;
   }
 
-  /* line 816, ../scss/breakpoints/_768up.scss */
+  /* line 845, ../scss/breakpoints/_768up.scss */
   table#events-calendar .days-heading {
     font-size: 14px;
   }
-  /* line 820, ../scss/breakpoints/_768up.scss */
+  /* line 849, ../scss/breakpoints/_768up.scss */
   table#events-calendar .show-time {
     font-size: 14px;
   }
 
-  /* line 827, ../scss/breakpoints/_768up.scss */
+  /* line 856, ../scss/breakpoints/_768up.scss */
   .search-results div.month-filter {
     overflow: hidden;
   }
-  /* line 830, ../scss/breakpoints/_768up.scss */
+  /* line 859, ../scss/breakpoints/_768up.scss */
   .search-results div.month-filter select {
     padding: 10px;
     height: 100%;
@@ -3738,50 +3768,50 @@ you can add resource intensive styles.
     background-image: none;
     background-color: transparent;
   }
-  /* line 841, ../scss/breakpoints/_768up.scss */
+  /* line 870, ../scss/breakpoints/_768up.scss */
   .search-results h3 {
     font-size: 18px;
     max-width: 260px;
   }
-  /* line 846, ../scss/breakpoints/_768up.scss */
+  /* line 875, ../scss/breakpoints/_768up.scss */
   .search-results .shows-results-list {
     margin-left: 25px;
   }
-  /* line 851, ../scss/breakpoints/_768up.scss */
+  /* line 880, ../scss/breakpoints/_768up.scss */
   .search-results .show-info h4 {
     margin: 5px 0px;
   }
-  /* line 855, ../scss/breakpoints/_768up.scss */
+  /* line 884, ../scss/breakpoints/_768up.scss */
   .search-results .show-info ul li {
     max-width: 260px;
   }
-  /* line 858, ../scss/breakpoints/_768up.scss */
+  /* line 887, ../scss/breakpoints/_768up.scss */
   .search-results .show-info ul li a {
     font-size: 18px;
   }
-  /* line 864, ../scss/breakpoints/_768up.scss */
+  /* line 893, ../scss/breakpoints/_768up.scss */
   .search-results article {
     padding: 0px;
   }
-  /* line 868, ../scss/breakpoints/_768up.scss */
+  /* line 897, ../scss/breakpoints/_768up.scss */
   .search-results .thumbnail {
     width: 150px;
   }
-  /* line 872, ../scss/breakpoints/_768up.scss */
+  /* line 901, ../scss/breakpoints/_768up.scss */
   .search-results .result-body {
     max-width: 260px;
   }
 
-  /* line 885, ../scss/breakpoints/_768up.scss */
+  /* line 914, ../scss/breakpoints/_768up.scss */
   .show-list .show-list-item {
     width: 130px;
     margin: 0px 5px;
   }
-  /* line 892, ../scss/breakpoints/_768up.scss */
+  /* line 921, ../scss/breakpoints/_768up.scss */
   .show-list .show-list-item .show-title {
     font-size: 18px;
   }
-  /* line 895, ../scss/breakpoints/_768up.scss */
+  /* line 924, ../scss/breakpoints/_768up.scss */
   .show-list .show-list-item .show-title a {
     color: black;
   }
@@ -3824,7 +3854,7 @@ you can add resource intensive styles.
 
   /* line 33, ../scss/breakpoints/_1030up.scss */
   nav li {
-    margin-right: 57px;
+    margin-right: 35px;
   }
 
   /* line 38, ../scss/breakpoints/_1030up.scss */
@@ -3906,124 +3936,128 @@ you can add resource intensive styles.
     font-size: 13px;
   }
 
-  /* line 131, ../scss/breakpoints/_1030up.scss */
+  /* line 129, ../scss/breakpoints/_1030up.scss */
+  #home-page-slider {
+    height: 511px;
+  }
+  /* line 132, ../scss/breakpoints/_1030up.scss */
   #home-page-slider #gallery-block {
     height: 500px;
   }
-  /* line 134, ../scss/breakpoints/_1030up.scss */
+  /* line 135, ../scss/breakpoints/_1030up.scss */
   #home-page-slider #gallery-block .slide-gradient {
     padding: 39px;
   }
-  /* line 138, ../scss/breakpoints/_1030up.scss */
+  /* line 139, ../scss/breakpoints/_1030up.scss */
   #home-page-slider #gallery-block div.slide {
     /*padding: 39px;*/
   }
-  /* line 143, ../scss/breakpoints/_1030up.scss */
+  /* line 144, ../scss/breakpoints/_1030up.scss */
   #home-page-slider #gallery-block div.slide .show-info h3 {
     font-size: 30px;
   }
-  /* line 147, ../scss/breakpoints/_1030up.scss */
+  /* line 148, ../scss/breakpoints/_1030up.scss */
   #home-page-slider #gallery-block div.slide .show-info .filled-buy div {
     border-radius: 20px;
     padding: 5px;
     width: 130px;
   }
-  /* line 156, ../scss/breakpoints/_1030up.scss */
+  /* line 157, ../scss/breakpoints/_1030up.scss */
   #home-page-slider #slider-listing {
     padding: 25px 0px 0px 30px;
     height: 500px;
   }
-  /* line 162, ../scss/breakpoints/_1030up.scss */
+  /* line 163, ../scss/breakpoints/_1030up.scss */
   #home-page-slider #slider-listing .show-listing img.dotted-arrow {
     left: -50px;
     top: 20px;
     height: 60px;
   }
-  /* line 168, ../scss/breakpoints/_1030up.scss */
+  /* line 169, ../scss/breakpoints/_1030up.scss */
   #home-page-slider #slider-listing .show-listing .poster {
     width: 30%;
   }
-  /* line 172, ../scss/breakpoints/_1030up.scss */
+  /* line 173, ../scss/breakpoints/_1030up.scss */
   #home-page-slider #slider-listing .show-listing .show-info {
     width: 64%;
   }
-  /* line 177, ../scss/breakpoints/_1030up.scss */
+  /* line 178, ../scss/breakpoints/_1030up.scss */
   #home-page-slider #slider-listing .show-listing .show-info .buy-tickets div {
     font-size: 15px;
   }
-  /* line 182, ../scss/breakpoints/_1030up.scss */
+  /* line 183, ../scss/breakpoints/_1030up.scss */
   #home-page-slider #slider-listing .show-listing .show-info .show-title {
     font-size: 18px;
   }
 
-  /* line 192, ../scss/breakpoints/_1030up.scss */
+  /* line 193, ../scss/breakpoints/_1030up.scss */
   #searchform input {
     width: 526px;
     height: 47px;
     margin: 0px 11px 0px 0px;
   }
-  /* line 198, ../scss/breakpoints/_1030up.scss */
+  /* line 199, ../scss/breakpoints/_1030up.scss */
   #searchform button {
     width: 52px;
   }
 
-  /* line 205, ../scss/breakpoints/_1030up.scss */
+  /* line 206, ../scss/breakpoints/_1030up.scss */
   .search-results article {
     padding: 40px;
   }
-  /* line 209, ../scss/breakpoints/_1030up.scss */
+  /* line 210, ../scss/breakpoints/_1030up.scss */
   .search-results h3 {
     font-size: 20px;
     font-weight: bold;
     max-width: 490px;
   }
-  /* line 215, ../scss/breakpoints/_1030up.scss */
+  /* line 216, ../scss/breakpoints/_1030up.scss */
   .search-results .thumbnail {
     width: 200px;
   }
-  /* line 221, ../scss/breakpoints/_1030up.scss */
+  /* line 222, ../scss/breakpoints/_1030up.scss */
   .search-results .show-info ul li {
     max-width: 490px;
   }
-  /* line 226, ../scss/breakpoints/_1030up.scss */
+  /* line 227, ../scss/breakpoints/_1030up.scss */
   .search-results .result-body {
     max-width: 490px;
   }
 
-  /* line 233, ../scss/breakpoints/_1030up.scss */
+  /* line 234, ../scss/breakpoints/_1030up.scss */
   .show-list .show-list-item {
     width: 150px;
   }
-  /* line 242, ../scss/breakpoints/_1030up.scss */
+  /* line 243, ../scss/breakpoints/_1030up.scss */
   .show-list .show-list-item .show-title {
     font-size: 18px;
   }
-  /* line 245, ../scss/breakpoints/_1030up.scss */
+  /* line 246, ../scss/breakpoints/_1030up.scss */
   .show-list .show-list-item .show-title a {
     color: black;
   }
 
-  /* line 252, ../scss/breakpoints/_1030up.scss */
+  /* line 253, ../scss/breakpoints/_1030up.scss */
   .venue-map-holder {
     width: 320px;
     height: 320px;
     float: left;
     margin-right: 20px;
   }
-  /* line 258, ../scss/breakpoints/_1030up.scss */
+  /* line 259, ../scss/breakpoints/_1030up.scss */
   .venue-map-holder iframe {
     width: 100%;
     height: 100%;
   }
 
-  /* line 264, ../scss/breakpoints/_1030up.scss */
+  /* line 265, ../scss/breakpoints/_1030up.scss */
   .footer-columns {
     font-size: 18px;
   }
 
-  /* line 272, ../scss/breakpoints/_1030up.scss */
+  /* line 273, ../scss/breakpoints/_1030up.scss */
   .footer-top .wpcf7-form .wpcf7-email {
-    width: 200px;
+    width: 187px;
   }
 }
 /*********************
