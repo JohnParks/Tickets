@@ -53,6 +53,12 @@ nav {
 
 .show-content {
 	padding: 0px 0px 0px 40px;
+	margin: 30px 0px 26px 0px;
+
+	section, h2 {
+		margin-left: 11px;
+	}
+
 }
 
 table#events-calendar {
@@ -81,7 +87,7 @@ table#events-calendar {
 }
 
 #month-selector {
-	width: 100px;
+	width: 120px;
 	font-size: 16px;
 }
 

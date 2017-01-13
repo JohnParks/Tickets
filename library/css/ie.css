@@ -972,31 +972,41 @@ GENERAL STYLES
 .show-content {
   padding: 0px 10px 0px 10px;
 }
+/* line 814, ../scss/breakpoints/_768up.scss */
+.show-content h2 {
+  font-weight: 600;
+  font-size: 45px;
+}
 
-/* line 815, ../scss/breakpoints/_768up.scss */
+/* line 822, ../scss/breakpoints/_768up.scss */
+.event-list h3 {
+  font-size: 27px;
+}
+
+/* line 827, ../scss/breakpoints/_768up.scss */
 .cal-nav {
   font-size: 14px;
   position: relative;
   top: 7px;
 }
-/* line 820, ../scss/breakpoints/_768up.scss */
+/* line 832, ../scss/breakpoints/_768up.scss */
 .cal-nav img {
   width: 18px;
 }
-/* line 824, ../scss/breakpoints/_768up.scss */
+/* line 836, ../scss/breakpoints/_768up.scss */
 .cal-nav #date-range {
   margin: auto 5px;
   position: relative;
   top: -3px;
 }
 
-/* line 831, ../scss/breakpoints/_768up.scss */
+/* line 843, ../scss/breakpoints/_768up.scss */
 #month-selector {
   width: 90px;
   font-size: 14px;
 }
 
-/* line 836, ../scss/breakpoints/_768up.scss */
+/* line 848, ../scss/breakpoints/_768up.scss */
 #venue-selector {
   width: auto;
   padding-right: 25px;
@@ -1004,20 +1014,24 @@ GENERAL STYLES
   font-size: 14px;
 }
 
-/* line 845, ../scss/breakpoints/_768up.scss */
+/* line 855, ../scss/breakpoints/_768up.scss */
+table#events-calendar {
+  margin-bottom: 50px;
+}
+/* line 858, ../scss/breakpoints/_768up.scss */
 table#events-calendar .days-heading {
   font-size: 14px;
 }
-/* line 849, ../scss/breakpoints/_768up.scss */
+/* line 862, ../scss/breakpoints/_768up.scss */
 table#events-calendar .show-time {
   font-size: 14px;
 }
 
-/* line 856, ../scss/breakpoints/_768up.scss */
+/* line 869, ../scss/breakpoints/_768up.scss */
 .search-results div.month-filter {
   overflow: hidden;
 }
-/* line 859, ../scss/breakpoints/_768up.scss */
+/* line 872, ../scss/breakpoints/_768up.scss */
 .search-results div.month-filter select {
   padding: 10px;
   height: 100%;
@@ -1027,50 +1041,50 @@ table#events-calendar .show-time {
   background-image: none;
   background-color: transparent;
 }
-/* line 870, ../scss/breakpoints/_768up.scss */
+/* line 883, ../scss/breakpoints/_768up.scss */
 .search-results h3 {
   font-size: 18px;
   max-width: 260px;
 }
-/* line 875, ../scss/breakpoints/_768up.scss */
+/* line 888, ../scss/breakpoints/_768up.scss */
 .search-results .shows-results-list {
   margin-left: 25px;
 }
-/* line 880, ../scss/breakpoints/_768up.scss */
+/* line 893, ../scss/breakpoints/_768up.scss */
 .search-results .show-info h4 {
   margin: 5px 0px;
 }
-/* line 884, ../scss/breakpoints/_768up.scss */
+/* line 897, ../scss/breakpoints/_768up.scss */
 .search-results .show-info ul li {
   max-width: 260px;
 }
-/* line 887, ../scss/breakpoints/_768up.scss */
+/* line 900, ../scss/breakpoints/_768up.scss */
 .search-results .show-info ul li a {
   font-size: 18px;
 }
-/* line 893, ../scss/breakpoints/_768up.scss */
+/* line 906, ../scss/breakpoints/_768up.scss */
 .search-results article {
   padding: 0px;
 }
-/* line 897, ../scss/breakpoints/_768up.scss */
+/* line 910, ../scss/breakpoints/_768up.scss */
 .search-results .thumbnail {
   width: 150px;
 }
-/* line 901, ../scss/breakpoints/_768up.scss */
+/* line 914, ../scss/breakpoints/_768up.scss */
 .search-results .result-body {
   max-width: 260px;
 }
 
-/* line 914, ../scss/breakpoints/_768up.scss */
+/* line 927, ../scss/breakpoints/_768up.scss */
 .show-list .show-list-item {
   width: 130px;
   margin: 0px 5px;
 }
-/* line 921, ../scss/breakpoints/_768up.scss */
+/* line 934, ../scss/breakpoints/_768up.scss */
 .show-list .show-list-item .show-title {
   font-size: 18px;
 }
-/* line 924, ../scss/breakpoints/_768up.scss */
+/* line 937, ../scss/breakpoints/_768up.scss */
 .show-list .show-list-item .show-title a {
   color: black;
 }
@@ -1127,39 +1141,44 @@ nav li {
 /* line 54, ../scss/breakpoints/_1030up.scss */
 .show-content {
   padding: 0px 0px 0px 40px;
+  margin: 30px 0px 26px 0px;
+}
+/* line 58, ../scss/breakpoints/_1030up.scss */
+.show-content section, .show-content h2 {
+  margin-left: 11px;
 }
 
-/* line 60, ../scss/breakpoints/_1030up.scss */
+/* line 66, ../scss/breakpoints/_1030up.scss */
 table#events-calendar .days-heading {
   font-size: 16px;
 }
-/* line 64, ../scss/breakpoints/_1030up.scss */
+/* line 70, ../scss/breakpoints/_1030up.scss */
 table#events-calendar .show-time {
   font-size: 16px;
 }
 
-/* line 69, ../scss/breakpoints/_1030up.scss */
+/* line 75, ../scss/breakpoints/_1030up.scss */
 .cal-nav {
   width: 180px;
   font-size: 16px;
 }
-/* line 73, ../scss/breakpoints/_1030up.scss */
+/* line 79, ../scss/breakpoints/_1030up.scss */
 .cal-nav img {
   height: 30px;
 }
-/* line 77, ../scss/breakpoints/_1030up.scss */
+/* line 83, ../scss/breakpoints/_1030up.scss */
 .cal-nav #date-range {
   margin: auto 10px;
   position: initial;
 }
 
-/* line 83, ../scss/breakpoints/_1030up.scss */
+/* line 89, ../scss/breakpoints/_1030up.scss */
 #month-selector {
-  width: 100px;
+  width: 120px;
   font-size: 16px;
 }
 
-/* line 88, ../scss/breakpoints/_1030up.scss */
+/* line 94, ../scss/breakpoints/_1030up.scss */
 #venue-selector {
   width: auto;
   padding-right: 25px;
@@ -1170,144 +1189,144 @@ table#events-calendar .show-time {
 /****************
 FRONT PAGE STYLES
 ****************/
-/* line 102, ../scss/breakpoints/_1030up.scss */
+/* line 108, ../scss/breakpoints/_1030up.scss */
 #beyond-buzz .headline-container {
   height: 500px;
 }
-/* line 108, ../scss/breakpoints/_1030up.scss */
+/* line 114, ../scss/breakpoints/_1030up.scss */
 #beyond-buzz article:first-of-type .recent-title {
   font-size: 30px;
 }
-/* line 115, ../scss/breakpoints/_1030up.scss */
+/* line 121, ../scss/breakpoints/_1030up.scss */
 #beyond-buzz article .recent-title {
   font-weight: 600;
   font-size: 16px;
 }
-/* line 120, ../scss/breakpoints/_1030up.scss */
+/* line 126, ../scss/breakpoints/_1030up.scss */
 #beyond-buzz article .recent-meta {
   font-size: 13px;
 }
 
-/* line 129, ../scss/breakpoints/_1030up.scss */
+/* line 135, ../scss/breakpoints/_1030up.scss */
 #home-page-slider {
   height: 511px;
 }
-/* line 132, ../scss/breakpoints/_1030up.scss */
+/* line 138, ../scss/breakpoints/_1030up.scss */
 #home-page-slider #gallery-block {
   height: 500px;
 }
-/* line 135, ../scss/breakpoints/_1030up.scss */
+/* line 141, ../scss/breakpoints/_1030up.scss */
 #home-page-slider #gallery-block .slide-gradient {
   padding: 39px;
 }
-/* line 139, ../scss/breakpoints/_1030up.scss */
+/* line 145, ../scss/breakpoints/_1030up.scss */
 #home-page-slider #gallery-block div.slide {
   /*padding: 39px;*/
 }
-/* line 144, ../scss/breakpoints/_1030up.scss */
+/* line 150, ../scss/breakpoints/_1030up.scss */
 #home-page-slider #gallery-block div.slide .show-info h3 {
   font-size: 30px;
 }
-/* line 148, ../scss/breakpoints/_1030up.scss */
+/* line 154, ../scss/breakpoints/_1030up.scss */
 #home-page-slider #gallery-block div.slide .show-info .filled-buy div {
   border-radius: 20px;
   padding: 5px;
   width: 130px;
 }
-/* line 157, ../scss/breakpoints/_1030up.scss */
+/* line 163, ../scss/breakpoints/_1030up.scss */
 #home-page-slider #slider-listing {
   padding: 25px 0px 0px 30px;
   height: 500px;
 }
-/* line 163, ../scss/breakpoints/_1030up.scss */
+/* line 169, ../scss/breakpoints/_1030up.scss */
 #home-page-slider #slider-listing .show-listing img.dotted-arrow {
   left: -50px;
   top: 20px;
   height: 60px;
 }
-/* line 169, ../scss/breakpoints/_1030up.scss */
+/* line 175, ../scss/breakpoints/_1030up.scss */
 #home-page-slider #slider-listing .show-listing .poster {
   width: 30%;
 }
-/* line 173, ../scss/breakpoints/_1030up.scss */
+/* line 179, ../scss/breakpoints/_1030up.scss */
 #home-page-slider #slider-listing .show-listing .show-info {
   width: 64%;
 }
-/* line 178, ../scss/breakpoints/_1030up.scss */
+/* line 184, ../scss/breakpoints/_1030up.scss */
 #home-page-slider #slider-listing .show-listing .show-info .buy-tickets div {
   font-size: 15px;
 }
-/* line 183, ../scss/breakpoints/_1030up.scss */
+/* line 189, ../scss/breakpoints/_1030up.scss */
 #home-page-slider #slider-listing .show-listing .show-info .show-title {
   font-size: 18px;
 }
 
-/* line 193, ../scss/breakpoints/_1030up.scss */
+/* line 199, ../scss/breakpoints/_1030up.scss */
 #searchform input {
   width: 526px;
   height: 47px;
   margin: 0px 11px 0px 0px;
 }
-/* line 199, ../scss/breakpoints/_1030up.scss */
+/* line 205, ../scss/breakpoints/_1030up.scss */
 #searchform button {
   width: 52px;
 }
 
-/* line 206, ../scss/breakpoints/_1030up.scss */
+/* line 212, ../scss/breakpoints/_1030up.scss */
 .search-results article {
   padding: 40px;
 }
-/* line 210, ../scss/breakpoints/_1030up.scss */
+/* line 216, ../scss/breakpoints/_1030up.scss */
 .search-results h3 {
   font-size: 20px;
   font-weight: bold;
   max-width: 490px;
 }
-/* line 216, ../scss/breakpoints/_1030up.scss */
+/* line 222, ../scss/breakpoints/_1030up.scss */
 .search-results .thumbnail {
   width: 200px;
 }
-/* line 222, ../scss/breakpoints/_1030up.scss */
+/* line 228, ../scss/breakpoints/_1030up.scss */
 .search-results .show-info ul li {
   max-width: 490px;
 }
-/* line 227, ../scss/breakpoints/_1030up.scss */
+/* line 233, ../scss/breakpoints/_1030up.scss */
 .search-results .result-body {
   max-width: 490px;
 }
 
-/* line 234, ../scss/breakpoints/_1030up.scss */
+/* line 240, ../scss/breakpoints/_1030up.scss */
 .show-list .show-list-item {
   width: 150px;
 }
-/* line 243, ../scss/breakpoints/_1030up.scss */
+/* line 249, ../scss/breakpoints/_1030up.scss */
 .show-list .show-list-item .show-title {
   font-size: 18px;
 }
-/* line 246, ../scss/breakpoints/_1030up.scss */
+/* line 252, ../scss/breakpoints/_1030up.scss */
 .show-list .show-list-item .show-title a {
   color: black;
 }
 
-/* line 253, ../scss/breakpoints/_1030up.scss */
+/* line 259, ../scss/breakpoints/_1030up.scss */
 .venue-map-holder {
   width: 320px;
   height: 320px;
   float: left;
   margin-right: 20px;
 }
-/* line 259, ../scss/breakpoints/_1030up.scss */
+/* line 265, ../scss/breakpoints/_1030up.scss */
 .venue-map-holder iframe {
   width: 100%;
   height: 100%;
 }
 
-/* line 265, ../scss/breakpoints/_1030up.scss */
+/* line 271, ../scss/breakpoints/_1030up.scss */
 .footer-columns {
   font-size: 18px;
 }
 
-/* line 273, ../scss/breakpoints/_1030up.scss */
+/* line 279, ../scss/breakpoints/_1030up.scss */
 .footer-top .wpcf7-form .wpcf7-email {
   width: 187px;
 }

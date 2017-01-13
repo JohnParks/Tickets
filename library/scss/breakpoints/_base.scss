@@ -376,11 +376,12 @@ section {
 
 .show-nav {
 	display: flex;
-	justify-content: space-around;
 	background-color: black;
+	text-transform: uppercase;
+	border-bottom: 2px solid #bbbbbb;
 
 	li {
-		margin: 10px;
+		margin: 10px 50px 10px 10px;
 	}
 
 	a {
@@ -393,7 +394,8 @@ section {
 	.active {
 		color: $yellow;
 		border-color: $yellow;
-		border-bottom: 2px solid;
+		border-bottom: 4px solid;
+		padding-bottom: 12px;
 	}
 }
 
@@ -446,6 +448,9 @@ section {
 }
 
 .event-list {
+	h3 {
+		font-size: 33px;
+	}
 	
 	select {
 		float: right;

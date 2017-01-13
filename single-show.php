@@ -54,13 +54,6 @@
 									<li><a href='<?php echo $daURL . "reviews"; ?>' <?php if( $tab == "reviews" ) echo "class='active'"; ?>>Reviews</a></li>
 								</ul>
 
-								<section class="entry-content cf">
-									<?php
-										get_template_part( "show", $tab );
-									?>
-								</section> <!-- end article section -->
-
-
 								<?php
 
 								$dates = getDates();
@@ -105,6 +98,12 @@
 										<?php handleCalendar( $post->ID, $dates ); ?>
 									</div>
 								</section>
+
+								<section class="entry-content cf">
+									<?php
+										get_template_part( "show", $tab );
+									?>
+								</section> <!-- end article section -->
 
 							</div>
 

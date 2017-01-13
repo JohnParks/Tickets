@@ -810,6 +810,18 @@ GENERAL STYLES
 
 .show-content {
 	padding: 0px 10px 0px 10px;
+
+	h2 {
+		font-weight: 600;
+		font-size: 45px;
+	}
+}
+
+.event-list {
+	
+	h3 {
+		font-size: 27px;
+	}
 }
 
 .cal-nav {
@@ -841,6 +853,7 @@ GENERAL STYLES
 }
 
 table#events-calendar {
+	margin-bottom: 50px;
 
 	.days-heading {
 		font-size: 14px;
