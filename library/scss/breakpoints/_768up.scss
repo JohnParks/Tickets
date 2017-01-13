@@ -93,6 +93,11 @@ nav {
 /*********************
 NAVIGATION STYLES
 *********************/
+nav {
+	ul {
+		text-transform: uppercase;
+	}
+}
 
 .nav {
 	border: 0;
@@ -106,6 +111,7 @@ NAVIGATION STYLES
 
 		a {
 			border-bottom: 0;
+			letter-spacing: 1px;
 
 			/*
 			you can use hover styles here even though this size
@@ -465,6 +471,18 @@ mobile. Make sure to double check these!
 
 .footer-columns {
 	font-size: 14px;
+
+	.footer-column-header {
+		margin-bottom: 0px;	
+	}
+
+	ul {
+		margin: 0px;
+	}
+
+	li {
+		padding-top: 4px;
+	}
 }
 
 .footer-top {
@@ -475,6 +493,10 @@ mobile. Make sure to double check these!
 	    	width: 140px;
 	    }
 	}
+}
+
+.copywrite {
+	font-size: 12px;
 }
 
 
@@ -496,10 +518,11 @@ HOMEPAGE STYLES
 	}
 
 	.top-seller-poster {
-		-webkit-box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.55);
-        -moz-box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.55);
-        box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.55);
+		-webkit-box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.3);
+        -moz-box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.3);
+        box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.3);
         font-size: 0px;
+        margin-bottom: 30px;
 	}
 }
 
@@ -536,7 +559,7 @@ HOMEPAGE STYLES
 
 #home-page-slider {
 	width: 100%;
-	height: 511px;
+	height: 441px;
 	background-color: black;
 	border-bottom: solid 11px #ffa700;
 
@@ -591,12 +614,13 @@ HOMEPAGE STYLES
 					color: black;
 					padding: 5px;
 					text-align: center;
-					width: 150px;
+					width: 120px;
 					font-size: 13px;
 				}
 
 				.more-info {
 					margin-top: 15px;
+					margin-left: 8px;
 
 					a {
 						color: white;
@@ -620,7 +644,9 @@ HOMEPAGE STYLES
 
 	#slider-listing {
 		float: right;
-		display: inline-block;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 		width: 25%;
 		padding: 15px 0px 0px 15px;
 		height: 100%;
@@ -651,13 +677,13 @@ HOMEPAGE STYLES
 			.show-info {
 				float: right;
 				width: 62%;
-				margin: auto 0px auto 5px;
+				margin: auto 0px auto 11px;
 
 				.buy-tickets {
 
 					div {
 						display: inline-block;
-						font-size: 12px;
+						font-size: 9px;
 						text-transform: uppercase;
 						font-weight: 600;
 					}
@@ -666,7 +692,8 @@ HOMEPAGE STYLES
 				.show-title {
 					color: white;
 					font-weight: bold;
-					font-size: 15px;
+					font-size: 13px;
+					margin-left: 7px;
 				}
 			}
 
@@ -724,6 +751,7 @@ GENERAL STYLES
 		.content {
 			width: 100%;
 			padding-left: 10px;
+			line-height: 28px;
 		}
 
 		.beyond-buzz-star {
@@ -751,7 +779,8 @@ GENERAL STYLES
 			height: 100%;
 			float: right;
 			background-color: rgba(0,0,0,0.3);
-			padding: 0px 0px 10px 10px;
+			padding: 10px;
+			line-height: 22px;
 		}
 
 		.recent-title {
