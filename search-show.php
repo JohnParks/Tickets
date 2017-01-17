@@ -2,7 +2,7 @@
 
 global $post; ?>
 
-<div class="thumbnail">
+<div class="thumbnail dropshadow">
 
 <?php if( has_post_thumbnail() ) {
 		the_post_thumbnail( 'small' );
@@ -26,7 +26,9 @@ global $post; ?>
 
 		$args = array (
 				"include"			=> $venueIDs,
-				"post_type"			=> "venue"
+				"post_type"			=> "venue",
+				"posts_per_page"	=> 6,
+				'no_found_rows'		=> true
 			);
 
 		$venues = get_posts( $args );

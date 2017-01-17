@@ -55,7 +55,7 @@
 							?>
 								<div class="slide <?php echo $slideClass; ?>" style="background-image: url('<?php echo $slide["background"]; ?>');" >
 									<div class="slide-gradient">
-										<div class='poster <?php echo $slide['link']; ?>'><?php echo $slide['poster']; ?></div>
+										<div class='poster'><a href="<?php echo $slide['link']; ?>"><?php echo $slide['poster']; ?></a></div>
 										<div class='show-info'>
 											<h3><?php echo $slide['title']; ?></h3>
 											<a href="<?php echo $slide['link']; ?>" class="filled-buy" ><div>Buy Tickets</div></a>
@@ -157,7 +157,7 @@
 								// Commence the Loop!
 								if( $seller_query->have_posts() ) : while( $seller_query->have_posts() ) : $seller_query->the_post();
 
-									echo "<span class='top-seller-poster'>";
+									echo "<span class='top-seller-poster dropshadow'>";
 									echo "<a href='" . get_the_permalink( $post->ID ) . "'>";
 									echo the_post_thumbnail( 'full' );
 									echo "</a></span>";

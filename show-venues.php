@@ -8,7 +8,8 @@ $venueIDs = get_post_meta( $post->ID, "venues", true );
 $args = array (
 		"include"			=> $venueIDs,
 		"post_type"			=> "venue",
-		"posts_per_page"	=> 2
+		"posts_per_page"	=> 2,
+		'no_found_rows'		=> true
 	);
 
 $venues = get_posts( $args );

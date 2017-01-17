@@ -82,11 +82,28 @@ HEADER STYLES
 	}
 }
 
-nav {
-	height: 49px;
+.contact-form {
+	
+	input, textarea {
+		border: black solid 1px;
+		background-color: #FFFFFF;
+		font-style: italic;
+		color: #666666;
+		border-radius: 3px;
+	}
 
-	li {
-		margin-right: 14px;
+	textarea {
+		height: 240px;
+	}
+
+	.wpcf7-submit {
+		background-color: $yellow;
+		color: #FFFFFF;
+		font-style: normal;
+		border: none;
+		width: 20%;
+		height: 30px;
+		border-radius: 20px;
 	}
 }
 
@@ -94,6 +111,12 @@ nav {
 NAVIGATION STYLES
 *********************/
 nav {
+	height: 49px;
+
+	li {
+		margin-right: 14px;
+	}
+
 	ul {
 		text-transform: uppercase;
 	}
@@ -220,6 +243,43 @@ SIDEBARS & ASIDES
 			display: none;
 		}
 	}
+
+	.contact-sidebar-container {
+		margin-left: 33px;
+	}
+
+	.phone-info {
+		color: $yellow;
+		font-weight: 600;
+		font-size: 20px;
+		line-height: 25px;
+	}
+
+	p.contact-sidebar {
+		font-size: 18px;
+		font-weight: normal;
+	}
+
+	.call-us {
+		font-weight: bold;
+		font-size: 20px;
+		position: relative;
+		left: -32px;
+
+		p {
+			position: relative;
+			top: -5px;
+		}
+
+		p, img {
+			display: inline;
+		}
+
+		img {
+			height: 27px;
+			width: auto;
+		}
+	}
 }
 
 .sidebar-img {
@@ -259,8 +319,10 @@ SIDEBARS & ASIDES
     a {
     	color: black;
     	position: relative;
-    	top: 22%;
-    	left: 20%;
+    	top: 17%;
+    	left: 6%;
+    	font-size: 26px;
+    	text-decoration: underline;
     }
 }
 	.widgettitle {}
@@ -486,6 +548,8 @@ mobile. Make sure to double check these!
 }
 
 .footer-top {
+	margin-top: 2px;
+	margin-bottom: 2px;
 
 	.wpcf7-form {
 
@@ -518,9 +582,6 @@ HOMEPAGE STYLES
 	}
 
 	.top-seller-poster {
-		-webkit-box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.3);
-        -moz-box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.3);
-        box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.3);
         font-size: 0px;
         margin-bottom: 30px;
 	}
@@ -589,6 +650,11 @@ HOMEPAGE STYLES
 
 			&.active-slide {
 				display: block;
+			}
+
+			.poster a {
+				height: inherit;
+				width: inherit;
 			}
 
 			.show-info {
@@ -723,6 +789,14 @@ HOMEPAGE STYLES
 /*********************
 GENERAL STYLES
 *********************/
+.dropshadow {
+	-webkit-box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.3);
+	-moz-box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.3);
+	box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.3);
+	line-height: 0px;
+}
+
+
 #beyond-buzz {
 	width: 100%;
 	color: white;
@@ -896,9 +970,10 @@ table#events-calendar {
 
 		ul li {
 			max-width: 260px;
+			display: inline;
 
 			a {
-				font-size: 18px;
+				font-size: 12px;
 			}
 		}
 	}
