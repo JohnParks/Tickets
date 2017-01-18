@@ -19,7 +19,6 @@ global $post; ?>
 	</header>
 
 	<div class="show-info">
-		<h4>This show playing at:</h4>
 		<ul>
 		<?php
 		$venueIDs = get_post_meta( $post->ID, "venues", true );
@@ -27,18 +26,24 @@ global $post; ?>
 		$args = array (
 				"include"			=> $venueIDs,
 				"post_type"			=> "venue",
-				"posts_per_page"	=> 6,
-				'no_found_rows'		=> true
+				"posts_per_page"	=> 6
 			);
 
 		$venues = get_posts( $args );
+		$cntr = 0;
 
-		foreach( $venues as $venue ) {
-			?>
-			<li><a href="<?php echo get_permalink( $venue->ID ); ?>"><?php echo $venue->post_title; ?></a></li>
-			<?php
-		}
-		?>
+		if ( count($venues) > 0 ) {
+
+			echo "<h4>This show playing at:</h4>";
+			foreach( $venues as $venue ) {
+				$cntr++;
+				?>
+				<li><a href="<?php echo get_permalink( $venue->ID ); ?>"><?php echo $venue->post_title; ?></a></li><?php if( $cntr < count($venues) ) { echo "<span class='pipe'> | </span>"; } ?>
+				<?php
+			}
+		} else { ?>
+			<a href="<?php the_permalink(); ?>" >Read More...</a>
+		<?php } ?>
 		</ul>
 	</div>
 </div>

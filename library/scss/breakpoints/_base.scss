@@ -404,9 +404,18 @@ section {
 	float: left;
 	padding-bottom: 20px;
 
-	.person a {
-		text-decoration: none;
-		color: darkgray;
+	.person {
+		margin: 7px 0px;
+		letter-spacing: 1px;
+
+		a {
+			text-decoration: underline;
+			color: $yellow;
+		}
+	}
+
+	.character-name, .role-name {
+		font-weight: bold;
 	}
 
 	h3 {
@@ -606,16 +615,14 @@ table#events-calendar {
 		}
 
 		.genre-filter {
+			text-decoration: none;
+			font-weight: 600;
+			font-size: 18px;
+			color: #444444;
+			cursor: pointer;
 
 			li.active {
 				background-color: $yellow;
-			}
-
-			a {
-				text-decoration: none;
-				font-weight: 600;
-				font-size: 18px;
-				color: #444444;
 			}
 		}
 	}
@@ -822,6 +829,18 @@ article h1 {
 	display: none;
 }
 
+.contact-form {
+	
+	.wpcf7-submit {
+		background-color: $yellow;
+		color: #FFFFFF;
+		font-style: normal;
+		border: none;
+		width: 20%;
+		height: 30px;
+		border-radius: 20px;
+	}
+}
 
 		.hentry {
 			background-color: $white;
@@ -1452,14 +1471,6 @@ FOOTER STYLES
 	.footer-logo {
 		width: 25%;
 	}
-
-	.footer-cards {
-		float: right;
-		height: inherit;
-		width: 25%;
-		position: relative;
-		top: 11px;
-	}
 }
 
 .footer-columns {
@@ -1517,22 +1528,6 @@ FOOTER STYLES
 	li::before {
 		content: url(../assets/icons/small-arrow.png);
 	}
-
-	.footer-email::before {
-		content: url(../assets/icons/envelope.png);
-		margin-right: 5px;
-	}
-
-	.footer-phone::before {
-		content: url(../assets/icons/phone.png);
-		margin-right: 5px;
-	}
-}
-
-.lower-inner-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
 }
 
 

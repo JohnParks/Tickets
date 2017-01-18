@@ -2,7 +2,7 @@
 
 global $post; ?>
 
-<div class="thumbnail">
+<div class="thumbnail dropshadow">
 
 <?php if( has_post_thumbnail() ) {
 		the_post_thumbnail( 'small' );

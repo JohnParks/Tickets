@@ -7,7 +7,11 @@
 					<div class="sidebar d-2of7 t-1of3">
 						<div class="shows-listing">
 							<h3>Top Shows</h3>
-							<?php display_shows( $post->ID, 3, true ); ?>
+							<?php display_shows( "", 3, true ); ?>
+						</div>
+						<div class="widget-area">
+							<?php if ( dynamic_sidebar( 'cta-sidebar' ) ) : ?>
+							<?php endif; ?>
 						</div>
 					</div>
 

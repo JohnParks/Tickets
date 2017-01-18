@@ -41,6 +41,10 @@
 									<h3>Top Shows in <?php echo $post->post_title; ?></h3>
 									<?php display_shows( $post->ID, 3, true ); ?>
 								</div>
+								<div class="widget-area">
+									<?php if ( dynamic_sidebar( 'cta-sidebar' ) ) : ?>
+									<?php endif; ?>
+								</div>
 							</div>
 
 							<div id="post-<?php the_ID(); ?>" class="body-content d-5of7 t-2of3" <?php post_class('cf'); ?> role="article">

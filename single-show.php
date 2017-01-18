@@ -37,9 +37,24 @@
 
 								?>
 
-								<!--<div class="buy-tickets">
-									<h3>Buy Tickets</h3>
-								</div>-->
+								<?php
+								$duration = get_post_meta( $post->ID, "duration", true );
+								$intermissions = get_post_meta( $post->ID, "intermissions", true );
+
+								if ( $duration != "" || $intermissions != "" ) { ?>
+
+								<div class="duration-block">
+									<h4>Duration</h4>
+									<p><?php echo $duration; ?></p>
+									<p><?php echo $intermissions; ?> Intermission(s)</p>
+								</div>
+
+								<?php } ?>
+
+								<div class="widget-area">
+									<?php if ( dynamic_sidebar( 'cta-sidebar' ) ) : ?>
+									<?php endif; ?>
+								</div>
 							</div>
 
 							<div id="post-<?php the_ID(); ?>" class="body-content d-5of7 t-2of3 show-content" <?php post_class('cf'); ?> role="article">
@@ -104,6 +119,45 @@
 										get_template_part( "show", $tab );
 									?>
 								</section> <!-- end article section -->
+
+								<section class="show-headlines">
+									<h3>Recent Blog Posts</h3>
+									<div class="headline-container">
+										<?php
+			                            $args = array(
+			                                'posts_per_page' => 2,
+			                                'no_found_rows' => true,
+			                                'post_type' => 'post'
+			                            );
+			                            $recent = new WP_Query($args);
+			                            if($recent->have_posts()) : while ($recent->have_posts()) : $recent->the_post(); ?>
+
+			                            <?php
+			                            // set thumbnail (or placeholder) for current article
+			                            if ( has_post_thumbnail() ) {
+			                            	$imgURL = get_the_post_thumbnail_url( $post->ID, 'small' );
+			                            } else {
+			                            	$imgURL = get_template_directory_uri() . "/library/assets/placeholder.jpg";
+			                            }
+			                            ?>
+
+			                            <article class="show-recent" id="recent-<?php the_ID(); ?>">
+		                                    <a href="<?php echo get_the_permalink(); ?>" class="thumbnail">
+		                                    	<img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/beyond-buzz-logo-small.png" class="beyond-buzz-star" />
+		                                    	<img src="<?php echo $imgURL; ?>" />
+		                                    </a>
+		                                    <div class="content">
+		                                    	<?php $cats = get_the_category( get_the_ID() ); ?>
+		                                        <span class="recent-category"><?php echo isset($cats[0])? $cats[0]->name : ""; ?></span>
+		                                        <span class="recent-title"><a href="<?php echo get_the_permalink(); ?>"><?php the_title(); ?></a></span>
+		                                        <span class="recent-date"><?php echo get_the_date(); ?></span>
+		                                    </div>
+
+			                            </article>
+
+			                            <?php endwhile ; endif; ?>
+			                        </div>
+								</section>
 
 							</div>
 

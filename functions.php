@@ -172,9 +172,9 @@ add_action( 'customize_register', 'bones_theme_customizer' );
 // Sidebars & Widgetizes Areas
 function bones_register_sidebars() {
 	register_sidebar(array(
-		'id' => 'sidebar1',
-		'name' => __( 'Sidebar 1', 'bonestheme' ),
-		'description' => __( 'The first (primary) sidebar.', 'bonestheme' ),
+		'id' => 'cta-sidebar',
+		'name' => __( 'Main Sidebar CTA', 'bonestheme' ),
+		'description' => __( 'CTA(s) to appear all over the site', 'bonestheme' ),
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget' => '</div>',
 		'before_title' => '<h4 class="widgettitle">',
@@ -661,13 +661,13 @@ add_action( "admin_enqueue_scripts", "tb_options_enqueue_scripts" );
 /* Commence Template related functions!
 ------------------------------------------*/
 // function to build out a list of of shows using the standard "show preview" format
-function display_shows ( $postID, $numPosts = 4, $topSeller = false, $offset = 0 ) {
+function display_shows ( $postID, $numPosts = 4, $topSeller = false, $offset = 0, $mobile = false ) {
   // what parameters might we need?
 
   // grab array of show IDs
   $showIDs = get_post_meta( $postID, 'shows', true );
 
-  if ( $_POST ) {
+  if ( $_POST && isset($_POST['showData']) ) {
 
     $numPosts = 4;
     $topSeller = false;
@@ -699,14 +699,17 @@ function display_shows ( $postID, $numPosts = 4, $topSeller = false, $offset = 0
     "include" => $showIDs,
     "post_type" => "show",
     "posts_per_page" => $numPosts,
-    "offset"  => $offset,
-    "no_found_rows" => true
+    "offset"  => $offset
   );
   if ( $topSeller ) {
     $args[ 'meta_key' ] = 'top_seller';
     $args[ 'meta_value' ] = 1;
   }
   $shows = get_posts( $args );
+
+  if ( $mobile ) {
+    return array( "shows" => $shows );
+  }
 
   /*echo "<pre>";
   print_r( $shows );
@@ -722,7 +725,7 @@ function display_shows ( $postID, $numPosts = 4, $topSeller = false, $offset = 0
       break;
     $html .= "<div class='show-list-item'>";
     $html .= "<a href='" . get_permalink( $show ) . "'>";
-    $html .= "<div class='show-poster'>";
+    $html .= "<div class='show-poster dropshadow'>";
     if ( has_post_thumbnail( $show ) ) {
       $html .= get_the_post_thumbnail( $show, 'small' );
     } else {
@@ -741,7 +744,7 @@ function display_shows ( $postID, $numPosts = 4, $topSeller = false, $offset = 0
   // finally, let's echo out $html
   echo $html;
 
-  if( $_POST ) {
+  if( $_POST && isset($_POST['showData']) ) {
     wp_die();
   }
 }
@@ -942,6 +945,9 @@ function handleCalendar( $showID, $dates=null, $venueWPID="", $mobile = false ) 
   } else {
     $html .= "<td colspan='7'>No events for this week</td>";
   }
+  $html .= "</tr>";
+
+  $html .= "<tr><td colspan='7' style='height: 50px'> </td></tr>";
 
   $html .= "</table>";
 
@@ -1069,6 +1075,19 @@ function getShowResults() {
 
   return $the_query;
 
+}
+
+function camelCase($str, array $noStrip = [])
+{
+  // non-alpha and non-numeric characters become spaces
+  $str = preg_replace('/[^a-z0-9' . implode("", $noStrip) . ']+/i', ' ', $str);
+  $str = trim($str);
+  // uppercase the first character of each word
+  $str = ucwords($str);
+  $str = str_replace(" ", "", $str);
+  $str = lcfirst($str);
+
+  return $str;
 }
 
 function tickets_enqueue_scripts(){
