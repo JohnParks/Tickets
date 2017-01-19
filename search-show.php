@@ -30,15 +30,21 @@ global $post; ?>
 			);
 
 		$venues = get_posts( $args );
+		$numVenues = count( $venues );
 		$cntr = 0;
 
-		if ( count($venues) > 0 ) {
-
+		if ( $numVenues > 0 ) {
 			echo "<h4>This show playing at:</h4>";
 			foreach( $venues as $venue ) {
-				$cntr++;
-				?>
-				<li><a href="<?php echo get_permalink( $venue->ID ); ?>"><?php echo $venue->post_title; ?></a></li><?php if( $cntr < count($venues) ) { echo "<span class='pipe'> | </span>"; } ?>
+				$cntr++; ?>
+				<li><a href="<?php echo get_permalink( $venue->ID ); ?>"><?php echo $venue->post_title; ?></a></li><?php if( $cntr < $numVenues && $cntr < 6) { echo "<span class='pipe'> | </span>"; } ?>
+				<?php if ( $cntr == 6 ) {
+					if ( $numVenues > 6 ) {
+						echo " | <li><a href='the_permalink()' class='more-venues'>And More...</a></li>";
+					}
+					break;
+				} ?>
+
 				<?php
 			}
 		} else { ?>

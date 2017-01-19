@@ -614,14 +614,33 @@ table#events-calendar {
 			color: black;
 		}
 
-		.genre-filter {
+		.month-filter li {
+			cursor: pointer;
+			color: black;
+			font-weight: 600;
+			font-size: 18px;
+
+			&:before {
+				content: url(../assets/icons/star.png);
+				margin-right: 5px;
+				position: relative;
+				top: 1px;
+			}
+
+			&.active:before {
+				content: url(../assets/icons/star-black.png);
+			}
+		}
+
+		.genre-filter li {
 			text-decoration: none;
 			font-weight: 600;
 			font-size: 18px;
 			color: #444444;
 			cursor: pointer;
+			padding-left: 8px;
 
-			li.active {
+			&.active {
 				background-color: $yellow;
 			}
 		}
@@ -735,6 +754,7 @@ table#events-calendar {
 		img {
 			width: inherit;
 			height: auto;
+			margin-bottom: 0px;
 		}
 	}
 }

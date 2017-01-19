@@ -23,16 +23,26 @@ global $post; ?>
 		$address1 = get_post_meta( get_the_ID(), 'Street 1', true );
 		$address2 = get_post_meta( get_the_ID(), 'Street 2', true );
 		$city = get_post_meta( get_the_ID(), 'city', true );
+		$state = get_post_meta( get_the_ID(), 'state', true );
+		$zip = get_post_meta( get_the_ID(), 'zip', true );
 
 		echo "<div class='entry-meta'>";
 		if( $address1 )
-			echo "<p>" . $address1 . "</p>";
+			echo $address1 . "<br />";
 		if( $address2 )
-			echo "<p>" . $address2 . "</p>";
+			echo $address2 . "<br />";
 		if( $city )
-			echo "<p>" . $city . "</p>";
+			echo $city;
+		if ( $state )
+			echo ", " . $state;
+		if ( $zip )
+			echo " " . $zip;
 		echo "</div>";
 		?>
+	</div>
+
+	<div class="search-excerpt">
+		<?php the_excerpt(); ?>
 	</div>
 </div>
 

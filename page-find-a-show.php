@@ -27,15 +27,15 @@
                                                                     <?php 
                                     $args = array(
                                         'genre' => array(
-                                            'label' => "",
+                                            'label' => "yes",
                                             'style' => "list"
                                         ),
                                         'city' => array(
-                                            'label' => "",
+                                            'label' => "yes",
                                         ),
                                         'month' => array(
-                                            'label' => "",
-                                            'multi' => true
+                                            'label' => "yes",
+                                            'style' => "list"
                                         )
                                     );
                                     get_filter_form($args); ?>

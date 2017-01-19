@@ -61,6 +61,10 @@ HEADER STYLES
 
 .find-shows-featured {
 	margin-left: 40px;
+
+	h3 {
+		font-size: 30px;
+	}
 }
 
 #searchform {
@@ -1159,6 +1163,13 @@ table#events-calendar {
 
 	.result-body {
 		max-width: 260px;
+
+		.address-block {
+
+			h4 {
+				margin-bottom: 0px;
+			}
+		}
 	}
 }
 

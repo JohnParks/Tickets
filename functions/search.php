@@ -71,7 +71,14 @@ function get_filter_form($options){
             <h4>Filter by Month</h4>
             <?php }
             if ( isset($options['month']['style']) && $options['month']['style'] == "list" ) { ?>
-
+                <ul id="month-filter">
+                    <li id=""><span class="month-name">All Months</span></li>
+                    <?php
+                    for( $m=0; $m <= 11; $m++ ) {
+                        $monthName = date( 'F', mktime( 0, 0, 0, $m+1, 1, date('Y') ) );?>
+                    <li id="<?php echo $m; ?>" <?php if($month == $m){ echo "class='active'"; }?> ><?php echo $monthName; ?></li>
+                   <?php } ?>
+                </ul>
             <?php } else { ?>
             <select class="month-filter" id="month-filter" <?php echo (isset($options['month']['multi'])) ? "size='13' multiple" : ""; ?>  >
                 <img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/star-orange.png" class="filter-star" /><option value="" <?php if($month === ""){ echo "selected='selected'";} ?>>All Months</option>

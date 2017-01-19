@@ -20,4 +20,8 @@ global $post; ?>
 	<div class="city search-excerpt">
 		<?php the_excerpt( '<span class="read-more">' . __( 'Read more &raquo;', 'bonestheme' ) . '</span>' ); ?>
 	</div>
+
+	<div class="search-excerpt">
+		<?php the_excerpt(); ?>
+	</div>
 </div>
