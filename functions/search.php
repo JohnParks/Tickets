@@ -49,35 +49,38 @@ function get_filter_form($options){
             );
             $terms = get_terms( $genreArgs );
             ?>
-            <select id="genre-filter" <?php echo (isset($options['genre']['multi'])) ? "multiple" : ""; ?>>
+            <?php
+            if ( isset($options['genre']['style']) && $options['genre']['style'] == "list" ) { ?>
+                <ul id="genre-filter">
+                    <?php foreach( $terms as $term ) { ?>
+                    <li id="<?php echo $term->slug; ?>" <?php if( $genre == $term->slug ){ echo "class='active'"; }?>><?php echo $term->name; ?></li>
+                    <?php } ?>
+                </ul>
+            <?php } else { ?>
+            <select id="genre-filter" <?php echo (isset($options['genre']['multi'])) ? "size='" . count($terms)+1 . "' multiple" : ""; ?>>
                 <option value="">All Genres</option>
                 <?php foreach( $terms as $term ) { ?>
                 <option value="<?php echo $term->slug; ?>" <?php if($genre == $term->slug){ echo "selected='selected'"; }?>><?php echo $term->name; ?></option>
                 <?php } ?>
             </select>
-        </div>
-        <div class="city-filter">
-            <input type="hidden" name="search_city" value="<?php echo $cityID; ?>" />
-            <?php if(isset($options['city']['label']) && $options['city']['label'] !== ""){ ?>
-            <h4>Filter by City</h4>
-            
-            <?php }
-            // let get a list of all cities in the DB, build a selector for each one
-            $cities = get_posts( array( "post_type" => "city" ) );
-            ?>
-            <select id="city-filter" <?php echo (isset($options['city']['multi'])) ? "multiple" : ""; ?>>
-                <option value="">All Cities</option>
-                <?php foreach( $cities as $city ) { ?>
-                <option value="<?php echo $city->ID; ?>" <?php if($cityID == $city->ID) echo "selected='selected'"; ?>><?php echo $city->post_title; ?></option>
-                <?php } ?>
-            </select>
+            <?php } ?>
         </div>
         <div class="month-filter">
             <input type="hidden" name="search_month" value="<?php echo $month; ?>" />
             <?php if(isset($options['month']['label']) && $options['month']['label'] !== ""){ ?>
             <h4>Filter by Month</h4>
-            <?php } ?>
-            <select class="month-filter" id="month-filter" size="13" <?php echo (isset($options['month']['multi'])) ? "multiple" : ""; ?>  >
+            <?php }
+            if ( isset($options['month']['style']) && $options['month']['style'] == "list" ) { ?>
+                <ul id="month-filter">
+                    <li id=""><span class="month-name">All Months</span></li>
+                    <?php
+                    for( $m=0; $m <= 11; $m++ ) {
+                        $monthName = date( 'F', mktime( 0, 0, 0, $m+1, 1, date('Y') ) );?>
+                    <li id="<?php echo $m; ?>" <?php if($month == $m){ echo "class='active'"; }?> ><?php echo $monthName; ?></li>
+                   <?php } ?>
+                </ul>
+            <?php } else { ?>
+            <select class="month-filter" id="month-filter" <?php echo (isset($options['month']['multi'])) ? "size='13' multiple" : ""; ?>  >
                 <img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/star-orange.png" class="filter-star" /><option value="" <?php if($month === ""){ echo "selected='selected'";} ?>>All Months</option>
                 <img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/star-orange.png" class="filter-star" /><option value="0" <?php if($month === 0){ echo "selected='selected'";} ?>>January</option>
                 <img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/star-orange.png" class="filter-star" /><option value="1" <?php if($month == 1){ echo "selected='selected'";} ?>>February</option>
@@ -95,17 +98,42 @@ function get_filter_form($options){
                             <script type="text/javascript">
                 $('.month-selector').val(new Date().getMonth());
             </script>
+            <?php } ?>
+        </div>
+        <div class="city-filter">
+            <input type="hidden" name="search_city" value="<?php echo $cityID; ?>" />
+            <?php if(isset($options['city']['label']) && $options['city']['label'] !== ""){ ?>
+            <h4>Filter by City</h4>
+            
+            <?php }
+            // let get a list of all cities in the DB, build a selector for each one
+            $cities = get_posts( array( "post_type" => "city" ) );
+            ?>
+            <select id="city-filter" <?php echo (isset($options['city']['multi'])) ? "multiple" : ""; ?>>
+                <option value="">All Cities</option>
+                <?php foreach( $cities as $city ) { ?>
+                <option value="<?php echo $city->ID; ?>" <?php if($cityID == $city->ID) echo "selected='selected'"; ?>><?php echo $city->post_title; ?></option>
+                <?php } ?>
+            </select>
         </div>
     </form>
 <script>
     $('form#searchform-find-a-show select').change(adjustForm);
+    $('form#searchform-find-a-show ul li').click(adjustForm);
     var timeOutvar;
     function adjustForm(e){
         
         clearTimeout(timeOutvar);
+
+        console.log(e);
         
-        var val = e.target.value;
-        var field = e.target.id.split('-')[0];
+        if ( e.type == "change" ) {
+            var val = e.target.value;
+            var field = e.target.id.split('-')[0];
+        } else {
+            var val = e.target.id;
+            var field = e.target.parentNode.id.split('-')[0];
+        }
         
         $('form#searchform-find-a-show input[name="search_'+field+'"]').val(val);
         

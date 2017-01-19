@@ -2,7 +2,7 @@
 
 global $post; ?>
 
-<div class="thumbnail">
+<div class="thumbnail dropshadow">
 
 <?php if( has_post_thumbnail() ) {
 		the_post_thumbnail( 'small' );
@@ -19,24 +19,37 @@ global $post; ?>
 	</header>
 
 	<div class="show-info">
-		<h4>This show playing at:</h4>
 		<ul>
 		<?php
 		$venueIDs = get_post_meta( $post->ID, "venues", true );
 
 		$args = array (
 				"include"			=> $venueIDs,
-				"post_type"			=> "venue"
+				"post_type"			=> "venue",
+				"posts_per_page"	=> 6
 			);
 
 		$venues = get_posts( $args );
+		$numVenues = count( $venues );
+		$cntr = 0;
 
-		foreach( $venues as $venue ) {
-			?>
-			<li><a href="<?php echo get_permalink( $venue->ID ); ?>"><?php echo $venue->post_title; ?></a></li>
-			<?php
-		}
-		?>
+		if ( $numVenues > 0 ) {
+			echo "<h4>This show playing at:</h4>";
+			foreach( $venues as $venue ) {
+				$cntr++; ?>
+				<li><a href="<?php echo get_permalink( $venue->ID ); ?>"><?php echo $venue->post_title; ?></a></li><?php if( $cntr < $numVenues && $cntr < 6) { echo "<span class='pipe'> | </span>"; } ?>
+				<?php if ( $cntr == 6 ) {
+					if ( $numVenues > 6 ) {
+						echo " | <li><a href='the_permalink()' class='more-venues'>And More...</a></li>";
+					}
+					break;
+				} ?>
+
+				<?php
+			}
+		} else { ?>
+			<a href="<?php the_permalink(); ?>" >Read More...</a>
+		<?php } ?>
 		</ul>
 	</div>
 </div>

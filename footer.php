@@ -42,7 +42,7 @@
 
 					<div class="lower-inner-footer">
 						<img src="<?php echo get_template_directory_uri(); ?>/library/assets/tickets-broadway-logo.png" class="footer-logo" />
-						<div class="copywrite">&copy; <?php echo Date('Y'); ?> Tickets Broadway. All rights reserved</div>
+						<div class="copywrite">&copy; <?php echo Date('Y'); ?> Tickets Broadway. All rights reserved.</div>
 						<img src="<?php echo get_template_directory_uri(); ?>/library/assets/credit-norton.png" class="footer-cards" />
 					</div>
 

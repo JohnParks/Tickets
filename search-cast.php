@@ -33,4 +33,8 @@ global $post; ?>
 
 	</div>
 
+	<div class="search-excerpt">
+		<?php the_excerpt(); ?>
+	</div>
+
 </div>

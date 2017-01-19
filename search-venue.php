@@ -2,12 +2,12 @@
 
 global $post; ?>
 
-<div class="thumbnail">
+<div class="thumbnail dropshadow">
 
 <?php if( has_post_thumbnail() ) {
 		the_post_thumbnail( 'small' );
 	} else {
-		echo "<img src='" . get_template_directory_uri() . "/library/assets/placeholder.jpg' class='placeholder'/>";
+		echo "<img src='" . get_template_directory_uri() . "/library/assets/placeholder.jpg' class='placeholder dropshadow'/>";
 	} ?>
 
 </div>
@@ -23,16 +23,26 @@ global $post; ?>
 		$address1 = get_post_meta( get_the_ID(), 'Street 1', true );
 		$address2 = get_post_meta( get_the_ID(), 'Street 2', true );
 		$city = get_post_meta( get_the_ID(), 'city', true );
+		$state = get_post_meta( get_the_ID(), 'state', true );
+		$zip = get_post_meta( get_the_ID(), 'zip', true );
 
 		echo "<div class='entry-meta'>";
 		if( $address1 )
-			echo "<p>" . $address1 . "</p>";
+			echo $address1 . "<br />";
 		if( $address2 )
-			echo "<p>" . $address2 . "</p>";
+			echo $address2 . "<br />";
 		if( $city )
-			echo "<p>" . $city . "</p>";
+			echo $city;
+		if ( $state )
+			echo ", " . $state;
+		if ( $zip )
+			echo " " . $zip;
 		echo "</div>";
 		?>
+	</div>
+
+	<div class="search-excerpt">
+		<?php the_excerpt(); ?>
 	</div>
 </div>
 

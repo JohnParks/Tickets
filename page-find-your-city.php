@@ -49,6 +49,8 @@
 									}
 
 									foreach( $states as $state) {
+										$camelState = camelCase( $state );
+										echo "<div data-state='$camelState'>";
 										echo "<h3 class='state-header'>$state</h3>";
 										echo "<ul>";
 										foreach( $cities as $city ) {
@@ -59,6 +61,7 @@
 											}
 										}
 										echo "</ul>";
+										echo "</div>";
 									}
 									?>
 								</section>

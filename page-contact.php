@@ -24,20 +24,25 @@
 							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 							<div class="sidebar d-2of7 t-1of3">
-								<p class="contact-faq">
+								<h3 class="contact-faq">
 									<a href="">Visit our FAQ Page.</a>
-								</p>
-								<div class="contact-info">
-									<span class="phone-info">
-										Toll Free<br />
-										1-844-SEESHOW<br />
-										1-844-733-7469
-									</span>
-								</div>
+								</h3>
+								<div class="contact-sidebar-container">
+									<div class="call-us">
+										<img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/small-phone-speech-bubble.png" />
+										<p>Call Us<p>
+									</div>
+									<div class="contact-info">
+										<span class="phone-info">
+											Toll Free<br />
+											<span class="phone-number">1-844-SEESHOW</span><br />
+											<span class="phone-number">1-844-733-7469</span>
+										</span>
+									</div>
 
-								<p>Sales agents and customer service agents are available to assist you every day at the times listed below.</p>
-								<p>7am to 1am EST</p>
-								
+									<p class="contact-sidebar">Sales agents and customer service agents are available to assist you every day at the times listed below.</p>
+									<p class="contact-sidebar">7:00 a.m. to 1:00 a.m. EST</p>
+								</div>
 							</div>
 
 							<div id="post-<?php the_ID(); ?>" class="body-content d-5of7 t-2of3" <?php post_class( 'cf' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">

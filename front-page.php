@@ -18,6 +18,8 @@
 								$slide['title'] = $post->post_title;
 								$slide['link'] = get_permalink();
 								$slide['poster'] = get_the_post_thumbnail( $post->ID, "small" );
+								$slide['duration'] = get_post_meta( $post->ID, "duration", true );
+								$slide['intermissions'] = get_post_meta( $post->ID, "intermissions", true );
 
 								//using "slider_image" meta field, grab attachment URL and store here
 								$background_ID = get_post_meta( $post->ID, "slider_image", true );
@@ -55,9 +57,19 @@
 							?>
 								<div class="slide <?php echo $slideClass; ?>" style="background-image: url('<?php echo $slide["background"]; ?>');" >
 									<div class="slide-gradient">
-										<div class='poster <?php echo $slide['link']; ?>'><?php echo $slide['poster']; ?></div>
+										<div class='poster'><a href="<?php echo $slide['link']; ?>"><?php echo $slide['poster']; ?></a></div>
 										<div class='show-info'>
 											<h3><?php echo $slide['title']; ?></h3>
+											<?php
+
+											if ( $slide['duration'] != "" || $slide['intermissions'] != "" ) { ?>
+
+											<div class="duration-block">
+												<h4>DURATION</h4>
+												<p><?php echo $slide['duration']; ?> | <?php echo $slide['intermissions']; ?> Intermission(s)</p>
+											</div>
+
+											<?php } ?>
 											<a href="<?php echo $slide['link']; ?>" class="filled-buy" ><div>Buy Tickets</div></a>
 											<div class="more-info"><a href="<?php echo $slide['link']; ?>" >More Info</a> ></div>
 										</div>
@@ -157,7 +169,7 @@
 								// Commence the Loop!
 								if( $seller_query->have_posts() ) : while( $seller_query->have_posts() ) : $seller_query->the_post();
 
-									echo "<span class='top-seller-poster'>";
+									echo "<span class='top-seller-poster dropshadow'>";
 									echo "<a href='" . get_the_permalink( $post->ID ) . "'>";
 									echo the_post_thumbnail( 'full' );
 									echo "</a></span>";

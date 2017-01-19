@@ -27,14 +27,15 @@
                                                                     <?php 
                                     $args = array(
                                         'genre' => array(
-                                            'label' => "",
+                                            'label' => "yes",
+                                            'style' => "list"
                                         ),
                                         'city' => array(
-                                            'label' => "",
+                                            'label' => "yes",
                                         ),
                                         'month' => array(
-                                            'label' => "",
-                                            'multi' => true
+                                            'label' => "yes",
+                                            'style' => "list"
                                         )
                                     );
                                     get_filter_form($args); ?>
@@ -65,6 +66,14 @@
                                             $('#searchform-find-a-show').submit();
                                         })
                                     </script>
+								</div>
+
+								<div class="find-shows-featured">
+									<h3>Featured Shows</h3>
+									<div id="shows-listing-container">
+										<input type="hidden" id="post-id" value="<?php echo $post->ID; ?>" />
+										<?php display_shows( $post->ID, 4, true ); ?>
+									</div>
 								</div>
 
 								<div>
