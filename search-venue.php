@@ -7,7 +7,7 @@ global $post; ?>
 <?php if( has_post_thumbnail() ) {
 		the_post_thumbnail( 'small' );
 	} else {
-		echo "<img src='" . get_template_directory_uri() . "/library/assets/placeholder.jpg' class='placeholder dropshadow'/>";
+		echo "<img src='" . get_template_directory_uri() . "/library/assets/placeholder-horizontal.jpg' class='placeholder dropshadow'/>";
 	} ?>
 
 </div>

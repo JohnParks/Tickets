@@ -109,26 +109,26 @@ FRONT PAGE STYLES
 		height: 500px;
 	}
 	
-	article:first-of-type {
+	.home-recent:first-of-type {
 
 		.recent-title {
 			font-size: 30px;
 		}
 	}
 
-	article {
+	.home-recent {
 
 		.recent-title {
 			font-weight: 600;
-			font-size: 16px;
+			font-size: 20px;
 		}
 
 		.recent-meta {
-			font-size: 13px;
+			font-size: 14px;
 		}
 	}
 
-	article:last-of-type {
+	.home-recent:last-of-type {
 	}
 }
 
@@ -186,7 +186,7 @@ FRONT PAGE STYLES
 					}
 				}
 
-				.show-title {
+				.show-title a {
 					font-size: 18px;
 				}
 			}

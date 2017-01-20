@@ -52,7 +52,7 @@
 
 							<?php endwhile; ?>
 
-									<?php bones_page_navi(); ?>
+							<?php bones_page_navi(); ?>
 
 							<?php else : ?>
 

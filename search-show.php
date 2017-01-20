@@ -48,7 +48,7 @@ global $post; ?>
 				<?php
 			}
 		} else { ?>
-			<a href="<?php the_permalink(); ?>" >Read More...</a>
+			<span class="read-more"><a href="<?php the_permalink(); ?>" >Read More</a></span>
 		<?php } ?>
 		</ul>
 	</div>

@@ -371,7 +371,6 @@ section {
 	width: 150px;
 	height: auto;
 	margin-right: 20px;
-	margin-bottom: 20px;
 }
 
 .show-nav {
@@ -395,7 +394,7 @@ section {
 		color: $yellow;
 		border-color: $yellow;
 		border-bottom: 4px solid;
-		padding-bottom: 12px;
+		padding-bottom: 13px;
 	}
 }
 
@@ -764,10 +763,6 @@ table#events-calendar {
 BLOG STYLES
 **********/
 
-.single-post #main, .blog #main, .archive #main {
-	margin-left: 40px;
-}
-
 .single-post a, .blog a, .archive a {
 	color: #666666;
 }
@@ -816,10 +811,7 @@ article h1 {
 }
 
 /* Blog Read More button styling */
-.blog .read-more {
-    margin-top: 10px;
-}
-.blog .read-more a, .blog-sidebar h3, .nav-single a {
+.blog-sidebar h3, .nav-single a {
     background-color: #fab512;
     padding: 5px;
 }

@@ -19,7 +19,21 @@
 								$slide['link'] = get_permalink();
 								$slide['poster'] = get_the_post_thumbnail( $post->ID, "small" );
 								$slide['duration'] = get_post_meta( $post->ID, "duration", true );
-								$slide['intermissions'] = get_post_meta( $post->ID, "intermissions", true );
+								$intermissionNum = get_post_meta( $post->ID, "intermissions", true );
+
+								switch ( $intermissionNum ) {
+									case "":
+										$slide['intermissions'] = "";
+										break;
+									case 0:
+										$slide['intermissions'] = " | No Intermissions";
+										break;
+									case 1:
+										$slide['intermissions'] = " | 1 Intermission";
+									default:
+										$slide['intermissions'] = " | " . $intermissionNum . " Intermissions";
+										break;
+								}
 
 								//using "slider_image" meta field, grab attachment URL and store here
 								$background_ID = get_post_meta( $post->ID, "slider_image", true );
@@ -59,14 +73,14 @@
 									<div class="slide-gradient">
 										<div class='poster'><a href="<?php echo $slide['link']; ?>"><?php echo $slide['poster']; ?></a></div>
 										<div class='show-info'>
-											<h3><?php echo $slide['title']; ?></h3>
+											<a href="<?php echo $slide['link']; ?>"><h3><?php echo $slide['title']; ?></h3></a>
 											<?php
 
-											if ( $slide['duration'] != "" || $slide['intermissions'] != "" ) { ?>
+											if ( $slide['duration'] != "" ) { ?>
 
 											<div class="duration-block">
 												<h4>DURATION</h4>
-												<p><?php echo $slide['duration']; ?> | <?php echo $slide['intermissions']; ?> Intermission(s)</p>
+												<p><?php echo $slide['duration']; ?><?php echo $slide['intermissions']; ?></p>
 											</div>
 
 											<?php } ?>
@@ -94,9 +108,9 @@
 									?>
 									<div class="show-listing">
 										<img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/dotted-arrow.png" class='dotted-arrow <?php echo $arrowClass; ?>'/>
-										<div class='poster <?php echo $slide['link']; ?>'><?php echo $slide['poster']; ?></div>
+										<div class='poster <?php echo $slide['link']; ?>'><a href="<?php echo $slide['link']; ?>"><?php echo $slide['poster']; ?></a></div>
 										<div class='show-info'>
-											<div class="show-title"><?php echo $slide['title']; ?></div>
+											<div class="show-title"><a href="<?php echo $slide['link']; ?>"><?php echo $slide['title']; ?></a></div>
 											<a href="<?php echo $slide['link']; ?>" class="buy-tickets" ><div>Buy Tickets</div></a>
 										</div>
 									</div>
@@ -212,16 +226,18 @@
 	                            }
 	                            ?>
 
-	                            <article class="home-recent" id="recent-<?php the_ID(); ?>" style="background-image: url('<?php echo $imgURL; ?>');">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/beyond-buzz-logo-large.png" class="beyond-buzz-star" />
-                                    <div class="content">
+	                            <a href="<?php the_permalink(); ?>"  class="home-recent">
+	                            	<article id="recent-<?php the_ID(); ?>" style="background-image: url('<?php echo $imgURL; ?>');">
+	                                    <img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/beyond-buzz-logo-large.png" class="beyond-buzz-star" />
+	                                    <div class="content">
 
-                                        <span class="recent-title"><a href="<?php echo get_the_permalink(); ?>"><?php the_title(); ?></a></span>
-                                        <?php $cats = get_the_category( get_the_ID() ); ?>
-                                        <span class="recent-meta"><?php echo get_the_date(); ?> <?php echo isset($cats[0])? " <span class='separator'>|</span> ".$cats[0]->name : ""; ?></span>
-                                    </div>
+	                                        <span class="recent-title"><?php the_title(); ?></span>
+	                                        <?php $cats = get_the_category( get_the_ID() ); ?>
+	                                        <span class="recent-meta"><?php echo get_the_date(); ?> <?php echo isset($cats[0])? " <span class='separator'>|</span> ".$cats[0]->name : ""; ?></span>
+	                                    </div>
 
-	                            </article>
+		                            </article>
+		                        </a>
 
 	                            <?php endwhile ; endif; ?>
 	                        </div>
@@ -229,7 +245,7 @@
 						</div>
 
 						<div id="home-bottom-banner">
-							<img src="<?php echo get_template_directory_uri(); ?>/library/assets/homepage-icons.png" style="width:100%;" />
+							<a href="<?php echo esc_url( home_url( '/' ) ) . 'about'; ?>"><img src="<?php echo get_template_directory_uri(); ?>/library/assets/homepage-icons.png" style="width:100%;" /></a>
 						</div>
 
 				</div>

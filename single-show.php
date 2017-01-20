@@ -39,14 +39,28 @@
 
 								<?php
 								$duration = get_post_meta( $post->ID, "duration", true );
-								$intermissions = get_post_meta( $post->ID, "intermissions", true );
+								$intermissionNum = get_post_meta( $post->ID, "intermissions", true );
 
-								if ( $duration != "" || $intermissions != "" ) { ?>
+								switch ( $intermissionNum ) {
+									case "":
+										$intermissions = "Unknown";
+										break;
+									case 0:
+										$intermissions = "No Intermissions";
+										break;
+									case 1:
+										$intermissions = "1 Intermission";
+									default:
+										$intermissions = $intermissionNum . " Intermissions";
+										break;
+								}
+
+								if ( $duration != "" ) { ?>
 
 								<div class="duration-block">
 									<h4>Duration</h4>
 									<p><?php echo $duration; ?></p>
-									<p><?php echo $intermissions; ?> Intermission(s)</p>
+									<p><?php echo $intermissions; ?></p>
 								</div>
 
 								<?php } ?>

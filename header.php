@@ -137,11 +137,11 @@
                         </div>
                         
 						<span class="top-social">
-							<a href="http://www.facebook.com/ticketsbroadway/" class="facebook-icon" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/color/facebook.png" /></a>
-							<a href="http://www.twitter.com/ticksbroadway/" class="twitter-icon" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/color/twitter.png" /></a>
-							<a href="https://www.instagram.com/ticketsbroadway/" class="instagram-icon" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/color/instagram.png" /></a>
-							<a href="https://www.pinterest.com/ticketsbroadway/" class="pinterest-icon" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/color/pinterest.png" /></a>
-							<a href="https://www.youtube.com/channel/UCiEZEbUab60ETExrru-SKUA" class="youtube-icon" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/color/youtube.png" /></a>
+							<a href="http://www.facebook.com/ticketsbroadway/" class="facebook-icon" target="_blank" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/color/facebook.png" /></a>
+							<a href="http://www.twitter.com/ticksbroadway/" class="twitter-icon" target="_blank" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/color/twitter.png" /></a>
+							<a href="https://www.instagram.com/ticketsbroadway/" class="instagram-icon" target="_blank" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/color/instagram.png" /></a>
+							<a href="https://www.pinterest.com/ticketsbroadway/" class="pinterest-icon" target="_blank" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/color/pinterest.png" /></a>
+							<a href="https://www.youtube.com/channel/UCiEZEbUab60ETExrru-SKUA" class="youtube-icon" target="_blank" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/color/youtube.png" /></a>
 						</span>
 
 					</nav>

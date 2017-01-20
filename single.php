@@ -2,10 +2,15 @@
 
 			<div id="content">
 
-				<div id="inner-content" class="wrap cf">
+				<div id="inner-content" class="wrap cf blog">
 
 					<div class="t-1of3 d-2of7">
 						<?php get_sidebar( "blog" ); ?>
+
+						<div class="widget-area">
+							<?php if ( dynamic_sidebar( 'cta-sidebar' ) ) : ?>
+							<?php endif; ?>
+						</div>
 					</div>
 
 					<div id="main" class="m-all t-2of3 d-5of7 cf" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
@@ -16,6 +21,7 @@
 
 							<article id="<?php the_ID(); ?>" class="single" >
 								<h2><?php the_title(); ?></h2>
+								<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" rel="bookmark" class="thumbnail"><?php echo get_the_post_thumbnail( get_the_ID(), 'full' ); ?></a>
 								<div class="article-header">
 									<time datetime="<?php echo date(DATE_W3C); ?>" pubdate ><?php the_time('F jS, Y'); ?></time> | <span class="category"> <?php echo $categories[0]->name; ?></span> | 
 									<span class="social-icons">
@@ -23,7 +29,6 @@
 										<a href="http://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" target="_blank"><img src="https://ticketsbroadway.com/wp-content/themes/ticketbroadway/images/facebook_color_64.png" /></a>
 									</span>
 								</div>
-								<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" rel="bookmark"><?php echo get_the_post_thumbnail( get_the_ID(), 'full' ); ?></a>
 								<div class="entry-content">
 									<?php the_content(); ?>
 								</div>

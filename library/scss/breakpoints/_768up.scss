@@ -67,6 +67,19 @@ HEADER STYLES
 	}
 }
 
+#cities {
+	display: none;
+	color: #FFF;
+	background-color: #000;
+	position: absolute;
+}
+#cities ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 10px;
+}
+
+
 #searchform {
 	
 	input {
@@ -135,6 +148,16 @@ nav {
 	ul {
 		background:$black;
 		margin-top:0;
+	}
+	.menu-item {
+
+		a {
+			padding-bottom: 13px;
+		}
+
+		:hover {
+			border-bottom: 3px solid $yellow;
+		}
 	}
 	li {
 		float: left;
@@ -602,6 +625,11 @@ mobile. Make sure to double check these!
 		padding-top: 4px;
 	}
 
+	.footer-email a {
+		color: white;
+		text-decoration: none;
+	}
+
 	.footer-email::before {
 		content: url(../assets/icons/envelope.png);
 		margin-right: 5px;
@@ -758,10 +786,15 @@ HOMEPAGE STYLES
 				color: white;
 				float: left;
 
+				a {
+					text-decoration: none;
+				}
+
 				h3 {
 					font-weight: bold;
 					font-size: 23px;
 					margin-top: 0px;
+					color: white;
 				}
 
 				a.filled-buy {
@@ -851,11 +884,12 @@ HOMEPAGE STYLES
 					}
 				}
 
-				.show-title {
+				.show-title a {
 					color: white;
 					font-weight: bold;
 					font-size: 13px;
 					margin-left: 7px;
+					text-decoration: none;
 				}
 			}
 
@@ -905,17 +939,28 @@ GENERAL STYLES
 	top: 2px;
 }
 
+.single-post #main, .blog #main, .archive #main {
+	margin-left: 40px;
+}
+
 
 #beyond-buzz {
 	width: 100%;
 	color: white;
+
+	article {
+		width: 100%;
+		height: 100%;
+		background-size: cover;
+		background-position: center;
+	}
 
 	a {
 		color: white;
 		text-decoration: none;
 	}
 	
-	article:first-of-type {
+	.home-recent:first-of-type {
 		float: left;
 		width: 59%;
 		height: 100%;
@@ -945,13 +990,11 @@ GENERAL STYLES
 		}
 	}
 
-	article {
+	.home-recent {
 		float: right;
 		width: 40%;
 		height: 49%;
 		margin-bottom: 1%;
-		background-size: cover;
-		background-position: center;
 		position: relative;
 		
 		.content {
@@ -982,7 +1025,7 @@ GENERAL STYLES
 		}
 	}
 
-	article:last-of-type {
+	.home-recent:last-of-type {
 		margin-bottom: 0px;
 	}
 }
@@ -1097,7 +1140,8 @@ table#events-calendar {
 		}
 
 		img {
-			width: 219px;
+			width: 220px;
+			height: 145px;
 		}
 	}
 }
@@ -1199,5 +1243,129 @@ table#events-calendar {
 				color: black;
 			}
 		}
+	}
+}
+
+.read-more {
+
+	a {
+		background-color: $yellow;
+		color: black;
+		padding: 7px;
+		text-decoration: none;
+	}
+}
+
+/*********************
+GENERAL STYLES
+*********************/
+
+.blog {
+
+	#main {
+		padding-right: 0px;
+	}
+
+	.blog-sidebar {
+
+		li {
+			a {
+				height: 150px;
+
+				img {
+					width: 100%;
+					height: inherit;
+					object-fit: cover;
+				}
+			}
+
+			h4 {
+				margin-top: 0px;
+			}
+		}
+
+		h3 {
+			border-bottom: 2px solid #444;
+		}
+	}
+
+	.single {
+		h2 {
+			margin-top: 6px;
+		}
+
+		a {
+			width: 100%;
+			height: 300px;
+		}
+	}
+
+	#main {
+		margin-top: 10px;
+	}
+	
+	article {
+		padding-bottom: 30px;
+		border-bottom: 2px solid #bbbbbb;
+		margin-bottom: 15px;
+		display: flex;
+
+		&:first-of-type {
+			flex-direction: column;
+
+			.preview-content {
+				margin-left: 0px;
+			}
+
+			.thumbnail {
+				width: 100%;
+				height: 300px;
+
+				img {
+					width: inherit;
+					height: inherit;
+					object-fit: cover;
+				}
+			}
+		}
+
+		&:last-of-type {
+			border-bottom: 0px;
+			padding-bottom: 0px;
+		}
+
+		.thumbnail {
+			width: 300px;
+			height: 200px;
+			margin-top: 11px;
+
+			img {
+				width: inherit;
+				height: inherit;
+				object-fit: cover;
+			}
+		}
+
+		.preview-content {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			margin-left: 15px;
+
+			h2 {
+				margin-top: 5px;
+				line-height: 1em;
+				margin-bottom: 0px;
+
+				a {
+					color: black;
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+
+	aside:first-of-type {
+		margin-top: 0px;
 	}
 }

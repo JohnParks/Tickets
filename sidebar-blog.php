@@ -8,6 +8,7 @@
 ?>
 
 	<div class="col-md-2 col-xs-0 blog-sidebar" role="complementary">
+		<?php if ( is_single() || is_archive() ) { ?>
 		<h3>Latest</h3>
 		<ul>
 		<?php
@@ -23,6 +24,7 @@
 			<?php wp_reset_postdata(); ?>
 		</ul>
 		<?php endif; ?>
+		<?php } ?>
 		<?php if ( dynamic_sidebar( 'blog-sidebar' ) ) : ?>
 	</div><!-- #secondary -->
 	<?php endif; ?>

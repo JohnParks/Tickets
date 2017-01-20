@@ -27,7 +27,7 @@ if ( count( $venues ) > 0 ) {
 		if ( has_post_thumbnail ( $venues[$cntr] ) ) {
 			echo get_the_post_thumbnail( $venues[$cntr], 'medium' );
 		} else {
-			echo "<img src='" . get_template_directory_uri() . "/library/assets/placeholder.jpg' class='placeholder' />";
+			echo "<img src='" . get_template_directory_uri() . "/library/assets/placeholder-horizontal.jpg' class='placeholder' />";
 		}
 		echo "</span><span class='theater-data'>";
 		echo "<h4><a href='" . get_permalink( $venues[$cntr]->ID ) . "'>" . $venues[$cntr]->post_title . "</a></h4>";

@@ -5,6 +5,10 @@
 				<div id="inner-content" class="wrap cf">
 
 					<div class='sidebar d-2of7 t-1of3'>
+						<div class="widget-area">
+							<?php if ( dynamic_sidebar( 'cta-sidebar' ) ) : ?>
+							<?php endif; ?>
+						</div>
 					</div>
 
 						<div id="main" class="m-all t-2of3 d-5of7 cf body-content" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
@@ -16,10 +20,6 @@
 								<header class="article-header">
 
 									<h1 class="page-title" itemprop="headline"><?php the_title(); ?></h1>
-
-									<p class="byline vcard">
-										<?php printf( __( 'Posted', 'bonestheme').' <time class="updated" datetime="%1$s" itemprop="datePublished">%2$s</time> '.__( 'by',  'bonestheme').' <span class="author">%3$s</span>', get_the_time('Y-m-j'), get_the_time(get_option('date_format')), get_the_author_link( get_the_author_meta( 'ID' ) )); ?>
-									</p>
 
 								</header> <?php // end article header ?>
 

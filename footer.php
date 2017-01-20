@@ -2,11 +2,11 @@
 
 				<div class="footer-top wrap">
 					<div class="footer-social">
-						<a href="http://www.facebook.com/ticketsbroadway/" class="facebook-icon" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/black/facebook.png" /></a>
-						<a href="http://www.twitter.com/ticksbroadway/" class="twitter-icon" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/black/twitter.png" /></a>
-						<a href="https://www.instagram.com/ticketsbroadway/" class="instagram-icon" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/black/instagram.png" /></a>
-						<a href="https://www.pinterest.com/ticketsbroadway/" class="pinterest-icon" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/black/pinterest.png" /></a>
-						<a href="https://www.youtube.com/channel/UCiEZEbUab60ETExrru-SKUA" class="youtube-icon" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/black/youtube.png" /></a>
+						<a href="http://www.facebook.com/ticketsbroadway/" class="facebook-icon" target="_blank" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/black/facebook.png" /></a>
+						<a href="http://www.twitter.com/ticksbroadway/" class="twitter-icon" target="_blank" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/black/twitter.png" /></a>
+						<a href="https://www.instagram.com/ticketsbroadway/" class="instagram-icon" target="_blank" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/black/instagram.png" /></a>
+						<a href="https://www.pinterest.com/ticketsbroadway/" class="pinterest-icon" target="_blank" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/black/pinterest.png" /></a>
+						<a href="https://www.youtube.com/channel/UCiEZEbUab60ETExrru-SKUA" class="youtube-icon" target="_blank" ><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/social/black/youtube.png" /></a>
 					</div>
 
 					<div class="email-signup">
@@ -34,7 +34,7 @@
 
 						<div class="contact-block column">
 							<p class="footer-column-header">Contact Information</p>
-							<p class="footer-email">Info@ticketsbroadway.com</p>
+							<p class="footer-email"><a href="mailto:Info@ticketsbroadway.com">Info@ticketsbroadway.com</a></p>
 							<p class="footer-phone">1-844-2SEESHOW</p>
 
 						</div>
