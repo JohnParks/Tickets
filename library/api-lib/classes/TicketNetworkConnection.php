@@ -68,7 +68,7 @@ class TicketNetworkConnection {
 
 		$eventArray = $result->GetEventsResult->Event;
 
-		return $eventArray;
+		return is_array( $eventArray ) ? $eventArray : array( $eventArray );
 
 	}
 
@@ -126,6 +126,31 @@ class TicketNetworkConnection {
 		//$uniqueNames = array_unique($performerNames);
 
 		return $uniquePerformers;
+	}
+
+	// grab a list of all potential categories from the API
+	// takes no input, returns array of categories
+	public function getCategories() {
+
+		$params = array();
+		$params[ 'websiteConfigID' ] = WEB_CONF_ID;
+
+		$result = $this->client->__soapCall( 'GetCategoriesMasterList', array( 'parameters' => $params ) );
+
+		$cats = $result->GetCategoriesMasterListResult->Category;
+
+		echo "<pre>";
+		print_r( $cats );
+		echo "</pre>";
+
+		$catArray = array();
+
+		foreach( $cats as $cat ) {
+			$catArray[ $cat->ParentCategoryID ] = $cat->ParentCategoryDescription;
+			$catArray[ $cat->ChildCategoryID ] = $cat->ChildCategoryDescription;
+		}
+
+		return $catArray;
 	}
 }
 

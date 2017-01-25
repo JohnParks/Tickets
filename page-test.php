@@ -24,9 +24,9 @@ get_header(); ?>
 			$conn = new TicketNetworkConnection();
 
 			// snag the three constant arrays containing categories, unserialize them
-			$parentCats = unserialize( PARENT_CATS );
+			/* $parentCats = unserialize( PARENT_CATS );
 			$childCats = unserialize( CHILD_CATS );
-			$grandchildCats = unserialize( GRANDCHILD_CATS );
+			$grandchildCats = unserialize( GRANDCHILD_CATS ); */
 
 			$cntr = 0;
 
@@ -65,12 +65,17 @@ get_header(); ?>
 
 				// Build a list of new events by comparing API and Show events
 				$APIEvents = $conn->GetEventsByPerformer( $show->performerID );
+
+				echo "<pre>";
+				print_r( $APIEvents );
+				echo "</pre>";
 				
 				// cycle through the new Events
 				foreach( $APIEvents as $obj ) {
 
-					if ( $exists )
-						continue;
+					/*if ( $exists )
+						continue;*/
+					echo "Event id is " . $obj->ID . "<br />";
 
 					$event = new Event( $obj );
 					$event->setPerformerID( $show->performerID );
@@ -81,17 +86,19 @@ get_header(); ?>
 					// NOTE: add in a check to confirm whether the fetched term exists in constants array...if not, fetch from API
 
 					// grab categories from event, push into array for adding to show after loop
-					$pCat = $parentCats[ $obj->ParentCategoryID ];
-					$cCat = $childCats[ $obj->ChildCategoryID ];
-					$gCat = $grandchildCats[ $obj->GrandchildCategoryID ];
+					$cats[] = $obj->ParentCategoryID;
+					$cats[] = $obj->ChildCategoryID;
+
+					/*$pCat = $parentCats[ $obj->ParentCategoryID ];
+					$cCat = $childCats[ $obj->ChildCategoryID ];*/
 
 					// check that various categories haven't been added to the cats array
-					if ( in_array( $pCat, $cats ) === false )
+					/* if ( in_array( $pCat, $cats ) === false )
 						$cats[] = $pCat;
 					if ( in_array( $cCat, $cats ) === false )
 						$cats[] = $cCat;
 					if ( in_array( $gCat, $cats ) === false && $gCat != "Empty Grandchild" )
-						$cats[] = $gCat;
+						$cats[] = $gCat;*/
 				}
 
 				// cycle through array of venue IDs, either grabbing existing or creating/saving new ones, then register relationship between show and venue
@@ -143,7 +150,7 @@ get_header(); ?>
 
 				$cntr++;
 
-				if ( $cntr > 5 ) {
+				if ( $cntr > 0 ) {
 					//break;
 				}
 			}

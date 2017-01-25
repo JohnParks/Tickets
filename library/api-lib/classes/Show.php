@@ -149,20 +149,13 @@ class Show {
 		$showCats = wp_get_object_terms( $wpID, 'genre', array( 'fields' => 'ids' ) );
 
 		foreach ( $cats as $cat ) {
-			$term = term_exists( $cat, 'genre' );
-			$termID = $term['term_id'];
-			if ( $term !== 0 && $term !== null ) {
+			
+			// go through the categories table, grab the WP ID corresponding to each cat ID from feed
+			global $wpdb;
+			$table = $wpdb->prefix . "categories";
+			$results = $wpdb->get_row( "SELECT * FROM " . $table . " WHERE id = " . $cat, ARRAY_A );
 
-				//echo $cat . " exists! Term ID is " . $termID . "<br />";
-			} else {
-				$term = wp_insert_term( $cat, 'genre' );
-				if ( is_wp_error( $term ) ) {
-					echo "error adding term<br />";
-				} else {
-					$termID = $term['term_id'];
-				}
-			}
-			$showCats[] = $termID;
+			$showCats[] = $results['wp_id'];
 		}
 		$showCats = array_map( 'intval', $showCats );
 		$showCats = array_unique( $showCats );

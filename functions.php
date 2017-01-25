@@ -500,7 +500,10 @@ function create_ticket_tax() {
 
 }
 
-// create the table to hold events on theme activation (called in the general theme set up function above)
+// create three tables required for managing inventory on theme activation (called in the general theme set up function above)
+// one to hold events
+// one to hold a list of performers, used to break up the import runs into manageable chunks
+// lastly, a table holding the relationships between WP genres and Ticket Network categories
 function build_event_tbl() {
   global $wpdb;
 
@@ -521,12 +524,21 @@ function build_event_tbl() {
   dbDelta( $sql );
 
   $performer_name = $wpdb->prefix . "performers";
-  $newSql = "CREATE TABLE $performer_name (
+  $performerSql = "CREATE TABLE $performer_name (
     id mediumint(9) NOT NULL,
     name text,
     PRIMARY KEY  (id)
   ) $charset_collate;";
-  dbDelta( $newSql );
+  dbDelta( $performerSql );
+
+  $category_name = $wpdb->prefix . "categories";
+  $categorySql = "CREATE TABLE $category_name (
+    id mediumint(9) NOT NULL,
+    name text,
+    wp_id mediumint(9),
+    PRIMARY KEY  (id)
+  ) $charset_collate;";
+  dbDelta( $categorySql );
 }
 
 // Let's create our Tickets Broadway specific theme options
