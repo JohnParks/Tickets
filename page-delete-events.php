@@ -18,32 +18,23 @@
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
-			<h1>THIS IS AN INIT PAGE!</h1>
+			<h1>This page clears out past events</h1>
 
 			<?php
 
-			$conn = new TicketNetworkConnection();
+			global $wpdb;
+			$table = $wpdb->prefix . "events";
+			$date = date( 'Y-m-d H:i:s' ); //current time
 
-			$perfArray = $conn->GetUniquePerformers();
+			$query = "DELETE FROM $table WHERE time < '" . $date . "'";
 
-			print_r( $perfArray );
-			
-			// we've got an array of unique Shows, cycle through and commence import
-			foreach( $perfArray as $id=>$name ) {
-					
+			$result = $wpdb->query( $query, ARRAY_A );
 
-				global $wpdb;
+			echo "<pre>";
+			print_r( $result );
+			echo "</pre>";
 
-				$data = array (
-					"id"	=> $id,
-					"name"	=> $name
-				);
-				$table = $wpdb->prefix . 'performers';
-        
-		        
-		        $wpdb->insert( $table, $data );
-		        		
-		    }
+			//echo $date;
 
 			?>
 

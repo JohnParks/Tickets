@@ -139,10 +139,6 @@ class TicketNetworkConnection {
 
 		$cats = $result->GetCategoriesMasterListResult->Category;
 
-		echo "<pre>";
-		print_r( $cats );
-		echo "</pre>";
-
 		$catArray = array();
 
 		foreach( $cats as $cat ) {
