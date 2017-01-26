@@ -8,6 +8,7 @@ class Venue {
 	public $street1;
 	public $street2;
 	public $zip;
+	public $state;
 	public $name;
 	public $wpVenue; // WP Object representing Venue
 	public $shows = array(); //array of show IDs with Events in this venue
@@ -22,6 +23,7 @@ class Venue {
 		$this->zip = $obj->ZipCode;
 		$this->street1 = $obj->Street1;
 		$this->street2 = $obj->Street2;
+		$this->state = $obj->StateProvince;
 
 		$this->check();
 
@@ -67,7 +69,7 @@ class Venue {
 		$post_author = 1; // hardcoded ID for only existing user in localhost WP install
 		$post_type = "venue";
 		$post_status = "publish";
-		$meta_input = array( "venueID" => $venueID, "city" => $this->city, "Street 1" => $this->street1, "Street 2" => $this->street2, "zip" => $this->zip );
+		$meta_input = array( "venueID" => $venueID, "city" => $this->city, "Street 1" => $this->street1, "Street 2" => $this->street2, "state" => $this->state, "zip" => $this->zip );
 		$compacted = compact( 'post_title', 'post_author', 'post_type', 'post_status', 'meta_input' );
 		$wpVenueID = wp_insert_post( $compacted );
 		

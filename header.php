@@ -113,7 +113,9 @@
                             		'post_type'		=>	'show',
                             		'posts_per_page'=>	'8',
                             		'no_found_rows'	=>	true,
-                            		'tax_query'		=> array( $termArgs )
+                            		'tax_query'		=> array( $termArgs ),
+                            		'meta_key'		=> 'nav_display',
+                            		'meta_value'	=> 1
                             	);
                             	$shows = get_posts( $args );
 

@@ -12,7 +12,8 @@
  * @package ticketsbroadway
  */
 
-get_header(); ?>
+//get_header();
+?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
@@ -22,11 +23,6 @@ get_header(); ?>
 			<?php
 
 			$conn = new TicketNetworkConnection();
-
-			// snag the three constant arrays containing categories, unserialize them
-			$parentCats = unserialize( PARENT_CATS );
-			$childCats = unserialize( CHILD_CATS );
-			$grandchildCats = unserialize( GRANDCHILD_CATS );
 
 			$cntr = 0;
 
@@ -65,12 +61,17 @@ get_header(); ?>
 
 				// Build a list of new events by comparing API and Show events
 				$APIEvents = $conn->GetEventsByPerformer( $show->performerID );
+
+				echo "<pre>";
+				print_r( $APIEvents );
+				echo "</pre>";
 				
 				// cycle through the new Events
 				foreach( $APIEvents as $obj ) {
 
-					if ( $exists )
-						continue;
+					/*if ( $exists )
+						continue;*/
+					echo "Event id is " . $obj->ID . "<br />";
 
 					$event = new Event( $obj );
 					$event->setPerformerID( $show->performerID );
@@ -81,17 +82,8 @@ get_header(); ?>
 					// NOTE: add in a check to confirm whether the fetched term exists in constants array...if not, fetch from API
 
 					// grab categories from event, push into array for adding to show after loop
-					$pCat = $parentCats[ $obj->ParentCategoryID ];
-					$cCat = $childCats[ $obj->ChildCategoryID ];
-					$gCat = $grandchildCats[ $obj->GrandchildCategoryID ];
-
-					// check that various categories haven't been added to the cats array
-					if ( in_array( $pCat, $cats ) === false )
-						$cats[] = $pCat;
-					if ( in_array( $cCat, $cats ) === false )
-						$cats[] = $cCat;
-					if ( in_array( $gCat, $cats ) === false && $gCat != "Empty Grandchild" )
-						$cats[] = $gCat;
+					$cats[] = $obj->ParentCategoryID;
+					$cats[] = $obj->ChildCategoryID;
 				}
 
 				// cycle through array of venue IDs, either grabbing existing or creating/saving new ones, then register relationship between show and venue
@@ -108,42 +100,19 @@ get_header(); ?>
 					$city->addShow( $show->showID );
 					$show->addCity( $vAPI->City  );
 
-					/*if ( in_array( $vAPI->City, $cities ) === false  ) {
-						
-						$cities[] = $cityInfo;
-					}*/
-
 					$show->addVenue( $venue->wpVenueID );
 
 					$venue->addShow( $show->showID );
 				}
 
-				// cycle through array of cities, either grabbing existing or creating/saving new ones, then add city to show (venue already has it)
-				/*foreach( $cities as $place ) {
-					$city = new City( $place );
-					$show->addCity( $place );
-				}*/
-
 				// lastly, add categories to the show
 				$show->addCats( $cats );
 
-				/*echo "<pre>";
-				echo $show->performerID . "<br />";
-				print_r( $cats );
-				//print_r( $APIEvents );
-				echo "</pre>";*/
-
 				$result = $wpdb->delete( $wpdb->prefix . 'performers', array( "id" => $id ) );
-
-				if ( $result === false ) {
-					//echo "deletion of " . $name . " failed.<br />";
-				} else {
-					//echo "<br />$result rows deleted (presumably with name $name)";
-				}
 
 				$cntr++;
 
-				if ( $cntr > 5 ) {
+				if ( $cntr > 0 ) {
 					//break;
 				}
 			}
