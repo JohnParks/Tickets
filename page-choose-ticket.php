@@ -28,6 +28,12 @@
 footer.footer{
 	background-color: transparent;
 }
+.container {
+	width: 100%;
+}
+#venue-map img {
+	width: auto;
+}
 </style>
 
 			<div id="content">
