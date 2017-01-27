@@ -104,15 +104,18 @@
 
 								<section class="venue-show-list">
 									<h2>Shows in This City</h2>
+									<div id="shows-listing-container">
 
-									<?php
-									// pull out city name, snag city object, then use that object ID's to create show list
-									$cityName = get_post_meta( get_the_ID(), 'city', true );
-									$cityObj = get_page_by_title( $cityName, 'OBJECT', 'city' );
+										<?php
+										// pull out city name, snag city object, then use that object ID's to create show list
+										$cityName = get_post_meta( get_the_ID(), 'city', true );
+										$cityObj = get_page_by_title( $cityName, 'OBJECT', 'city' );
+										?>
 
-									display_shows( $cityObj->ID, 4);
-
-									?>
+										<?php
+										display_shows( $cityObj->ID, 4);
+										?>
+									</div>
 								</section>
 
 							</div>

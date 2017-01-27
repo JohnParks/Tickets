@@ -53,7 +53,6 @@
 								<section class="show-listing">
 									<h3>Shows Now Playing in <?php echo $post->post_title; ?></h3>
 									<div id="shows-listing-container">
-										<input type="hidden" id="post-id" value="<?php echo $post->ID; ?>" />
 										<?php display_shows( $post->ID, 4, false ); ?>
 									</div>
 

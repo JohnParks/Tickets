@@ -4,6 +4,7 @@ jQuery(document).ready(function(){
 	$("#events-table").on( "click", "#prev-week-btn", sendCalData );
 	$("#events-table").on( "click", "#next-week-btn", sendCalData );
 	$("#shows-listing-container").on( "click" , "#next-shows-btn", loadNextShows );
+	$("#shows-listing-container").on( "click" , "#prev-shows-btn", loadPrevShows );
 	$("#next-week").click( function(){
 		console.log("a click!");
 		var whatever = {
@@ -56,13 +57,31 @@ jQuery(document).ready(function(){
 function loadNextShows() {
 	console.log( "load them next shows!" );
 	var showData = {
-		"offset"	: $("#next-shows-offset").val(),
+		"offset"	: $("#shows-listing-container #next-shows-offset").val(),
 		"postID"	: $("#post-id").val()
 	};
 	var toPass = {
 		action: "display_shows",
-		data: showData 
+		showData: showData
 	};
+	console.log(showData);
+	$.post( ticket_ajax.ajaxurl, toPass ).done( function(res){
+		$("#shows-listing-container").html( res );
+		console.log(res)
+	} );
+}
+
+function loadPrevShows() {
+	console.log( "load the previous shows!" );
+	var showData = {
+		"offset"	: $("#shows-listing-container #prev-shows-offset").val(),
+		"postID"	: $("#post-id").val()
+	};
+	var toPass = {
+		action: "display_shows",
+		showData: showData 
+	};
+	console.log(showData);
 	$.post( ticket_ajax.ajaxurl, toPass ).done( function(res){
 		$("#shows-listing-container").html( res );
 		console.log(res)

@@ -676,9 +676,6 @@ add_action( "admin_enqueue_scripts", "tb_options_enqueue_scripts" );
 function display_shows ( $postID, $numPosts = 4, $topSeller = false, $offset = 0, $mobile = false ) {
   // what parameters might we need?
 
-  // grab array of show IDs
-  $showIDs = get_post_meta( $postID, 'shows', true );
-
   if ( $_POST && isset($_POST['showData']) ) {
 
     $numPosts = 4;
@@ -688,22 +685,36 @@ function display_shows ( $postID, $numPosts = 4, $topSeller = false, $offset = 0
     $offset = $_POST['showData']['offset'];
   }
 
+  // grab array of show IDs
+  $showIDs = get_post_meta( $postID, 'shows', true );
+
 
   // establish total possible size of result set, use this to modulate offset
-  $possibleShows = count( $showIDs );
-  //echo "Possible shows is " . $possibleShows;
-  if ( $offset > ( $possibleShows - $numPosts ) ) {
-    //we've reached the end, do not iterate offset any further
-    $nextOffset = $offset;
-    $prevOffset = $offset - $numPosts;
-  } else if ( $offset < 0 ) {
-    // we're at the beginning of the list, decrease no further
-    $prevOffset = 0;
-    $nextOffset = $numPosts;
-  } else {
-    // all is hunky dory
-    $nextOffset = $offset + 1;
-    $prevOffset = $offset - 1;
+  $totalShows = count( $showIDs );
+  /*echo "Total possible shows is $totalShows <br />";
+  echo "Current offset is $offset <br />";
+  echo "Requested number of shows is $numPosts <br />";*/
+
+  // logic to set next and previous nav offset values
+  if ( $numPosts < $totalShows) {
+    //echo "Requested less than total<br />";
+    if ( $offset == 0 ) {
+      // We're at the beginning of the list
+      $prevOffset = 0;
+      $nextOffset = 1;
+      //echo "Offset is zero, previous is $prevOffset and next is $nextOffset <br />";
+    }
+    if ( $offset+$numPosts == $totalShows ) {
+      // We've hit the end of the list
+      $nextOffset = $offset;
+      $prevOffset = $offset - 1;
+      //echo "End of list reached, previous is $prevOffset and next is $nextOffset <br />";
+    }
+    if ( $offset+$numPosts < $totalShows && $offset != 0 ) {
+      $nextOffset = $offset + 1;
+      $prevOffset = $offset - 1;
+      //echo "We're in the middle of the list, previous is $prevOffset and next is $nextOffset <br />";
+    }
   }
 
   // grab Show objects
@@ -730,8 +741,16 @@ function display_shows ( $postID, $numPosts = 4, $topSeller = false, $offset = 0
   // start building out $html
   $cntr = 1;
   $html = "<div class='show-list'>";
+  $html .= "<input type='hidden' id='post-id' value='" . $postID . "' />";
   // add previous shows nav
-  $html .= "<a id='prev-shows-btn' ><input id='prev-shows-offset' value='" . $prevOffset . "' type='hidden' /><img src='" . get_template_directory_uri() . "/library/assets/icons/dotted-arrow.png' class='show-list-nav' /></a>";
+  if ( $totalShows > $numPosts ) {
+    if ( $prevOffset == 0 && $nextOffset != 2 )
+      $html .= '<div style="filter:grayscale(100%)">';
+    
+    $html .= "<a id='prev-shows-btn' ><input id='prev-shows-offset' value='" . $prevOffset . "' type='hidden' /><img src='" . get_template_directory_uri() . "/library/assets/icons/dotted-arrow.png' class='show-list-nav' /></a>";
+    if ( $prevOffset == 0 && $nextOffset != 2 )
+      $html .= "</div>";
+  }
   foreach ( $shows as $show ) {
     if ( $cntr > $numPosts )
       break;
@@ -750,7 +769,14 @@ function display_shows ( $postID, $numPosts = 4, $topSeller = false, $offset = 0
     $cntr++;
   }
   // add next shows nav
-  $html .= "<a id='next-shows-btn' ><input id='next-shows-offset' value='" . $nextOffset . "' type='hidden' /><img src='" . get_template_directory_uri() . "/library/assets/icons/dotted-arrow.png' class='show-list-nav' /></a>";
+  if ( $totalShows > $numPosts ) {
+    if ( $nextOffset == $offset ) 
+      $html .= '<div style="filter:grayscale(100%)">';
+
+    $html .= "<a id='next-shows-btn' ><input id='next-shows-offset' value='" . $nextOffset . "' type='hidden' /><img src='" . get_template_directory_uri() . "/library/assets/icons/dotted-arrow.png' class='show-list-nav' /></a>";
+    if ( $nextOffset == $offset )
+      $html .= "</div>";
+  }
   $html .= "</div>";
 
   // finally, let's echo out $html
