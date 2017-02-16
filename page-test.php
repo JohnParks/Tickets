@@ -24,6 +24,8 @@
 
 			$conn = new TicketNetworkConnection();
 
+			$newShows = array();
+
 			$cntr = 0;
 
 			// grab collection of performers from performers table
@@ -39,6 +41,8 @@
 				$name = $performer['name'];
 
 				$exists = Show::exists( $id );
+
+				$newShows[] = $name;
 
 				/*if ( $exists ) {
 					echo "show $name exists, skipping this one";
@@ -89,8 +93,8 @@
 				// cycle through array of venue IDs, either grabbing existing or creating/saving new ones, then register relationship between show and venue
 				foreach( $venueIDs as $vID ) {
 
-					if ( $exists )
-						continue;
+					/*if ( $exists )
+						continue;*/
 
 					// fetch venue from API, use to instantiate a new Venue object
 					$vAPI = $conn->getVenue( $vID );
@@ -112,8 +116,35 @@
 
 				$cntr++;
 
-				if ( $cntr > 0 ) {
-					//break;
+				if ( $cntr > 24 ) {
+					break;
+				}
+			}
+
+			if ( !empty($newShows) ) {
+				// Commence logic to ship out a notification email to Howie containing a list of all newly added shows
+				$to = "john.parks@brafton.com";
+				$subject = "New shows added to ticketsbroadway.com";
+
+				$message = "<h1>Here's a list of shows recently added to ticketsbroadway.com</h1>";
+				$message .= "<ul>";
+
+				foreach( $newShows as $newShow ) {
+					$message .= "<li>" . $newShow . "</li>";
+				}
+
+				$message .= "</ul>";
+
+				$header = "From:john.parks@brafton.com \r\n";
+				$header .= "MIME-Version: 1.0\r\n";
+				$header .= "Content-type: text/html\r\n";
+
+				$mailResult = mail( $to, $subject, $message, $header );
+
+				if ( $mailResult == true ) {
+					echo "Message sent successfully";
+				} else {
+					echo "Message failed to send";
 				}
 			}
 

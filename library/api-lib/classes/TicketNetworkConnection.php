@@ -36,7 +36,7 @@ class TicketNetworkConnection {
 
 		$params = array();
 		$params[ 'websiteConfigID' ] = WEB_CONF_ID;
-		$params[ 'whereClause' ] = "CountryID == 217"; // ensure only US events are returned
+		//$params[ 'whereClause' ] = "CountryID == 217"; // ensure only US events are returned
 
 		if ( isset( $begin ) )
 			$params[ 'beginDate' ] = $begin;
@@ -61,7 +61,7 @@ class TicketNetworkConnection {
 
 		$params = array();
 		$params[ 'websiteConfigID' ] = WEB_CONF_ID;
-		$params[ 'whereClause' ] = "CountryID == 217"; // ensure only US events are returned
+		//$params[ 'whereClause' ] = "CountryID == 217"; // ensure only US events are returned
 		$params[ 'performerID' ] = $performerID;
 
 		$result = $this->client->__soapCall( 'GetEvents', array( 'parameters' => $params ) );

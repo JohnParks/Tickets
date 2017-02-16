@@ -576,6 +576,15 @@ function tb_settings_init() {
     "tb_settings_section"
   );
 
+  // Add option for banner image link on homepage
+  add_settings_field (
+    "Banner Image Link",
+    "Homepage Banner Link",
+    "banner_link_callback",
+    "tb_theme_options",
+    "tb_settings_section"
+  );
+
   // Add option for selecting a city (for spinning out microsites)
   add_settings_field (
     "City Selection",
@@ -596,6 +605,7 @@ function tb_settings_init() {
 function tb_default_options() {
   $defaults = array (
     'banner_id'   => '',
+    'banner_link' => '',
     'city'        => ''
   );
   return apply_filters( "tb_default_options", $defaults );
@@ -617,6 +627,17 @@ function banner_callback() {
   <label id="banner-image-label" style="cursor:pointer;">Select a banner image to display on the homepage: </label>
   <input id="banner_id" name="tb_theme_options[banner_id]" value ="<?php echo $options['banner_id']; ?>" type="text" style="display:none;" />
   <input type="button" class="upload_image_button" value="Select Image" name="banner_url" /><img src="<?php echo wp_get_attachment_url( $options['banner_id'] ); ?>" id="img_preview" style="max-width:1150px; margin-top:10px" />
+
+<?php
+}
+
+// Build out homepage banner link section
+function banner_link_callback() {
+  $options = get_option( "tb_theme_options" );
+?>
+
+  <label id="banner-link-label">Enter the URL of the page you want the homepage banner to link to: </label>
+  <input id="banner_link" name="tb_theme_options[banner_link]" value="<?php echo $options['banner_link']; ?>" type="text" />
 
 <?php
 }
@@ -1130,6 +1151,7 @@ function camelCase($str, array $noStrip = [])
 
 function tickets_enqueue_scripts(){
   wp_enqueue_script( 'ticket-script', get_template_directory_uri() . '/library/js/tb-scripts.js' );
+  wp_enqueue_script( 'ticket-handlebars', get_template_directory_uri() . '/library/js/handlebars.js' );
   wp_localize_script( 'ticket-script', 'ticket_ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 }
 

@@ -15,11 +15,18 @@ jQuery(document).ready(function(){
 			console.log(res)
 		} );
 	} );
-    $('#menu-main-nav li:first-of-type').hover(revealShowMenu);
-    $('#menu-main-nav li:first-of-type').click(revealShowMenu);
+    //$('#menu-main-nav li:first-of-type').hover(revealShowMenu);
+    $('#menu-main-nav li:first-of-type').hover(function(){revealMenu("show")});
+    $('#menu-main-nav li:nth-of-type(2)').hover(function(){revealMenu("city")});
+    //$('#menu-main-nav li:first-of-type').click(revealShowMenu);
+    $('#menu-main-nav li:first-of-type').click(function(){revealMenu("show")});
+    $('#menu-main-nav li:nth-of-type(2)').click(function(){revealMenu("city")});
     $('#drop-down-shows').mouseleave(function(e){
-        //$('#drop-down-shows').css('display', "none");
-        $('#drop-down-shows').slideToggle();
+        $('#drop-down-shows').css('display', "none");
+        //$('#drop-down-shows').slideToggle();
+    });
+    $('#drop-down-cities').mouseleave(function(e){
+        $('#drop-down-cities').css('display', "none");
     });
     $('.ul-genre-list ul li').each(function(n,el){
         console.log(el);
@@ -42,6 +49,7 @@ jQuery(document).ready(function(){
         });
     })
     var d_el = $('#drop-down-shows');
+    var cityDropdown = $('#drop-down-cities');
     $('body').click(function(e){
             if(d_el.css('display') !== "none"){
                 d_el.click(function(e){
@@ -49,7 +57,17 @@ jQuery(document).ready(function(){
                     e.stopPropagation();
                 })
                 console.log("clicked outside div");
-                d_el.slideToggle();
+                //d_el.slideToggle();
+                $('#drop-down-shows').css('display', "none");
+            }
+            if(cityDropdown.css('display') !== "none"){
+                cityDropdown.click(function(e){
+                    console.log("clicked inside div");
+                    e.stopPropagation();
+                })
+                console.log("clicked outside div");
+                //d_el.slideToggle();
+                $('#drop-down-cities').css('display', "none");
             }
         });
 });
@@ -120,6 +138,23 @@ function revealShowMenu(){
     if(el.css('display') == "none"){
         el.slideToggle();    
         
+    }
+}
+
+function revealMenu( menu ){
+	console.log(menu);
+	if ( menu == "show" ) {
+		var toShow = $('#drop-down-shows');
+		var toHide = $('#drop-down-cities');
+	} else if ( menu == "city" ) {
+		var toHide = $('#drop-down-shows');
+		var toShow = $('#drop-down-cities');
+	}
+    if(toShow.css('display') == "none"){
+        toShow.css('display', "block");
+    }
+    if(toHide.css('display') != "none"){
+    	toHide.css('display', "none");
     }
 }
 

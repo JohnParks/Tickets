@@ -69,13 +69,14 @@
 
 									<?php 
 									// get a list of theaters hooked up to this post
-									$venueIDs = get_post_meta( $post->ID, "venues", true );
+									$cityName = get_post_meta( $post->ID, "cityName", true );
 
 									$args = array (
-											"include"			=> $venueIDs,
 											"post_type"			=> "venue",
 											"posts_per_page"	=> 2,
-											'no_found_rows'		=> true
+											'no_found_rows'		=> true,
+											'meta_key'			=> 'city',
+											'meta_value'		=> $cityName
 										);
 
 									$venues = get_posts( $args );

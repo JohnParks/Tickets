@@ -19,8 +19,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
 		<?php // icons & favicons (for more: http://www.jonathantneal.com/blog/understand-the-favicon/) ?>
-		<link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/library/images/apple-touch-icon.png">
-		<link rel="icon" href="<?php echo get_template_directory_uri(); ?>/favicon.png">
+		<link rel="icon" href="<?php echo get_template_directory_uri(); ?>/library/assets/icons/14693.png">
 		<!--[if IE]>
 			<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico">
 		<![endif]-->
@@ -54,7 +53,10 @@
 
 						<?php get_search_form(); ?>
 
-						<a href="" class="phone-btn"><img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/phone-speech-bubble.png" /></a>
+						<div class="header-phone-container">
+							<div class="header-bubble"><span>1-844-2SEESHOW</span><img src="<?php echo get_template_directory_uri(); ?>/library/assets/phone-number-hover.png" /></div>
+							<img src="<?php echo get_template_directory_uri(); ?>/library/assets/icons/phone-speech-bubble.png" class="phone-btn" />
+						</div>
 
 					</div>
                     
@@ -94,14 +96,20 @@
                             <div class="ul-genre-list">
                                 <ul>
                                 	<?php
+                                	$cntr = 0;
                                 	foreach( $terms as $term ) { ?>
-                                	<li class="genre" data-genre="<?php echo $term->term_id; ?>"><a href="<?php echo esc_url( home_url( '/' ) ) . 'genre/' . $term->slug; ?>"><?php echo $term->name; ?></a></li>
-                                	<?php } ?>
+                                	<li class="genre" data-genre="<?php echo $term->term_id; ?>"><a href="<?php echo esc_url( home_url( '/' ) ) . 'genre/' . $term->slug; ?>" class="<?php if($cntr==0){echo 'active';} ?>"><?php echo $term->name; ?></a></li>
+                                	<?php $cntr++;
+                                	} ?>
                                 </ul>
                             </div>
                             <?php
+                            $cntr = 0;
                             foreach( $terms as $term ) {
-                            	echo "<div class='genre-show-list' id='genre-show-list-$term->term_id'>";
+                            	echo "<div class='genre-show-list'";
+                            	if ( $cntr == 0 )
+                            		echo " style='display:block;'";
+                            	echo "id='genre-show-list-$term->term_id'>";
                             	// grab list of 8 shows of this genre
                             	// start building $args array
                             	$termArgs = array (
@@ -136,6 +144,30 @@
                             	echo "</div>";
                             }
                             ?>
+                        </div>
+
+                        <?php
+						// Get list of cities cleared to be displayed in dropdown
+						$args = array (
+							"post_type"		=> "city",
+							"meta_key"		=> "display_city",
+							"meta_value"	=> 1,
+							"orderby"		=> "title",
+							"order"			=> "ASC",
+							"posts_per_page"=> -1
+						);
+						$cities = get_posts( $args );
+						?>
+
+                        <div class="drop-down-cities" id="drop-down-cities">
+                        	<ul>
+                        		<?php
+                        		foreach( $cities as $city ) {
+									$daLink = get_permalink( $city );
+									echo "<li><a href='$daLink'>$city->post_title</a></li>";
+								}
+								?>
+                        	</ul>
                         </div>
                         
 						<span class="top-social">

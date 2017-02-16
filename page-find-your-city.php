@@ -2108,7 +2108,8 @@
 									$args = array (
 										"post_type"		=> "city",
 										"meta_key"		=> "display_city",
-										"meta_value"	=> 1
+										"meta_value"	=> 1,
+										"posts_per_page"=> -1
 									);
 									$cities = get_posts( $args );
 
@@ -2116,7 +2117,7 @@
 									$states = array();
 									foreach ( $cities as $city ) {
 										$state = get_post_meta( $city->ID, 'state', true );
-										if( in_array( $city, $states ) === false ) {
+										if( in_array( $state, $states ) === false ) {
 											$states[] = $state;
 										}
 									}

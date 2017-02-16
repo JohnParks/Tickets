@@ -82,7 +82,8 @@ table#events-calendar {
 
 	#date-range {
 		margin: auto 10px;
-		position: initial;
+		position: static;
+		height: 26px;
 	}
 }
 
@@ -235,6 +236,16 @@ FRONT PAGE STYLES
 	}
 }
 
+.show-headlines {
+	article.show-recent {
+		.content {
+			.recent-title{
+				max-width: 100%;
+			}
+		}
+	}
+}
+
 .show-list {
 
 	.show-list-item {
@@ -265,6 +276,95 @@ FRONT PAGE STYLES
 	iframe {
 		width: 100%;
 		height: 100%;
+	}
+}
+
+.sidebar {
+	
+	.contact-faq {
+
+		a {
+			top: 17%;
+	    	font-size: 26px;
+		}
+	}
+}
+
+.state-list {
+	height: 555px;
+}
+
+.entry-content {
+	svg {
+		display: inline;
+	}
+}
+
+.blog {
+	
+	article {
+		@include flex();
+		@include flexDirection(row);
+
+		&:first-of-type {
+			@include flexDirection(column);
+
+			.preview-content {
+				margin-left: 0px;
+				max-width: 100%;
+			}
+
+			.thumbnail {
+				width: 100%;
+				height: 300px;
+				display: block;
+				overflow: hidden;
+
+				img {
+					max-width: 100%;
+					height: auto;
+					transform: translateY(-20%);
+				}
+			}
+		}
+
+		&:last-of-type {
+			border-bottom: 0px;
+			padding-bottom: 0px;
+		}
+
+		.thumbnail {
+			width: 300px;
+			height: 200px;
+			margin-top: 11px;
+
+			img {
+				width: inherit;
+				height: inherit;
+				object-fit: cover;
+			}
+		}
+
+		.preview-content {
+			@include flex();
+			@include flexDirection(column);
+			-webkit-justify-content: space-between;
+		    -ms-flex-pack: justify;
+		    justify-content: space-between;
+			margin-left: 15px;
+			max-width: 61%;
+
+			h2 {
+				margin-top: 5px;
+				line-height: 1em;
+				margin-bottom: 0px;
+
+				a {
+					color: black;
+					text-decoration: underline;
+				}
+			}
+		}
 	}
 }
 

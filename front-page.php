@@ -200,8 +200,10 @@
 								$theme_options = get_option( "tb_theme_options" );
 
 								$banner_url = wp_get_attachment_url( $theme_options['banner_id'] );
+
+								$banner_link = $theme_options['banner_link'];
 							?>
-							<img src="<?php echo $banner_url; ?>" style="width:100%;"/>
+							<a href="<?php echo $banner_link; ?>"><img src="<?php echo $banner_url; ?>" style="width:100%;"/></a>
 						</div>
 
 						<div id="beyond-buzz">

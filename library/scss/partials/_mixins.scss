@@ -70,4 +70,23 @@ probably best not to use it. I mean, were you going to anyway? */
 	box-sizing:         $type;
 }
 
+/*********************
+FLEX
+*********************/
+@mixin flex() {
+	display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
 
+@mixin flexDirection( $direction ) {
+	-webkit-flex-direction: $direction;
+    -ms-flex-direction: $direction;
+    flex-direction: $direction;
+}
+
+@mixin flexWrap( $wrap: wrap ) {
+	-webkit-flex-wrap: $wrap;
+    -ms-flex-wrap: $wrap;
+    flex-wrap: $wrap;
+}
