@@ -32,9 +32,11 @@ get_header();
 
 						$client = new SoapClient( WSDL );
 
+						$search = get_query_var( 'tosearch', 'ca' );
+
 						$params = array();
 						$params[ 'websiteConfigID' ] = WEB_CONF_ID;
-						$params[ 'searchTerms' ] = "ca";
+						$params[ 'searchTerms' ] = $search;
 
 						// account for no search term or a single result
 
@@ -200,9 +202,9 @@ get_header();
 							Handlebars.registerHelper( "buildList", function( filterName, theFilter ) {
 								var html = "";
 								if(theFilter instanceof Object) {
-									html += "<li data-value='" + theFilter.id + "' data-name='" + filterName + "'>" + theFilter.name + "</li>";
+									html += "<li data-value='" + theFilter.id + "' data-name='" + filterName + "' onclick='applyFilters(this)'>" + theFilter.name + "</li>";
 								} else {
-									html += "<li data-value='" + theFilter + "' data-name='" + filterName + "'>" + theFilter + "</li>";
+									html += "<li data-value='" + theFilter + "' data-name='" + filterName + "' onclick='applyFilters(this)'>" + theFilter + "</li>";
 								}
 								return new Handlebars.SafeString( html );
 							});
@@ -236,7 +238,7 @@ get_header();
 							
 							{{#each filters as |filter name|}}
 								<ul id={{name}}>
-									<li data-value='all' data-name='{{name}}'>All {{name}}</li>
+									<li data-value='all' data-name='{{name}}' onclick='applyFilters(this)'>All {{name}}</li>
 								{{#each filter}}
 									{{buildList name this}}
 								{{/each}}
@@ -261,16 +263,20 @@ get_header();
 
 						<script type="text/javascript">
 							//let's start applying some filters!
-							$("#filter-holder li").click( function() {
-								var name = $(this).data("name");
-								var data = $(this).data("value");
+							function applyFilters(e) {
+								
+								var name = $(e).data("name");
+								var data = $(e).data("value");
+
+								console.log(data);
 
 								//select filter array to change
 								switch(name) {
 									case "Days":
 										if( data == "all" ) {
 											console.log("all days clicked!");
-											filters.Days = defaultFilters.Days;
+											filters.Days = [];
+											filters.Days = defaultFilters.Days.slice();
 										} else {
 											filters.Days = [];
 											filters.Days.push(data);
@@ -278,7 +284,8 @@ get_header();
 										break;
 									case "Categories":
 										if( data == "all" ) {
-											filters.Categories = defaultFilters.Categories;
+											filters.Categories = [];
+											filters.Categories = defaultFilters.Categories.slice();
 										} else {
 											var cat = {id: data, name: name};
 											filters.Categories = [];
@@ -287,7 +294,8 @@ get_header();
 										break;
 									case "Shows":
 										if( data == "all" ) {
-											filters.Shows = defaultFilters.Shows;
+											filters.Shows = [];
+											filters.Shows = defaultFilters.Shows.slice();
 										} else {
 											filters.Shows = [];
 											filters.Shows.push(data);
@@ -295,6 +303,7 @@ get_header();
 										break;
 									case "Months":
 										if( data == "all" ) {
+											filters.Months = [];
 											filters.Months = defaultFilters.Months;
 										} else {
 											filters.Months = [];
@@ -303,6 +312,7 @@ get_header();
 										break;
 									case "Venues":
 										if( data == "all" ) {
+											filters.Venues = [];
 											filters.Venues = defaultFilters.Venues;
 										} else {
 											filters.Venues = [];
@@ -311,6 +321,7 @@ get_header();
 										break;
 									case "Times":
 										if( data == "all" ) {
+											filters.Times = [];
 											filters.Times = defaultFilters.Times;
 										} else {
 											filters.Times = [];
@@ -319,15 +330,19 @@ get_header();
 										break;
 								}
 
+								console.log("result is ", result);
+								console.log("day filters before filterRestuls ", filters.Days);
 								var filteredResults = result.filter(filterResults);
+								console.log("filtered results", filteredResults);
+
+								console.log("day filters before pop ", filters.Days);
 								populateFilters(filteredResults);
+
+								console.log("day filters is ", filters.Days);
 
 								$("#stache-holder").html(template( {theResult:filteredResults} ) );
 								$("#filter-holder").html(filterTemplate( {filters:filters} ) );
-
-								console.log( "Defaults filters is",defaultFilters);
-							});
-							
+							}
 
 						</script>
 
