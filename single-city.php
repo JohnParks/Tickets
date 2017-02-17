@@ -73,8 +73,6 @@
 
 									$args = array (
 											"post_type"			=> "venue",
-											"posts_per_page"	=> 2,
-											'no_found_rows'		=> true,
 											'meta_key'			=> 'city',
 											'meta_value'		=> $cityName
 										);

@@ -299,8 +299,7 @@ get_header();
 							
 							Handlebars.registerHelper( "buildTicketURL", function( ticketID ) {
 								var getURL = window.location;
-								//var baseURL = getURL.protocol + "//" + getURL.host + "/" + getURL.pathname.split('/')[1];
-								var baseURL = "<?php echo get_template_directory_uri(); ?>";
+								var baseURL = getURL.protocol + "//" + getURL.host + "/" + getURL.pathname.split('/')[1];
 
 								var ticketURL = baseURL + "/tickets/?eventID=" + ticketID;
 
