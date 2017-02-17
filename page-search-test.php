@@ -77,7 +77,8 @@ get_header();
 								Venues: [],
 								Times: [],
 								Cities: [],
-								Dates: []
+								Dates: [],
+								Ranges: []
 							};
 
 							// create array to hold original filters, to be used when resetting a single filter
@@ -89,7 +90,8 @@ get_header();
 								Venues: [],
 								Times: [],
 								Cities: [],
-								Dates: []
+								Dates: [],
+								Ranges: []
 							};
 
 
@@ -105,7 +107,8 @@ get_header();
 									Venues: [],
 									Times: [],
 									Cities: [],
-									Dates: []
+									Dates: [],
+									Ranges: []
 								};
 
 								theArray.forEach( function(item) {
@@ -141,15 +144,19 @@ get_header();
 
 									var today = new Date();
 									var dateDifference = dateFns.differenceInCalendarDays(item.Date, today);
-									if ( dateDifference >= 3 )
+									if ( dateDifference <= 3 )
 										if ( $.inArray("Next 3 Days", filters.Dates) === -1 ) filters.Dates.push("Next 3 Days");
 
-									if ( dateDifference >= 7 )
+									if ( dateDifference <= 7 )
 										if ( $.inArray("Next 7 Days", filters.Dates) === -1 ) filters.Dates.push("Next 7 Days");
 
-									if ( dateDifference >= 30 )
+									if ( dateDifference <= 30 )
 										if ( $.inArray("Next 30 Days", filters.Dates) === -1 ) filters.Dates.push("Next 30 Days");
 								});
+
+								if ( filters.Dates.length > 1 ) {
+									filters.Ranges.push({beginDate:"", endDate:""});
+								}
 							}
 
 							// function for applying the filters to the result set, returns true or false (to be used with the JS "filter" method)
@@ -166,26 +173,11 @@ get_header();
 								if( $.inArray(item.Venue, filters.Venues) == -1 ) return false;
 								if( $.inArray(item.City, filters.Cities) == -1 ) return false;
 
-								var today = new Date();
-								var dateDifference = dateFns.differenceInCalendarDays(item.Date, today);
-								if( $.inArray("Next 3 Days", filters.Dates) != -1 && dateDifference < 4 ) {
-									return true;
-								}else{
-									return false;
-								}
-								if( $.inArray("Next 7 Days", filters.Dates) != -1 && dateDifference < 8 ) {
-									return true;
-								}else{
-									return false;
-								}
-								console.log("difference is "+dateDifference);
-								console.log($.inArray("Next 30 Days", filters.Dates));
-								if( $.inArray("Next 30 Days", filters.Dates) != -1 && dateDifference < 31 ) {
-									return true;
-								}else{
-									return false;
-								}
+								var dateRes = filterDates(item);
 
+								if( dateRes === false ) {
+									return false;
+								}
 
 								var cat = filters.Categories.filter(function ( obj ) {
 								   return obj.id === item.ChildCategoryID;
@@ -194,6 +186,22 @@ get_header();
 
 								
 								return true;
+							}
+
+							function filterDates( item ) {
+								if( filters.Dates.length > 1) {
+									return null;
+								}
+								var today = new Date();
+								var dateDifference = dateFns.differenceInCalendarDays(item.Date, today);
+
+								if( $.inArray("Next 30 Days", filters.Dates) != -1 && dateDifference > 30 ) {
+									return false;
+								}else if( $.inArray("Next 7 Days", filters.Dates) != -1 && dateDifference > 7 ) {
+									return false;
+								}else if( $.inArray("Next 3 Days", filters.Dates) != -1 && dateDifference > 3 ) {
+									return false;
+								}
 							}
 
 							// initial population of the filters to be manipulated
@@ -208,14 +216,9 @@ get_header();
 								Venues: filters.Venues,
 								Times: filters.Times,
 								Cities: filters.Cities,
-								Dates: filters.Dates
+								Dates: filters.Dates,
+								Ranges: filters.Ranges
 							};
-
-							// register begin and end date pickers
-							$( function() {
-								$( "#beginDatePicker" ).datepicker();
-								$( "#endDatePicker" ).datepicker();
-							});
 
 						</script>
 
@@ -253,8 +256,12 @@ get_header();
 
 							Handlebars.registerHelper( "buildList", function( filterName, theFilter ) {
 								var html = "";
-								if(theFilter instanceof Object) {
+								console.log(filterName);
+								if(filterName == "Categories") {
 									html += "<li data-value='" + theFilter.id + "' data-name='" + filterName + "' onclick='applyFilters(this)'>" + theFilter.name + "</li>";
+								} else if(filterName == "Ranges"){
+									html += "<input type='text' id='beginDatePicker' /><br />";
+									html += "<input type='text' id='endDatePicker' />";
 								} else {
 									html += "<li data-value='" + theFilter + "' data-name='" + filterName + "' onclick='applyFilters(this)'>" + theFilter + "</li>";
 								}
@@ -309,6 +316,13 @@ get_header();
 
 							$("#filter-holder").append(filterTemplate( {filters:filters} ) );
 							$("#stache-holder").append(template( {theResult:result} ) );
+							if ( filters.Ranges.length > 0 ) {
+								// register begin and end date pickers
+								$( function() {
+									$( "#beginDatePicker" ).Datepicker();
+									$( "#endDatePicker" ).Datepicker();
+								});
+							}
 
 							
 						</script>
@@ -359,6 +373,7 @@ get_header();
 										case "Dates":
 											filters.Dates = [];
 											filters.Dates.push(data);
+											console.log( "filtered Dates is " , filters.Dates );
 									}
 
 									var filteredResults = result.filter(filterResults);
@@ -368,6 +383,13 @@ get_header();
 
 								$("#stache-holder").html(template( {theResult:filteredResults} ) );
 								$("#filter-holder").html(filterTemplate( {filters:filters} ) );
+								if ( filters.Ranges.length > 0 ) {
+									// register begin and end date pickers
+									$( function() {
+										$( "#beginDatePicker" ).Datepicker();
+										$( "#endDatePicker" ).Datepicker();
+									});
+								}
 							}
 
 						</script>
