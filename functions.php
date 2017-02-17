@@ -267,6 +267,9 @@ and be up and running in seconds.
 */
 function bones_fonts() {
   wp_enqueue_style('googleFonts', '//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic');
+  wp_enqueue_style('jquery-ui-min', get_template_directory_uri() . '/library/css/jquery-ui.min.css');
+  wp_enqueue_style('jquery-ui-structure-min', get_template_directory_uri() . '/library/css/jquery-ui.structure.min.css');
+  wp_enqueue_style('jquery-ui-theme-min', get_template_directory_uri() . '/library/css/jquery-ui.theme.min.css');
 }
 
 add_action('wp_enqueue_scripts', 'bones_fonts');

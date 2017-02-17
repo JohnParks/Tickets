@@ -15,6 +15,7 @@ get_header();
 ?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.27.1/date_fns.min.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/library/js/jquery-ui.min.js"></script>
 
 			<div id="content" class="event-result">
 
@@ -74,7 +75,9 @@ get_header();
 								Shows: [],
 								Months: [],
 								Venues: [],
-								Times: []
+								Times: [],
+								Cities: [],
+								Dates: []
 							};
 
 							// create array to hold original filters, to be used when resetting a single filter
@@ -84,7 +87,9 @@ get_header();
 								Shows: [],
 								Months: [],
 								Venues: [],
-								Times: []
+								Times: [],
+								Cities: [],
+								Dates: []
 							};
 
 
@@ -98,7 +103,9 @@ get_header();
 									Shows: [],
 									Months: [],
 									Venues: [],
-									Times: []
+									Times: [],
+									Cities: [],
+									Dates: []
 								};
 
 								theArray.forEach( function(item) {
@@ -121,6 +128,9 @@ get_header();
 									// grab any venues
 									if ( $.inArray(item.Venue, filters.Venues) === -1 ) filters.Venues.push(item.Venue);
 
+									// grab any cities
+									if ( $.inArray(item.City, filters.Cities) === -1 ) filters.Cities.push(item.City);
+
 									// grab months events are happening in
 									var month = dateFns.format(item.Date, "MMMM");
 									if( $.inArray(month, filters.Months) === -1 ) filters.Months.push(month);
@@ -128,6 +138,17 @@ get_header();
 									// populate "time" array (assume "night" > 6PM)
 									var time = dateFns.format(item.Date, "H") >= 18 ? "Night" : "Day";
 									if ( $.inArray(time, filters.Times) === -1 ) filters.Times.push(time);
+
+									var today = new Date();
+									var dateDifference = dateFns.differenceInCalendarDays(item.Date, today);
+									if ( dateDifference >= 3 )
+										if ( $.inArray("Next 3 Days", filters.Dates) === -1 ) filters.Dates.push("Next 3 Days");
+
+									if ( dateDifference >= 7 )
+										if ( $.inArray("Next 7 Days", filters.Dates) === -1 ) filters.Dates.push("Next 7 Days");
+
+									if ( dateDifference >= 30 )
+										if ( $.inArray("Next 30 Days", filters.Dates) === -1 ) filters.Dates.push("Next 30 Days");
 								});
 							}
 
@@ -138,17 +159,40 @@ get_header();
 								var time = dateFns.format(item.Date, "H") >= 18 ? "Night" : "Day";
 
 
-								if( $.inArray(item.Name, filters.Shows) == -1 ) return false;
 								if( $.inArray(day, filters.Days) == -1 ) return false;
+								if( $.inArray(item.Name, filters.Shows) == -1 ) return false;
 								if( $.inArray(month, filters.Months) == -1 ) return false;
 								if( $.inArray(time, filters.Times) == -1 ) return false;
 								if( $.inArray(item.Venue, filters.Venues) == -1 ) return false;
+								if( $.inArray(item.City, filters.Cities) == -1 ) return false;
+
+								var today = new Date();
+								var dateDifference = dateFns.differenceInCalendarDays(item.Date, today);
+								if( $.inArray("Next 3 Days", filters.Dates) != -1 && dateDifference < 4 ) {
+									return true;
+								}else{
+									return false;
+								}
+								if( $.inArray("Next 7 Days", filters.Dates) != -1 && dateDifference < 8 ) {
+									return true;
+								}else{
+									return false;
+								}
+								console.log("difference is "+dateDifference);
+								console.log($.inArray("Next 30 Days", filters.Dates));
+								if( $.inArray("Next 30 Days", filters.Dates) != -1 && dateDifference < 31 ) {
+									return true;
+								}else{
+									return false;
+								}
+
 
 								var cat = filters.Categories.filter(function ( obj ) {
 								   return obj.id === item.ChildCategoryID;
 								})[0];
 								if( cat === undefined ) return false;
 
+								
 								return true;
 							}
 
@@ -162,8 +206,16 @@ get_header();
 								Shows: filters.Shows,
 								Months: filters.Months,
 								Venues: filters.Venues,
-								Times: filters.Times
+								Times: filters.Times,
+								Cities: filters.Cities,
+								Dates: filters.Dates
 							};
+
+							// register begin and end date pickers
+							$( function() {
+								$( "#beginDatePicker" ).datepicker();
+								$( "#endDatePicker" ).datepicker();
+							});
 
 						</script>
 
@@ -267,78 +319,52 @@ get_header();
 								
 								var name = $(e).data("name");
 								var data = $(e).data("value");
+								var filteredResults;
 
-								console.log(data);
-
-								//select filter array to change
-								switch(name) {
-									case "Days":
-										if( data == "all" ) {
-											console.log("all days clicked!");
-											filters.Days = [];
-											filters.Days = defaultFilters.Days.slice();
-										} else {
+								if( data == "all") {
+									populateFilters(result);
+									filteredResults = result.filter(filterResults);
+								} else {
+									//select filter array to change
+									switch(name) {
+										case "Days":
 											filters.Days = [];
 											filters.Days.push(data);
-										}
-										break;
-									case "Categories":
-										if( data == "all" ) {
-											filters.Categories = [];
-											filters.Categories = defaultFilters.Categories.slice();
-										} else {
+											break;
+										case "Categories":
 											var cat = {id: data, name: name};
 											filters.Categories = [];
 											filters.Categories.push(cat);
-										}
-										break;
-									case "Shows":
-										if( data == "all" ) {
-											filters.Shows = [];
-											filters.Shows = defaultFilters.Shows.slice();
-										} else {
+											break;
+										case "Shows":
 											filters.Shows = [];
 											filters.Shows.push(data);
-										}
-										break;
-									case "Months":
-										if( data == "all" ) {
-											filters.Months = [];
-											filters.Months = defaultFilters.Months;
-										} else {
+											break;
+										case "Months":
 											filters.Months = [];
 											filters.Months.push(data);
-										}
-										break;
-									case "Venues":
-										if( data == "all" ) {
-											filters.Venues = [];
-											filters.Venues = defaultFilters.Venues;
-										} else {
+											break;
+										case "Venues":
 											filters.Venues = [];
 											filters.Venues.push(data);
-										}
-										break;
-									case "Times":
-										if( data == "all" ) {
-											filters.Times = [];
-											filters.Times = defaultFilters.Times;
-										} else {
+											break;
+										case "Times":
 											filters.Times = [];
 											filters.Times.push(data);
-										}
-										break;
+											break;
+										case "Cities":
+											filters.Cities = [];
+											filters.Cities.push(data);
+											break;
+										case "Dates":
+											filters.Dates = [];
+											filters.Dates.push(data);
+									}
+
+									var filteredResults = result.filter(filterResults);
+									populateFilters(filteredResults);
+
 								}
-
-								console.log("result is ", result);
-								console.log("day filters before filterRestuls ", filters.Days);
-								var filteredResults = result.filter(filterResults);
-								console.log("filtered results", filteredResults);
-
-								console.log("day filters before pop ", filters.Days);
-								populateFilters(filteredResults);
-
-								console.log("day filters is ", filters.Days);
 
 								$("#stache-holder").html(template( {theResult:filteredResults} ) );
 								$("#filter-holder").html(filterTemplate( {filters:filters} ) );
