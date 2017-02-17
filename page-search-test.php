@@ -184,6 +184,10 @@ get_header();
 								})[0];
 								if( cat === undefined ) return false;
 
+								if( filters.Ranges.length > 0 ) {
+									if ( filters.Ranges[0].beginDate != "" && filters.Ranges[0]) {}
+								}
+
 								
 								return true;
 							}
@@ -202,6 +206,11 @@ get_header();
 								}else if( $.inArray("Next 3 Days", filters.Dates) != -1 && dateDifference > 3 ) {
 									return false;
 								}
+							}
+
+							function addPickerListeners() {
+								jQuery( "#beginDatePicker" ).datepicker();
+								jQuery( "#endDatePicker" ).datepicker();
 							}
 
 							// initial population of the filters to be manipulated
@@ -318,10 +327,7 @@ get_header();
 							$("#stache-holder").append(template( {theResult:result} ) );
 							if ( filters.Ranges.length > 0 ) {
 								// register begin and end date pickers
-								$( function() {
-									$( "#beginDatePicker" ).Datepicker();
-									$( "#endDatePicker" ).Datepicker();
-								});
+								$( addPickerListeners() );
 							}
 
 							
@@ -385,10 +391,7 @@ get_header();
 								$("#filter-holder").html(filterTemplate( {filters:filters} ) );
 								if ( filters.Ranges.length > 0 ) {
 									// register begin and end date pickers
-									$( function() {
-										$( "#beginDatePicker" ).Datepicker();
-										$( "#endDatePicker" ).Datepicker();
-									});
+									$( addPickerListeners() );
 								}
 							}
 
