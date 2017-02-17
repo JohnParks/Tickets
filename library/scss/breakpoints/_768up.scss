@@ -327,6 +327,16 @@ SIDEBARS & ASIDES
 				}
 			}
 		}
+		input{
+			border: 1px solid black;
+			background: transparent;
+			font-size: 15px;
+			width: 75%;
+    		float: right;
+			&:after{
+				
+			}
+		}
 	}
 
 	.shows-listing {
