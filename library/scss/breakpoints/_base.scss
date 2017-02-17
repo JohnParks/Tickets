@@ -903,16 +903,55 @@ article h1 {
 	
 	table#events-results-table {
 		width: 100%;
-
+		tr{
+			&:nth-child(even) {
+				background: #CCC;
+			}
+			&:nth-child(odd) {
+				background: #FFF;
+			}
+		}
 		tr#header {
 			background-color: black;
 			color: white;
 		}
 
 		tr.event-entry {
-			border: solid black 1px;
-			padding: 5px;
+			/*border: solid black 1px;*/
+			
 			vertical-align: top;
+			td{
+				padding:5px;
+				&.date{
+					padding-left:25px;
+					position:relative;
+					&:before{
+						content:url('../assets/icons/date-icon.png');
+						position:absolute;
+						left:2px;
+					}
+				}
+				&.show-title{
+					font-weight: 700;
+				}
+				&.location{
+					padding-left:25px;
+					position:relative;
+					&:before{
+						content:url('../assets/icons/location-icon.png');
+						position:absolute;
+						left:2px;
+					}
+					span{
+						font-weight: 700;
+					}
+				}
+				
+				.buy-tickets{
+					text-decoration: none;
+    				padding: 0px 10px;
+				}
+			}
 		}
 	}
 }
