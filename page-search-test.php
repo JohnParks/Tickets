@@ -154,9 +154,8 @@ get_header();
 										if ( $.inArray("Next 30 Days", filters.Dates) === -1 ) filters.Dates.push("Next 30 Days");
 								});
 
-								if ( filters.Dates.length > 1 ) {
-									filters.Ranges.push({beginDate:"", endDate:""});
-								}
+								
+								filters.Ranges.push({beginDate:"", endDate:""});
 							}
 
 							// function for applying the filters to the result set, returns true or false (to be used with the JS "filter" method)
@@ -295,8 +294,8 @@ get_header();
 									html += "<li data-value='" + theFilter.id + "' data-name='" + filterName + "' onclick='applyFilters(this)'>" + theFilter.name + "</li>";
 								} else if(filterName == "Ranges"){
 									console.log("theFilter is " + theFilter );
-									html += "<input type='text' id='beginDatePicker' /><br />";
-									html += "<input type='text' id='endDatePicker' />";
+									html += "<input type='text' id='beginDatePicker' placeholder='from' /><br />";
+									html += "<input type='text' id='endDatePicker' placeholder='to' />";
 								} else {
 									html += "<li data-value='" + theFilter + "' data-name='" + filterName + "' onclick='applyFilters(this)'>" + theFilter + "</li>";
 								}
