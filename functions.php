@@ -1026,6 +1026,10 @@ add_action( "wp_ajax_add_calendar", "handleCalendar" );
 // Pulls filter and search parameters from $_POST, then builds and spits out a WP_Query object
 function getShowResults() {
   // first off, let's grab and initialize $_POST variables
+  $spaged = 1;
+  if ( isset($_POST['search_paged']) ){
+      $spaged = intval($_POST['search_paged']);
+  }
   if( isset( $_POST['search_tosearch'] ) ) {
     $toSearch = $_POST['search_tosearch'];
   }
@@ -1038,11 +1042,12 @@ function getShowResults() {
   if( isset( $_POST['search_month'] ) && $_POST['search_month'] != 'none' ) {
     $months = explode( ',', $_POST['search_month'] );
   }
-
+  
   // Let's start populating the $args array for the query
   $args = array(
     'post_type' =>  'show',
-    'posts_per_page'  =>  '12'
+    'posts_per_page'  =>  '12',
+    'paged' => $spaged
   );
 
   // set Search parameter, if there's a search string yet
@@ -1073,7 +1078,8 @@ function getShowResults() {
   //$wpShowIDs = array();
 
   // take array of months (as values), grab any Performer IDs with events happening during those months
-  if ( isset( $months ) && $months !== "" ) {
+
+  if ( isset( $months ) && $months !== "" && !empty($months[0])) {
     global $wpdb;
 
     //start building a query to select Performer IDs
@@ -1113,7 +1119,7 @@ function getShowResults() {
 
   // final array of show IDs to be included in search results
   //$showIDs = array();
-
+  
   if ( isset( $cityShowIDs ) && $cityShowIDs != "" ) {
     if ( isset( $wpShowIDs ) ) {
       // both filters have been applied, take the intersect
@@ -1124,6 +1130,7 @@ function getShowResults() {
     }
   } elseif ( isset( $wpShowIDs ) ) {
     // only month filter is applied, use that
+    echo "here it is";
     $showIDs = $wpShowIDs;
   }
 

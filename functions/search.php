@@ -7,6 +7,11 @@ function get_filter_form($options){
     <form role="search" action="" method="post" id="searchform-find-a-show">
         <?php
         // grab and/or initialize $_POST variables
+        if ( isset($_POST['search_paged']) )
+            $search_paged = $_POST['search_paged'];
+        else
+            $search_paged = 1;
+
         if ( isset($_POST['search_tosearch']) )
             $toSearch = $_POST['search_tosearch'];
         else
@@ -29,6 +34,7 @@ function get_filter_form($options){
         ?>
         <input type="hidden" name="search_post_type" value="shows" /> <!-- // hidden 'products' value -->
         <input type="hidden" name="search_tosearch" value="<?php $toSearch; ?>" />
+        <input type="hidden" name="search_paged" value="<?php echo $search_paged; ?>"/>
         <div class="genre-filter">
             <input type="hidden" name="search_genre" value="<?php echo $genre; ?>" />
             <?php if(isset($options['genre']['label']) && $options['genre']['label'] !== ""){ ?>
@@ -120,14 +126,21 @@ function get_filter_form($options){
 <script>
     $('form#searchform-find-a-show select').change(adjustForm);
     $('form#searchform-find-a-show ul li').click(adjustForm);
+    $(document).ready(function(){
+        $('ul.page-numbers a').click(function(e){
+            adjustForm(e);
+        });
+    });
     var timeOutvar;
     function adjustForm(e){
         
         clearTimeout(timeOutvar);
 
         console.log(e);
-        
-        if ( e.type == "change" ) {
+        if( e.type == "click" && e.currentTarget.className == "page-numbers search-page-paged"){
+            var val = e.currentTarget.dataset.page;
+            var field = "paged"
+        }else if ( e.type == "change" ) {
             var val = e.target.value;
             var field = e.target.id.split('-')[0];
         } else {
