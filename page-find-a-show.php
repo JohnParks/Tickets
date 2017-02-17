@@ -80,6 +80,8 @@
 									<h2>Search Results</h2>
 									<?php
 									// Call "getShowResults()", which is a function that takes all the various filters and search params, and returns a WP_Query object
+									$paged = isset($_POST['search_paged']) ? intval($_POST['search_paged']) : 1;
+
 									$shows_query = getShowResults();
 
 									/*echo "The Result Query is:<br />";
@@ -91,6 +93,8 @@
 
 									// Commence the Loop!
 									//if( $shows_query->have_posts() ) : while( $shows_query->have_posts() ) : $shows_query->the_post();
+									$total = $shows_query->max_num_pages;
+									$numP = $shows_query->found_posts;
 									if( $shows_query->have_posts() ) : while( $shows_query->have_posts() ) : $shows_query->the_post();
 
 									?>	<article id="post-<?php the_ID(); ?>" <?php post_class('cf'); ?> role="article">
@@ -114,8 +118,25 @@
 								?>
 
 							</div>
-
-							<?php endwhile; else : ?>
+							
+							<?php endwhile; ?>
+							<?php wp_reset_query(); ?>
+							<nav class="pagination">
+								<ul class="page-numbers">
+								<?php if($total != 1){ ?>
+									<li><a class="page-numbers search-page-paged"  data-page="1">←</a></li>
+								<?php } ?>
+								<?php for($i=1;$i<=$total;$i++){ 
+									$next = $i; ?>
+									<li><a class="page-numbers search-page-paged"  data-page="<?php echo $next; ?>"><?php echo $next; ?></a></li>
+								<?php } ?>
+								<?php if($total > 1){ ?>
+									<li><a class="page-numbers search-page-paged"  data-page="<?php echo $total; ?>">←</a></li>
+								<?php } ?>
+								</ul>
+							</nav>
+							
+							<?php else : ?>
 
 									<article id="post-not-found" class="hentry cf">
 											<header class="article-header">
