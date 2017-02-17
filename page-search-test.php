@@ -184,8 +184,10 @@ get_header();
 								})[0];
 								if( cat === undefined ) return false;
 
-								if( filters.Ranges.length > 0 ) {
-									if ( filters.Ranges[0].beginDate != "" && filters.Ranges[0]) {}
+								console.log("Ranges is ", filters.Ranges[0].beginDate);
+
+								if ( filters.Ranges[0].beginDate != "" && filters.Ranges[0].endDate != "" ) {
+									return dateFns.isWithinRange(item.Date, filters.Ranges[0].beginDate, filters.Ranges[0].endDate);
 								}
 
 								
@@ -209,8 +211,31 @@ get_header();
 							}
 
 							function addPickerListeners() {
-								jQuery( "#beginDatePicker" ).datepicker();
-								jQuery( "#endDatePicker" ).datepicker();
+								jQuery( "#beginDatePicker" ).datepicker({
+									onClose: doDateRange
+								});
+								jQuery( "#endDatePicker" ).datepicker({
+									onClose: doDateRange
+								});
+							}
+
+							function doDateRange() {
+								console.log("Doing date range");
+								var beginVal = jQuery( "#beginDatePicker" ).val();
+								var endVal = jQuery( "#endDatePicker" ).val();
+								if( beginVal != "" && endVal != "" ) {
+									filters.Ranges[0].beginDate = beginVal;
+									filters.Ranges[0].endDate = endVal;
+
+									var filteredResults = result.filter(filterResults);
+									populateFilters(filteredResults);
+
+									$("#stache-holder").html(template( {theResult:filteredResults} ) );
+									$("#filter-holder").html(filterTemplate( {filters:filters} ) );
+									
+									// register begin and end date pickers
+									$( addPickerListeners() );
+								}
 							}
 
 							// initial population of the filters to be manipulated
@@ -269,6 +294,7 @@ get_header();
 								if(filterName == "Categories") {
 									html += "<li data-value='" + theFilter.id + "' data-name='" + filterName + "' onclick='applyFilters(this)'>" + theFilter.name + "</li>";
 								} else if(filterName == "Ranges"){
+									console.log("theFilter is " + theFilter );
 									html += "<input type='text' id='beginDatePicker' /><br />";
 									html += "<input type='text' id='endDatePicker' />";
 								} else {
@@ -292,7 +318,7 @@ get_header();
 									<td class="date">{{formatDate Date}}</td>
 									<td class="show-title">{{Name}}</td>
 									<td class="location">
-										{{Venue}} <br />
+										<span>{{Venue}}</span> <br />
 										{{City}}, {{StateProvince}}
 									</td>
 									<td class="link"><a href="{{buildTicketURL ID}}" class="buy-tickets">Buy Tickets</a></td>
