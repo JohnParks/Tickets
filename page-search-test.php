@@ -94,6 +94,8 @@ get_header();
 								Ranges: []
 							};
 
+							var offset = 0;
+
 
 							// function for populating the filter arrays
 							// takes the initial "result" array at first, later instead takes a filtered array
@@ -218,6 +220,13 @@ get_header();
 								});
 							}
 
+							function doPagination(res) {
+								$("#pagination-holder").html(function() {
+									var numPages = Math.floor(res.length / 3);
+									console.log(numPages);
+								});
+							}
+
 							function doDateRange() {
 								console.log("Doing date range");
 								var beginVal = jQuery( "#beginDatePicker" ).val();
@@ -229,11 +238,14 @@ get_header();
 									var filteredResults = result.filter(filterResults);
 									populateFilters(filteredResults);
 
-									$("#stache-holder").html(template( {theResult:filteredResults} ) );
+									$("#stache-holder").html(template(
+											{theResult:filteredResults, theOffset:offset}
+										));
 									$("#filter-holder").html(filterTemplate( {filters:filters} ) );
 									
 									// register begin and end date pickers
 									$( addPickerListeners() );
+									$( doPagination(filteredResults) );
 								}
 							}
 
@@ -256,12 +268,13 @@ get_header();
 						</script>
 
 						<div id="stache-holder"></div>
+						<div id="pagination-holder"></div>
 
 						<script type="text/javascript">
 							// pagination helper
 							Handlebars.registerHelper( "numResults", function( arrEvents, offset ) {
 								offset = offset === undefined ? 0 : offset;
-								return arrEvents.length == 0 ? null : arrEvents.slice(offset, offset + 25);
+								return arrEvents.length == 0 ? null : arrEvents.slice(offset, offset + 3);
 							} );
 
 							Handlebars.registerHelper( "formatDate", function( rawDate ) {
@@ -349,10 +362,16 @@ get_header();
 
 
 							$("#filter-holder").append(filterTemplate( {filters:filters} ) );
-							$("#stache-holder").append(template( {theResult:result} ) );
+							$("#stache-holder").append(template(
+											{
+												theResult:result,
+												theOffset:offset
+											}
+										));
 							if ( filters.Ranges.length > 0 ) {
 								// register begin and end date pickers
 								$( addPickerListeners() );
+								$( doPagination(result) );
 							}
 
 							
@@ -412,11 +431,14 @@ get_header();
 
 								}
 
-								$("#stache-holder").html(template( {theResult:filteredResults} ) );
+								$("#stache-holder").html(template( 
+										{theResult:filteredResults, theOffset:offset}
+									));
 								$("#filter-holder").html(filterTemplate( {filters:filters} ) );
 								if ( filters.Ranges.length > 0 ) {
 									// register begin and end date pickers
 									$( addPickerListeners() );
+									$( doPagination(filteredResults) );
 								}
 							}
 
