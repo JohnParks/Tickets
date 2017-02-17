@@ -122,16 +122,18 @@
 							<?php endwhile; ?>
 							<?php wp_reset_query(); ?>
 							<nav class="pagination">
+							<?php $pages = array($paged -2, $paged -1, $paged, $paged + 1, $paged +2); ?>
 								<ul class="page-numbers">
 								<?php if($total != 1){ ?>
-									<li><a class="page-numbers search-page-paged"  data-page="1">←</a></li>
+									<li><a class="page-numbers search-page-paged"  data-page="<?php echo $next -1; ?>">←</a></li>
 								<?php } ?>
-								<?php for($i=1;$i<=$total;$i++){ 
-									$next = $i; ?>
+								<?php for($i=0;$i<=count($pages);$i++){ 
+									$next = $pages[$i];
+									if($next < 1){ continue; } ?>
 									<li><a class="page-numbers search-page-paged"  data-page="<?php echo $next; ?>"><?php echo $next; ?></a></li>
 								<?php } ?>
 								<?php if($total > 1){ ?>
-									<li><a class="page-numbers search-page-paged"  data-page="<?php echo $total; ?>">←</a></li>
+									<li><a class="page-numbers search-page-paged"  data-page="<?php echo $next +1; ?>">→</a></li>
 								<?php } ?>
 								</ul>
 							</nav>
