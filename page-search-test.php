@@ -21,7 +21,7 @@ get_header();
 
 				<div id="inner-content" class="wrap cf">
 
-					<div class="sidebar d-1of7 t-1of3">
+					<div class="sidebar events-search d-1of7 t-1of3">
 						<div id="filter-holder"></div>
 					</div>
 
@@ -119,6 +119,7 @@ get_header();
 
 									// grab any categories in result set
 									var index = item.ChildCategoryID;
+									
 									cat = { id: index, name: catArray[index].name };
 									var testCat = filters.Categories.filter(function ( obj ) {
 									   return obj.id === item.ChildCategoryID;

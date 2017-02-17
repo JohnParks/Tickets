@@ -303,6 +303,31 @@ SIDEBARS & ASIDES
 	float: left;
 	background-color: black;
 	color: white;
+	&.events-search{
+		background-color:white;
+		color:black;
+		padding-right:0px;
+		padding-left:20px;
+		font-size:14px;
+		li{
+			cursor:pointer;
+			&:before{
+					content: url(../assets/icons/star-sm.png);
+					margin-right: 5px;
+					position: relative;
+					top: 1px;
+				}
+		}
+		ul{
+			li:first-child{
+				font-weight: 700;
+				&:before{
+					content:"";
+					
+				}
+			}
+		}
+	}
 
 	.shows-listing {
 		padding-bottom: 38px;
